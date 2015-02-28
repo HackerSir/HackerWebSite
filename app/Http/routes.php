@@ -15,3 +15,13 @@ Route::get('/', [
     'as' => 'home',
     'uses' => 'HomeController@index'
 ]);
+
+//=====遊客限定=====
+Route::group(['middleware' => 'guest'], function () {
+
+});
+
+//=====會員限定=====
+Route::group(['middleware' => 'auth'], function () {
+
+});
