@@ -38,7 +38,6 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {{-- 右側選單 --}}
-                {{-- TODO:以下未修改 --}}
                 @if (Auth::guest())
                     <li><a href="{{ URL::route('member.login') }}">Login</a></li>
                     <li><a href="{{ URL::route('member.register') }}">Register</a></li>
