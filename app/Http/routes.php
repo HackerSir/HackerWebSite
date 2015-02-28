@@ -16,26 +16,6 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
-//=====遊客限定=====
-Route::group(['middleware' => 'guest'], function () {
-    //=====GET=====
-    //登入
-    //註冊
-    //忘記密碼
-    //重設密碼
-    //=====POST=====
-    //登入
-    //註冊
-    //忘記密碼
-});
-
-//=====會員限定=====
-Route::group(['middleware' => 'auth'], function () {
-    //=====GET=====
-    //修改密碼
-    //修改資料
-    //登出
-    //=====POST=====
-    //修改密碼
-    //修改資料
-});
+Route::controllers([
+    'member' => 'MemberController',
+]);
