@@ -16,6 +16,20 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
-Route::controllers([
-    'member' => 'MemberController',
-]);
+Route::controller('member', 'MemberController', array(
+    'getLogin' => 'member.login',
+    'postLogin' => 'member.login',
+    'getRegister' => 'member.register',
+    'postRegister' => 'member.register',
+    'getConfirm' => 'member.confirm',
+    'getResend' => 'member.resend',
+    'postResend' => 'member.resend',
+    'getForgotPassword' => 'member.forgot-password',
+    'postForgotPassword' => 'member.forgot-password',
+    'getRecover' => 'member.recover',
+    'getChangePassword' => 'member.change-password',
+    'postChangePassword' => 'member.change-password',
+    'getEditProfile' => 'member.edit-profile',
+    'postEditProfile' => 'member.edit-profile',
+    'getLogout' => 'member.logout'
+));
