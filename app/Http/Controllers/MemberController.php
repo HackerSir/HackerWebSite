@@ -81,7 +81,7 @@ class MemberController extends Controller
     }
 
     //重設密碼
-    public function getRecover()
+    public function getRecover($token = null)
     {
         return 'getRecover';
     }
