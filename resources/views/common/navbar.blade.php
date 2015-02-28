@@ -40,13 +40,13 @@
                 {{-- 右側選單 --}}
                 {{-- TODO:以下未修改 --}}
                 @if (Auth::guest())
-                    <li><a href="./auth/login">Login</a></li>
-                    <li><a href="./auth/register">Register</a></li>
+                    <li><a href="{{ URL::route('member.login') }}">Login</a></li>
+                    <li><a href="{{ URL::route('member.register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="./auth/logout">Logout</a></li>
+                            <li><a href="{{ URL::route('member.logout') }}">Logout</a></li>
                         </ul>
                     </li>
                 @endif
