@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\Request;
+
 class MemberController extends Controller
 {
     public function __construct()
@@ -34,7 +36,7 @@ class MemberController extends Controller
         return 'getLogin';
     }
 
-    public function postLogin()
+    public function postLogin(Request $request)
     {
         return 'postLogin';
     }
@@ -45,7 +47,7 @@ class MemberController extends Controller
         return 'getRegister';
     }
 
-    public function postRegister()
+    public function postRegister(Request $request)
     {
         return 'postRegister';
     }
@@ -56,7 +58,7 @@ class MemberController extends Controller
         return 'getForgotPassword';
     }
 
-    public function postForgotPassword()
+    public function postForgotPassword(Request $request)
     {
         return 'postForgotPassword';
     }
@@ -73,7 +75,7 @@ class MemberController extends Controller
         return 'getChangePassword';
     }
 
-    public function postChangePassword()
+    public function postChangePassword(Request $request)
     {
         return 'postChangePassword';
     }
@@ -84,7 +86,7 @@ class MemberController extends Controller
         return 'getEditProfile';
     }
 
-    public function postEditProfile()
+    public function postEditProfile(Request $request)
     {
         return 'postEditProfile';
     }
