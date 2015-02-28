@@ -19,9 +19,19 @@
         <![endif]-->
     </head>
     <body>
+        {{-- navbar--}}
         @include('common.navbar')
-
-        @yield('content')
+        <div class="container-fluid">
+            {{-- global message --}}
+            @if(Session::has('global'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    {{ Session::get('global') }}
+                </div>
+            @endif
+            {{-- content --}}
+            @yield('content')
+        </div>
 
         <!-- Scripts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
