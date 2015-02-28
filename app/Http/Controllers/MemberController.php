@@ -52,6 +52,23 @@ class MemberController extends Controller
         return 'postRegister';
     }
 
+    //驗證信箱
+    public function getConfirm($token = null)
+    {
+        return 'getConfirm';
+    }
+
+    //重發驗證信
+    public function getResend()
+    {
+        return 'getResend';
+    }
+
+    public function postResend(Request $request)
+    {
+        return 'postResend';
+    }
+
     //忘記密碼
     public function getForgotPassword()
     {
