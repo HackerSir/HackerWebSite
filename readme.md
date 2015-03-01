@@ -29,3 +29,4 @@ unset
 
 ## 推薦Chrome擴充套件
 - [Bitbucket Notifier](https://chrome.google.com/webstore/detail/bitbucket-notifier/jncnafmlekinjbdlcncbpclfpmgodcmf)
+- [GitHub Notifier](https://chrome.google.com/webstore/detail/github-notifier/lmjdlojahmbbcodnpecnjnmlddbkjhnn)
