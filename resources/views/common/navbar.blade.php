@@ -12,7 +12,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                {{-- 左側主要選單 --}}
+                {{-- 右側主要選單 --}}
                 @foreach (Config::get('navbar.navbar') as $name => $uri)
                     @if(is_array($uri))
                         {{-- 次級選單 --}}
@@ -34,6 +34,12 @@
                         </li>
                     @endif
                 @endforeach
+                {{-- Auth --}}
+                @if (Auth::guest())
+                    <li><a href="{{ URL::route('member.login') }}">Login</a></li>
+                @else
+                    <li><a href="{{ URL::route('member.logout') }}">Logout</a></li>
+                @endif
             </ul>
         </div>
     </div>
