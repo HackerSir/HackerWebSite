@@ -9,7 +9,10 @@
 
                 <div class="panel-body">
                     Hello, world.<br />
-                    安安，世界。
+                    安安，世界。<br />
+                    @for($i=0;$i<50;$i++)
+                        {{ $i }}<br />
+                    @endfor
                 </div>
             </div>
         </div>
