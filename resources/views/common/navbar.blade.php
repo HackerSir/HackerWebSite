@@ -36,9 +36,9 @@
                 @endforeach
                 {{-- Auth --}}
                 @if (Auth::guest())
-                    <li><a href="{{ URL::route('member.login') }}">Login</a></li>
+                    <li><a href="{{ URL::route('member.login') }}">登入</a></li>
                 @else
-                    <li><a href="{{ URL::route('member.logout') }}">Logout</a></li>
+                    <li><a href="{{ URL::route('member.logout') }}">登出</a></li>
                 @endif
             </ul>
         </div>
