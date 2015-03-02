@@ -7,6 +7,7 @@
         <title>{{ Config::get('config.sitename') }}</title>
 
         {!! HTML::style('css/app.css'); !!}
+        {!! HTML::style('css/stylesheet.css'); !!}
 
         <!-- Fonts -->
         {!! HTML::style('//fonts.googleapis.com/css?family=Roboto:400,300'); !!}
