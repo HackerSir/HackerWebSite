@@ -38,7 +38,6 @@ Route::controller('member', 'MemberController', array(
 Route::get('{all}', array(
     'as' => 'not-found',
     function () {
-        return Redirect::route('home')
-            ->with('global', '不正確的網址');
+        abort(404);
     }
 ))->where('all', '.*');
