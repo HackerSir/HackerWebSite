@@ -11,11 +11,9 @@ return array(
      */
 
     'navbar' => array(
-        '首頁'                     => '/',
-        '關於'                     => 'about',
-        '伺服器清單'               => 'server',
-        '伺服器專區'               => array(
-            '暫無'                     => '#',
-        ),
+        '關於我們'               => 'about',
+        '社團課程'               => 'class',
+        '社團活動'               => 'activity',
+	'登入'			 => 'login',
     ),
 );
