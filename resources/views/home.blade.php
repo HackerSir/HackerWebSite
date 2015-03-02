@@ -8,7 +8,8 @@
                 <div class="panel-heading">Home</div>
 
                 <div class="panel-body">
-                    Hello, world.
+                    Hello, world.<br />
+                    安安，世界。
                 </div>
             </div>
         </div>
