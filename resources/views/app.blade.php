@@ -7,6 +7,7 @@
         <title>@if (trim($__env->yieldContent('title'))) @yield('title') - @endif{{ Config::get('config.sitename') }}</title>
 
         {!! HTML::style('css/app.css'); !!}
+        {!! HTML::style('//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/slate/bootstrap.css'); !!}
         {!! HTML::style('css/stylesheet.css'); !!}
 
         <!-- Fonts -->
