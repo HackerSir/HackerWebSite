@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    418
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row text-center">
