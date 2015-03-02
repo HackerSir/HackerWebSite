@@ -19,3 +19,8 @@ Thumbs.db
 
 # IntelliJ
 out/
+
+# github auto pull
+## Do not try it :)
+_github.php
+
