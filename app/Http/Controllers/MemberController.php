@@ -30,23 +30,19 @@ class MemberController extends Controller
         ]);
     }
 
-    //登入
+    //登入 + 註冊
     public function getLogin()
     {
-        return 'getLogin';
+        return view('member.login');
     }
 
+    //登入
     public function postLogin(Request $request)
     {
         return 'postLogin';
     }
 
     //註冊
-    public function getRegister()
-    {
-        return 'getRegister';
-    }
-
     public function postRegister(Request $request)
     {
         return 'postRegister';

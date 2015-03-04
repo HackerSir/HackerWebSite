@@ -19,7 +19,6 @@ Route::get('/', [
 Route::controller('member', 'MemberController', array(
     'getLogin' => 'member.login',
     'postLogin' => 'member.login',
-    'getRegister' => 'member.register',
     'postRegister' => 'member.register',
     'getConfirm' => 'member.confirm',
     'getResend' => 'member.resend',
