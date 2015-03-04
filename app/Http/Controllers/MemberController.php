@@ -1,6 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests\Request;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
@@ -38,13 +43,71 @@ class MemberController extends Controller
     //登入
     public function postLogin(Request $request)
     {
-        return 'postLogin';
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::route('member.login')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $remember = ($request->has('remember')) ? true : false;
+            $auth = Auth::attempt([
+                'email' => $request->get('email'),
+                'password' => $request->get('password'),
+            ], $remember);
+
+            if ($auth) {
+                //重導向至登入前頁面
+                return Redirect::intended('/');
+            } else {
+                return Redirect::route('member.login')
+                    ->with('global', '帳號或密碼錯誤');
+            }
+        }
     }
 
     //註冊
     public function postRegister(Request $request)
     {
-        return 'postRegister';
+        $validator = Validator::make($request->all(),
+            array(
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6',
+                'password_again' => 'required|same:password',
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('member.login')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $email = $request->get('email');
+            $password = $request->get('password');
+            //驗證碼
+            $code = str_random(60);
+            //預設暱稱
+            $nickname = explode("@", $email, 1)[0];
+
+            $user = User::create(array(
+                'email' => $email,
+                'password' => Hash::make($password),
+                'name' => $nickname,
+                'confirm_code' => $code
+            ));
+
+            if ($user) {
+                //TODO 發送驗證信件
+                /*Mail::send('emails.auth.activate', array('link' => URL::route('member-activate', $code)), function($message) use ($user){
+                    $message->to($user->email)->subject("[" . Config::get('config.sitename') . "]信箱驗證");
+                });*/
+                return Redirect::route('home')
+                    ->with('global', '註冊完成，請至信箱收取驗證信件並啟用帳號。');
+            }
+        }
     }
 
     //驗證信箱
@@ -106,7 +169,8 @@ class MemberController extends Controller
     //登出
     public function getLogout()
     {
-        return 'getLogout';
+        Auth::logout();
+        return Redirect::route('home');
     }
 
 }
