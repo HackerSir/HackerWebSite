@@ -31,7 +31,7 @@
                                     {!! Form::email('email', null, ['placeholder' => '請輸入信箱', 'class' => 'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group has-feedback {{ ($errors->has('password'))?'has-error':'' }}">
-                                    <label for="password">密碼 <a href="{{ URL::route('member.forgot-password') }}" tabindex="4">(忘記密碼)</a>
+                                    <label for="password">密碼 <a href="{{ URL::route('member.forgot-password') }}" tabindex="4">（忘記密碼）</a>
                                         @if($errors->has('password'))
                                             <span class="label label-danger">{{ $errors->first('password') }}</span>
                                             <span class="glyphicon glyphicon-remove form-control-feedback"></span>
