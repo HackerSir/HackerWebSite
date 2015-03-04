@@ -20,7 +20,8 @@ class MemberController extends Controller
                 'postRegister',
                 'getForgotPassword',
                 'postForgotPassword',
-                'getRecover'
+                'getResetPassword',
+                'postResetPassword'
             ]
         ]);
         //會員限定
@@ -143,9 +144,14 @@ class MemberController extends Controller
     }
 
     //重設密碼
-    public function getRecover($token = null)
+    public function getResetPassword($token = null)
     {
-        return 'getRecover';
+        return 'getResetPassword';
+    }
+
+    public function postResetPassword(Request $request)
+    {
+        return 'postResetPassword';
     }
 
     //修改密碼
