@@ -11,7 +11,6 @@ class MemberController extends Controller
             'only' => [
                 'getLogin',
                 'postLogin',
-                'getRegister',
                 'postRegister',
                 'getForgotPassword',
                 'postForgotPassword',
