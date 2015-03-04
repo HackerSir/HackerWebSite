@@ -16,6 +16,7 @@ class MemberController extends Controller
             'only' => [
                 'getLogin',
                 'postLogin',
+                'getRegister',
                 'postRegister',
                 'getForgotPassword',
                 'postForgotPassword',
@@ -34,13 +35,12 @@ class MemberController extends Controller
         ]);
     }
 
-    //登入 + 註冊
+    //登入
     public function getLogin()
     {
         return view('member.login');
     }
 
-    //登入
     public function postLogin(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -70,6 +70,11 @@ class MemberController extends Controller
     }
 
     //註冊
+    public function getRegister()
+    {
+        return view('member.register');
+    }
+
     public function postRegister(Request $request)
     {
         $validator = Validator::make($request->all(),
@@ -81,7 +86,7 @@ class MemberController extends Controller
         );
 
         if ($validator->fails()) {
-            return Redirect::route('member.login')
+            return Redirect::route('member.register')
                 ->withErrors($validator)
                 ->withInput();
         } else {
