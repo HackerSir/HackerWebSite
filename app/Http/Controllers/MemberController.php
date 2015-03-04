@@ -29,8 +29,7 @@ class MemberController extends Controller
                 'getChangePassword',
                 'postChangePassword',
                 'getEditProfile',
-                'postEditProfile',
-                'getLogout'
+                'postEditProfile'
             ]
         ]);
     }
