@@ -95,7 +95,7 @@ class MemberController extends Controller
             //驗證碼
             $code = str_random(60);
             //預設暱稱
-            $nickname = explode("@", $email, 1)[0];
+            $nickname = explode("@", $email)[0];
 
             $user = User::create(array(
                 'email' => $email,
