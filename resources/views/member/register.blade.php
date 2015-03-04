@@ -20,7 +20,7 @@
                                         <span class="label label-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </label>
-                                {!! Form::email('email', null, ['placeholder' => '請輸入信箱', 'class' => 'form-control', 'required']) !!}
+                                {!! Form::email('email', null, ['id' => 'email', 'placeholder' => '請輸入信箱', 'class' => 'form-control', 'required']) !!}
                                 @if($errors->has('email'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>@endif
                             </div>
                             <div class="form-group has-feedback{{ ($errors->has('password'))?' has-error':'' }}">
@@ -29,7 +29,7 @@
                                         <span class="label label-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </label>
-                                {!! Form::password('password', ['placeholder' => '請輸入密碼', 'class' => 'form-control', 'required']) !!}
+                                {!! Form::password('password', ['id' => 'password', 'placeholder' => '請輸入密碼', 'class' => 'form-control', 'required']) !!}
                                 @if($errors->has('password'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>@endif
                             </div>
                             <div class="form-group has-feedback{{ ($errors->has('password_again'))?' has-error':'' }}">
@@ -38,7 +38,7 @@
                                         <span class="label label-danger">{{ $errors->first('password_again') }}</span>
                                     @endif
                                 </label>
-                                {!! Form::password('password_again', ['placeholder' => '請再輸入一次密碼', 'class' => 'form-control', 'required']) !!}
+                                {!! Form::password('password_again', ['id' => 'password_again', 'placeholder' => '請再輸入一次密碼', 'class' => 'form-control', 'required']) !!}
                                 @if($errors->has('password_again'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>@endif
                             </div>
                             {!! Form::submit('註冊', ['class' => 'btn btn-primary']) !!}
