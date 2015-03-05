@@ -6,3 +6,7 @@ body {
     /* navbar */
     padding-top: 70px;
 }
+
+.navbar{
+    background: rgba(72, 78, 85, 0);
+}
