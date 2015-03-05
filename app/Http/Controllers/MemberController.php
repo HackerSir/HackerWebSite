@@ -109,7 +109,7 @@ class MemberController extends Controller
 
             if ($user) {
                 //發送驗證信件
-                Mail::send('emails.confirm', array('link' => URL::route('member.confirm', $code)), function($message) use ($user){
+                Mail::send('emails.confirm', array('link' => URL::route('member.confirm', $code)), function ($message) use ($user) {
                     $message->to($user->email)->subject("[" . Config::get('config.sitename') . "] 信箱驗證");
                 });
                 return Redirect::route('home')
@@ -121,7 +121,20 @@ class MemberController extends Controller
     //驗證信箱
     public function getConfirm($token = null)
     {
-        return 'getConfirm';
+        $user = User::where('confirm_code', '=', $token)->whereNull('confirm_at');
+        if ($user->count()) {
+            $user = $user->first();
+            //更新資料
+            $user->confirm_at = date('Y-m-d H:i:s', time());
+            $user->confirm_code = '';
+
+            if ($user->save()) {
+                return Redirect::route('home')
+                    ->with('global', '帳號啟用成功。');
+            }
+        }
+        return Redirect::route('home')
+            ->with('global', '驗證連結無效，也可能是帳號已啟用，請再次確認');
     }
 
     //重發驗證信
