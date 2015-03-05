@@ -30,6 +30,8 @@ class MemberController extends Controller
         //會員限定
         $this->middleware('auth', [
             'only' => [
+                'getResend',
+                'postResend',
                 'getChangePassword',
                 'postChangePassword',
                 'getEditProfile',
@@ -140,12 +142,36 @@ class MemberController extends Controller
     //重發驗證信
     public function getResend()
     {
-        return 'getResend';
+        $user = Auth::user();
+        //帳號已啟用
+        if (empty($user->confirm_code)) {
+            return Redirect::back()
+                ->with('global', '此帳號已啟用，無須再次認證');
+        }
+
+        return view('member.resend');
     }
 
     public function postResend(Request $request)
     {
-        return 'postResend';
+        $user = Auth::user();
+        //帳號已啟用
+        if (empty($user->confirm_code)) {
+            return Redirect::back()
+                ->with('global', '此帳號已啟用，無須再次認證');
+        }
+        //更換驗證碼
+        $code = str_random(60);
+        $user->confirm_code = $code;
+
+        if ($user->save()) {
+            //重新發送驗證信件
+            Mail::send('emails.confirm', array('link' => URL::route('member.confirm', $code)), function ($message) use ($user) {
+                $message->to($user->email)->subject("[" . Config::get('config.sitename') . "] 信箱驗證");
+            });
+            return Redirect::route('home')
+                ->with('global', '已重新發送，請至信箱收取驗證信件並啟用帳號。');
+        }
     }
 
     //忘記密碼
