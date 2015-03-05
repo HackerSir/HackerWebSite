@@ -38,6 +38,12 @@ class MemberController extends Controller
                 'postEditProfile'
             ]
         ]);
+        //需完成信箱驗證
+        $this->middleware('email', [
+            'only' => [
+                //
+            ]
+        ]);
     }
 
     //登入
