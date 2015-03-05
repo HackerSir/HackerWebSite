@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Group;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,8 @@ class MemberController extends Controller
         //需完成信箱驗證
         $this->middleware('email', [
             'only' => [
-                //
+                //條件不能空白，否則會出錯
+                'method_needs_email_confirm'
             ]
         ]);
     }
@@ -114,6 +116,9 @@ class MemberController extends Controller
                 'name' => $nickname,
                 'confirm_code' => $code
             ));
+            //預設群組
+            $group = Group::where('name', '=', 'default')->first();
+            $user = $group->users()->save($user);
 
             if ($user) {
                 //發送驗證信件
