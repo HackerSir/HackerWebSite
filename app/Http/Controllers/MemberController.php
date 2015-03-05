@@ -3,8 +3,11 @@
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -105,10 +108,10 @@ class MemberController extends Controller
             ));
 
             if ($user) {
-                //TODO 發送驗證信件
-                /*Mail::send('emails.auth.activate', array('link' => URL::route('member-activate', $code)), function($message) use ($user){
-                    $message->to($user->email)->subject("[" . Config::get('config.sitename') . "]信箱驗證");
-                });*/
+                //發送驗證信件
+                Mail::send('emails.confirm', array('link' => URL::route('member.confirm', $code)), function($message) use ($user){
+                    $message->to($user->email)->subject("[" . Config::get('config.sitename') . "] 信箱驗證");
+                });
                 return Redirect::route('home')
                     ->with('global', '註冊完成，請至信箱收取驗證信件並啟用帳號。');
             }
