@@ -129,6 +129,8 @@ class MemberController extends Controller
                     ->with('global', '註冊完成，請至信箱收取驗證信件並啟用帳號。');
             }
         }
+        return Redirect::route('member.register')
+            ->with('global', '註冊時發生錯誤。');
     }
 
     //驗證信箱
@@ -183,6 +185,8 @@ class MemberController extends Controller
             return Redirect::route('home')
                 ->with('global', '已重新發送，請至信箱收取驗證信件並啟用帳號。');
         }
+        return Redirect::route('member.resend')
+            ->with('global', '發送信件時發生錯誤。');
     }
 
     //忘記密碼
