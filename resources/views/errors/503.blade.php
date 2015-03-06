@@ -34,6 +34,7 @@
     <body>
         <div class="container">
             <div class="content">
+                {!! HTML::image('pic/503.jpg','I\'m a teapot',['height'=>'400px']); !!}
                 <div class="title">Be right back.</div>
             </div>
         </div>
