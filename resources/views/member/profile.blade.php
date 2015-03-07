@@ -18,6 +18,7 @@
                                 {!! HTML::image($user->gravatar(), null, ['class' => 'img-circle']) !!}
                             </div>
                         </div>
+                        <br />
                         <div class="row">
                             <div class="text-center col-md-10 col-md-offset-1">
                                 <table class="table table-hover">
