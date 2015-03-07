@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 {{-- 右側主要選單 --}}
-                @foreach (Config::get('navbar.navbar') as $name => $uri)
+                @foreach ($navbar as $name => $uri)
                     @if(is_array($uri))
                         {{-- 次級選單 --}}
                         <li class="dropdown">
