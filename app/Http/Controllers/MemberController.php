@@ -73,6 +73,11 @@ class MemberController extends Controller
             ], $remember);
 
             if ($auth) {
+                $user = Auth::user();
+                //更新資料
+                $user->lastlogin_ip = $request->getClientIp();
+                $user->lastlogin_at = date('Y-m-d H:i:s', time());
+                $user->save();
                 //重導向至登入前頁面
                 return Redirect::intended('/');
             } else {
@@ -114,7 +119,9 @@ class MemberController extends Controller
                 'email' => $email,
                 'password' => Hash::make($password),
                 'name' => $nickname,
-                'confirm_code' => $code
+                'confirm_code' => $code,
+                'register_ip' => $request->getClientIp(),
+                'register_at' => date('Y-m-d H:i:s', time())
             ));
             //預設群組
             $group = Group::where('name', '=', 'default')->first();

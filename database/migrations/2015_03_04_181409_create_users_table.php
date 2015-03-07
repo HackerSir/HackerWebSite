@@ -24,6 +24,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('confirm_code', 64);
             $table->timestamp('confirm_at')->nullable();
+            $table->string('register_ip', 40);
+            $table->timestamp('register_at')->nullable();
+            $table->string('lastlogin_ip', 40);
+            $table->timestamp('lastlogin_at')->nullable();
             $table->timestamps();
         });
     }
