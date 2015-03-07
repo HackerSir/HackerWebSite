@@ -222,12 +222,43 @@ class MemberController extends Controller
     //修改密碼
     public function getChangePassword()
     {
-        return 'getChangePassword';
+        return view('member.change-password');
     }
 
     public function postChangePassword(Request $request)
     {
-        return 'postChangePassword';
+        $validator = Validator::make($request->all(),
+            array(
+                'old_password' => 'required',
+                'password' => 'required|min:6',
+                'password_again' => 'required|same:password',
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('member.change-password')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $user = Auth::user();
+
+            $old_password = $request->get('old_password');
+            $password = $request->get('password');
+
+            if (Hash::check($old_password, $user->getAuthPassword())) {
+                $user->password = Hash::make($password);
+
+                if ($user->save()) {
+                    return Redirect::route('home')
+                        ->with('global', '密碼修改完成。');
+                }
+            } else {
+                return Redirect::route('member.change-password')
+                    ->with('global', '舊密碼輸入錯誤。');
+            }
+        }
+        return Redirect::route('member.change-password')
+            ->with('global', '密碼無法修改。');
     }
 
     //個人資料
