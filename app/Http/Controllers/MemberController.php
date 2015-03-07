@@ -351,7 +351,8 @@ class MemberController extends Controller
     //個人資料
     public function getProfile()
     {
-        return 'getProfile';
+        $user = Auth::user();
+        return view('member.profile')->with('user', $user);
     }
 
     //修改資料
