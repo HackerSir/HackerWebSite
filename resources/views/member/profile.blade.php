@@ -41,6 +41,14 @@
                                         <td>用戶組：</td>
                                         <td>{{ $user->group->title }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>註冊：</td>
+                                        <td>{{ $user->register_at }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>最後登入：</td>
+                                        <td>{{ $user->lastlogin_at }}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
