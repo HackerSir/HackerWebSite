@@ -80,6 +80,8 @@ class MemberController extends Controller
                 $user->lastlogin_ip = $request->getClientIp();
                 $user->lastlogin_at = date('Y-m-d H:i:s', time());
                 $user->save();
+                //移除重新設定密碼的驗證碼
+                DB::table('password_resets')->where('email', '=', $user->email)->delete();
                 //重導向至登入前頁面
                 return Redirect::intended('/');
             } else {
