@@ -12,7 +12,10 @@
                     <div class="panel-heading">{{ $user->name }} - 個人資料</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
-
+                        <div class="text-center">
+                            {{-- Gravatar大頭貼 --}}
+                            {!! HTML::image($user->gravatar(), null, ['class' => 'img-circle']) !!}
+                        </div>
                     </div>
                 </div>
             </div>
