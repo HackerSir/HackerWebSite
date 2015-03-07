@@ -5,6 +5,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
@@ -200,23 +201,107 @@ class MemberController extends Controller
     //忘記密碼
     public function getForgotPassword()
     {
-        return 'getForgotPassword';
+        return view('member.forgot-password');
     }
 
     public function postForgotPassword(Request $request)
     {
-        return 'postForgotPassword';
+        $validator = Validator::make($request->all(),
+            array(
+                'email' => 'required|email',
+            )
+        );
+        if ($validator->fails()) {
+            return Redirect::route('member.forgot-password')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $user = User::where('email', '=', $request->get('email'));
+            if ($user->count()) {
+                $user = $user->first();
+                $code = str_random(60);
+                //檢查是否曾有驗證碼記錄
+                if (DB::table('password_resets')->where('email', '=', $user->email)->count()) {
+                    //更新找回密碼的驗證碼
+                    DB::table('password_resets')->where('email', '=', $user->email)->update([
+                        'token' => $code,
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ]);
+                } else {
+                    //產生找回密碼的驗證碼
+                    DB::table('password_resets')->insert([
+                        'email' => $user->email,
+                        'token' => $code,
+                        'created_at' => date('Y-m-d H:i:s', time()),
+                        'updated_at' => date('Y-m-d H:i:s', time())
+                    ]);
+                }
+                if ($user->save()) {
+                    //發送信件
+                    Mail::send('emails.forgot', array('link' => URL::route('member.reset-password', $code)), function ($message) use ($user) {
+                        $message->to($user->email)->subject("[" . Config::get('config.sitename') . "] 重新設定密碼");
+                    });
+                    return Redirect::route('home')
+                        ->with('global', '更換密碼的連結已發送至信箱。');
+                }
+            } else {
+                return Redirect::route('member.forgot-password')
+                    ->with('global', '此信箱仍未註冊成為會員。');
+            }
+        }
+        return Redirect::route('member.forgot-password')
+            ->with('global', '無法取得更換密碼的連結。');
     }
 
     //重設密碼
     public function getResetPassword($token = null)
     {
-        return 'getResetPassword';
+        if (DB::table('password_resets')->where('token', '=', $token)->count()) {
+            $email = DB::table('password_resets')->where('token', '=', $token)->first()->email;
+            $user = User::where('email', '=', $email)->first();
+            //檢查使用者是否存在
+            if ($user) {
+                return view('member.reset-password')->with('user', $user)->with('token', $token);
+            }
+        }
+        return Redirect::route('home')
+            ->with('global', '連結無效，無法重新設定密碼，請再次確認');
     }
 
     public function postResetPassword(Request $request)
     {
-        return 'postResetPassword';
+        $token = $request->get('token');
+        if (DB::table('password_resets')->where('token', '=', $token)->count()) {
+            $email = DB::table('password_resets')->where('token', '=', $token)->first()->email;
+            $user = User::where('email', '=', $email)->first();
+            //檢查使用者是否存在
+            if ($user) {
+                $validator = Validator::make($request->all(),
+                    array(
+                        'password' => 'required|min:6',
+                        'password_again' => 'required|same:password',
+                    )
+                );
+
+                if ($validator->fails()) {
+                    return Redirect::route('member.reset-password', $token)
+                        ->withErrors($validator)
+                        ->withInput();
+                } else {
+                    $password = $request->get('password');
+                    $user->password = Hash::make($password);
+
+                    if ($user->save()) {
+                        //移除重新設定密碼的驗證碼
+                        DB::table('password_resets')->where('email', '=', $email)->delete();
+                        return Redirect::route('home')
+                            ->with('global', '密碼重新設定完成，請使用新密碼重新登入。');
+                    }
+                }
+            }
+        }
+        return Redirect::route('member.change-password')
+            ->with('global', '密碼無法修改。');
     }
 
     //修改密碼
