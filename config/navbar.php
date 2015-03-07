@@ -22,6 +22,8 @@ return array(
     //會員
     'member' => array(
         '%user%' => array(
+            '個人資料'=>'member/profile',
+            '修改密碼'=>'member/change-password',
             '登出' => 'member/logout'
         )
     ),

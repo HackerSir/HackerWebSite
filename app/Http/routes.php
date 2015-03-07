@@ -30,6 +30,7 @@ Route::controller('member', 'MemberController', array(
     'postResetPassword' => 'member.reset-password',
     'getChangePassword' => 'member.change-password',
     'postChangePassword' => 'member.change-password',
+    'getProfile' => 'member.profile',
     'getEditProfile' => 'member.edit-profile',
     'postEditProfile' => 'member.edit-profile',
     'getLogout' => 'member.logout'

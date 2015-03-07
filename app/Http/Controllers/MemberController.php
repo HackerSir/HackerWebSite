@@ -35,6 +35,7 @@ class MemberController extends Controller
                 'postResend',
                 'getChangePassword',
                 'postChangePassword',
+                'getProfile',
                 'getEditProfile',
                 'postEditProfile'
             ]
@@ -227,6 +228,12 @@ class MemberController extends Controller
     public function postChangePassword(Request $request)
     {
         return 'postChangePassword';
+    }
+
+    //個人資料
+    public function getProfile()
+    {
+        return 'getProfile';
     }
 
     //修改資料
