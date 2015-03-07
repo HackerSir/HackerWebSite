@@ -15,7 +15,6 @@ class MemberController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
         //遊客限定
         $this->middleware('guest', [
             'only' => [
