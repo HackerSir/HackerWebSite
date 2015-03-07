@@ -22,16 +22,16 @@
                             <div class="text-center col-md-10 col-md-offset-1">
                                 <table class="table table-hover">
                                     <tr>
-                                        <td>NID：</td>
-                                        <td>{{ $user->nid }}</td>
+                                        <td>暱稱：</td>
+                                        <td>{{ $user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>Email：</td>
                                         <td>{{ $user->email }}</td>
                                     </tr>
                                     <tr>
-                                        <td>暱稱：</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td>NID：</td>
+                                        <td>{{ $user->nid }}</td>
                                     </tr>
                                     <tr>
                                         <td>系級：</td>
