@@ -3,15 +3,16 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSigninsTable extends Migration {
+class CreateSigninsTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::create('signins', function ($table) {
             $table->increments('id');
             $table->integer('user_id');
@@ -19,16 +20,16 @@ class CreateSigninsTable extends Migration {
             $table->timestamp('time');
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::drop('signins');
-	}
+    }
 
 }
