@@ -358,12 +358,48 @@ class MemberController extends Controller
     //修改資料
     public function getEditProfile()
     {
-        return 'getEditProfile';
+        $user = Auth::user();
+        return view('member.edit-profile')->with('user', $user);
     }
 
     public function postEditProfile(Request $request)
     {
-        return 'postEditProfile';
+        $validator = Validator::make($request->all(),
+            array(
+                'name' => array(
+                    'required',
+                    'unique:users,name,' . Auth::user()->id,
+                    'min:2',
+                    'max:20'
+                ),
+                'nid' => array(
+                    'size:8',
+                    'regex:/^[d|e|p|m]([0-9]){7}$/'
+                ),
+                'grade' => array(
+                    'max:20'
+                ),
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('member.edit-profile')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $user = Auth::user();
+            $user->name = $request->get('name');
+            if (empty($user->nid)) {
+                $user->nid = $request->get('nid');
+            }
+            $user->grade = $request->get('grade');
+            if ($user->save()) {
+                return Redirect::route('member.profile')
+                    ->with('global', '個人資料修改完成。');
+            }
+        }
+        return Redirect::route('member.edit-profile')
+            ->with('global', '個人資料無法修改。');
     }
 
     //登出

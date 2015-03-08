@@ -50,6 +50,9 @@
                                         <td>最後登入：</td>
                                         <td>{{ $user->lastlogin_at }}</td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="2">{!! HTML::linkRoute('member.edit-profile', '編輯個人資料', null, ['class' => 'btn btn-primary']) !!}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
