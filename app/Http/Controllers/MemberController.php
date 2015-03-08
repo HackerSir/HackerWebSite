@@ -374,7 +374,7 @@ class MemberController extends Controller
                 ),
                 'nid' => array(
                     'size:8',
-                    'regex:/^[d|e|p|m]([0-9]){7}$/'
+                    'regex:/^[d|e|p|m]([0-9]){7}$/i'
                 ),
                 'grade' => array(
                     'max:20'
@@ -390,7 +390,7 @@ class MemberController extends Controller
             $user = Auth::user();
             $user->name = $request->get('name');
             if (empty($user->nid)) {
-                $user->nid = $request->get('nid');
+                $user->nid = strtolower($request->get('nid'));
             }
             $user->grade = $request->get('grade');
             if ($user->save()) {
