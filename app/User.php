@@ -62,4 +62,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return $url;
     }
+
+    public function isStaff()
+    {
+        if ($this->group->name == "staff") {
+            return true;
+        }
+        return false;
+    }
 }
