@@ -32,7 +32,7 @@
             paddingTop: '50px',
             scrollOverflow: true,
             scrollBar: true,
-            sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#ccddff'],
+            sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'],
             anchors: ['welcome', 'about', 'class', 'activity'],
         });
     });
