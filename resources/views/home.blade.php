@@ -9,7 +9,7 @@
         <h1>關於我們</h1>
         {!! HTML::image('http://placehold.it/1024x768') !!}
     </div>
-    <div class="section">
+    <div class="section text-right">
         <h1>社團課程</h1>
         {!! HTML::image('http://placehold.it/1024x768') !!}
     </div>
