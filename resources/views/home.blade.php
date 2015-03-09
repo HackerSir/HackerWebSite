@@ -2,8 +2,8 @@
 
 @section('content')
 <div id="fullpage">
-    <div class="section">
-        {!! HTML::image('pic/welcome.jpg', null, ['width' => '100%', 'height' => '100%']) !!}
+    <div class="section" style="background-image: url('{{ URL::asset('pic/welcome.jpg') }}'); background-size: 100%;">
+
     </div>
     <div class="section">
         <h1>關於我們</h1>
@@ -32,7 +32,7 @@
             paddingTop: '50px',
             scrollOverflow: true,
             scrollBar: true,
-            sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'],
+            //sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'],
             anchors: ['welcome', 'about', 'class', 'activity'],
         });
     });
