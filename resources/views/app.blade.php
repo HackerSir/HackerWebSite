@@ -8,7 +8,11 @@
 
         {!! HTML::style('css/app.css'); !!}
         {!! HTML::style('//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/slate/bootstrap.css'); !!}
+        {!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.css'); !!}
         {!! HTML::style('css/stylesheet.css'); !!}
+        <style type="text/css">
+            @yield('css')
+        </style>
 
         <!-- Fonts -->
         {!! HTML::style('//fonts.googleapis.com/css?family=Roboto:400,300'); !!}
@@ -38,5 +42,11 @@
         <!-- Scripts -->
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js'); !!}
+        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
+        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
+        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
+        <script type="text/javascript">
+            @yield('javascript')
+        </script>
     </body>
 </html>

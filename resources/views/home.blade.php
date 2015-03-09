@@ -1,21 +1,41 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Home</div>
-
-                <div class="panel-body">
-                    Hello, world.<br />
-                    安安，世界。<br />
-                    @for($i=0;$i<50;$i++)
-                        {{ $i }}<br />
-                    @endfor
-                </div>
-            </div>
+<div class="container-fluid">
+    <div id="fullpage">
+        <div class="section">
+            {!! HTML::image('http://placehold.it/1024x768', null, ['width' => '100%', 'height' => '100%']) !!}
+        </div>
+        <div class="section">
+            <h1>關於我們</h1>
+            {!! HTML::image('http://placehold.it/1024x768') !!}
+        </div>
+        <div class="section">
+            <h1>社團課程</h1>
+            {!! HTML::image('http://placehold.it/1024x768') !!}
+        </div>
+        <div class="section">
+            <h1>社團活動</h1>
+            {!! HTML::image('http://placehold.it/1024x768') !!}
         </div>
     </div>
 </div>
+@endsection
+
+@section('css')
+    body {
+        padding-top: 0px;
+    }
+@endsection
+
+@section('javascript')
+    $(document).ready(function() {
+        $('#fullpage').fullpage({
+            paddingTop: '50px',
+            scrollOverflow: true,
+            scrollBar: true,
+            sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#ccddff'],
+            anchors: ['welcome', 'about', 'class', 'activity'],
+        });
+    });
 @endsection
