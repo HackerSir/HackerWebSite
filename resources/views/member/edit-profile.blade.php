@@ -24,12 +24,25 @@
                         <br />
                         <div class="row">
                             {!! Form::open(['route' => 'member.edit-profile', 'class' => 'form-horizontal']) !!}
-                                <div class="form-group has-feedback{{ ($errors->has('name'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="name">暱稱</label>
+                                <div class="form-group has-feedback{{ ($errors->has('nickname'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="nickname">暱稱</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('name', $user->name, ['id' => 'name', 'placeholder' => '請輸入暱稱', 'class' => 'form-control', 'required']) !!}
-                                        @if($errors->has('name'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('name') }}</span>@endif
+                                        {!! Form::text('nickname', $user->nickname, ['id' => 'nickname', 'placeholder' => '請輸入暱稱', 'class' => 'form-control', 'required']) !!}
+                                        @if($errors->has('nickname'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('nickname') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('name'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="name">真實姓名</label>
+                                    <div class="col-md-9">
+                                        @if(empty($user->name))
+                                            {!! Form::text('name', $user->name, ['id' => 'name', 'placeholder' => '請輸入真實姓名', 'class' => 'form-control']) !!}
+                                            @if($errors->has('name'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                            <span class="label label-danger">{{ $errors->first('name') }}</span><br />@endif
+                                        @else
+                                            {!! Form::text(null, $user->name, ['id' => 'name', 'placeholder' => '請輸入真實姓名', 'class' => 'form-control', 'readonly']) !!}
+                                        @endif
+                                        <span class="label label-primary">真實姓名僅能設定一次，設定後將無法修改</span>
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback{{ ($errors->has('nid'))?' has-error':'' }}">

@@ -122,7 +122,7 @@ class MemberController extends Controller
             $user = User::create(array(
                 'email' => $email,
                 'password' => Hash::make($password),
-                'name' => $nickname,
+                'nickname' => $nickname,
                 'confirm_code' => $code,
                 'register_ip' => $request->getClientIp(),
                 'register_at' => date('Y-m-d H:i:s', time())
@@ -368,7 +368,12 @@ class MemberController extends Controller
             array(
                 'name' => array(
                     'required',
-                    'unique:users,name,' . Auth::user()->id,
+                    'min:2',
+                    'max:20'
+                ),
+                'nickname' => array(
+                    'required',
+                    'unique:users,nickname,' . Auth::user()->id,
                     'min:2',
                     'max:20'
                 ),
@@ -388,7 +393,10 @@ class MemberController extends Controller
                 ->withInput();
         } else {
             $user = Auth::user();
-            $user->name = $request->get('name');
+            $user->nickname = $request->get('nickname');
+            if (empty($user->name)) {
+                $user->name = strtolower($request->get('name'));
+            }
             if (empty($user->nid)) {
                 $user->nid = strtolower($request->get('nid'));
             }

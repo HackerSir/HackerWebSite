@@ -23,8 +23,12 @@
                             <div class="text-center col-md-10 col-md-offset-1">
                                 <table class="table table-hover">
                                     <tr>
-                                        <td>暱稱：</td>
+                                        <td>真實姓名：</td>
                                         <td>{{ $user->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>暱稱：</td>
+                                        <td>{{ $user->nickname }}</td>
                                     </tr>
                                     <tr>
                                         <td>Email：</td>

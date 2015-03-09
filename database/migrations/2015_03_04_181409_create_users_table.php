@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->string('name', 20);
+            $table->string('nickname', 20);
             $table->string('grade', 20);
             $table->integer('group_id')->nullable()->unsigned();
             $table->rememberToken();
