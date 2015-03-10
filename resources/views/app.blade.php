@@ -54,10 +54,33 @@
                         align: 'center'
                     },
                     offset: 70,
+                    delay: 5000,
                     timer: 500,
                     mouse_over: 'pause',
                     animate: {
                         enter: 'animated zoomIn',
+                        exit: 'animated zoomOut'
+                    }
+                });
+            @endif
+            @if(Session::has('warning'))
+                /* Warning message */
+                /* Bootstrap Notify */
+                $.notify({
+                    // options
+                    message: '{{ Session::get('warning') }}'
+                },{
+                    // settings
+                    type: 'danger',
+                    placement: {
+                        align: 'center'
+                    },
+                    offset: 70,
+                    delay: 0,
+                    timer: 500,
+                    mouse_over: 'pause',
+                    animate: {
+                        enter: 'animated rubberBand',
                         exit: 'animated zoomOut'
                     }
                 });

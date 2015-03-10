@@ -86,7 +86,7 @@ class MemberController extends Controller
                 return Redirect::intended('/');
             } else {
                 return Redirect::route('member.login')
-                    ->with('global', '帳號或密碼錯誤');
+                    ->with('warning', '帳號或密碼錯誤');
             }
         }
     }
@@ -141,7 +141,7 @@ class MemberController extends Controller
             }
         }
         return Redirect::route('member.register')
-            ->with('global', '註冊時發生錯誤。');
+            ->with('warning', '註冊時發生錯誤。');
     }
 
     //驗證信箱
@@ -160,7 +160,7 @@ class MemberController extends Controller
             }
         }
         return Redirect::route('home')
-            ->with('global', '驗證連結無效，也可能是帳號已啟用，請再次確認');
+            ->with('warning', '驗證連結無效，也可能是帳號已啟用，請再次確認');
     }
 
     //重發驗證信
@@ -170,7 +170,7 @@ class MemberController extends Controller
         //帳號已啟用
         if (empty($user->confirm_code)) {
             return Redirect::back()
-                ->with('global', '此帳號已啟用，無須再次認證');
+                ->with('warning', '此帳號已啟用，無須再次認證');
         }
 
         return view('member.resend');
@@ -182,7 +182,7 @@ class MemberController extends Controller
         //帳號已啟用
         if (empty($user->confirm_code)) {
             return Redirect::back()
-                ->with('global', '此帳號已啟用，無須再次認證');
+                ->with('warning', '此帳號已啟用，無須再次認證');
         }
         //更換驗證碼
         $code = str_random(60);
@@ -197,7 +197,7 @@ class MemberController extends Controller
                 ->with('global', '已重新發送，請至信箱收取驗證信件並啟用帳號。');
         }
         return Redirect::route('member.resend')
-            ->with('global', '發送信件時發生錯誤。');
+            ->with('warning', '發送信件時發生錯誤。');
     }
 
     //忘記密碼
@@ -248,11 +248,11 @@ class MemberController extends Controller
                 }
             } else {
                 return Redirect::route('member.forgot-password')
-                    ->with('global', '此信箱仍未註冊成為會員。');
+                    ->with('warning', '此信箱仍未註冊成為會員。');
             }
         }
         return Redirect::route('member.forgot-password')
-            ->with('global', '無法取得更換密碼的連結。');
+            ->with('warning', '無法取得更換密碼的連結。');
     }
 
     //重設密碼
@@ -267,7 +267,7 @@ class MemberController extends Controller
             }
         }
         return Redirect::route('home')
-            ->with('global', '連結無效，無法重新設定密碼，請再次確認');
+            ->with('warning', '連結無效，無法重新設定密碼，請再次確認');
     }
 
     public function postResetPassword(Request $request)
@@ -303,7 +303,7 @@ class MemberController extends Controller
             }
         }
         return Redirect::route('member.change-password')
-            ->with('global', '密碼無法修改。');
+            ->with('warning', '密碼無法修改。');
     }
 
     //修改密碼
@@ -341,11 +341,11 @@ class MemberController extends Controller
                 }
             } else {
                 return Redirect::route('member.change-password')
-                    ->with('global', '舊密碼輸入錯誤。');
+                    ->with('warning', '舊密碼輸入錯誤。');
             }
         }
         return Redirect::route('member.change-password')
-            ->with('global', '密碼無法修改。');
+            ->with('warning', '密碼無法修改。');
     }
 
     //個人資料
@@ -407,7 +407,7 @@ class MemberController extends Controller
             }
         }
         return Redirect::route('member.edit-profile')
-            ->with('global', '個人資料無法修改。');
+            ->with('warning', '個人資料無法修改。');
     }
 
     //登出
