@@ -36,6 +36,8 @@ Route::controller('member', 'MemberController', array(
     'getLogout' => 'member.logout'
 ));
 
+Route::controller('api', 'ApiController');
+
 //未定義路由
 Route::get('{all}', array(
     'as' => 'not-found',
