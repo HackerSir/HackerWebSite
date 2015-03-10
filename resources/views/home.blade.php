@@ -3,7 +3,7 @@
 @section('content')
 <div id="fullpage">
     {{-- Welcome section--}}
-    <div class="section" style="background-image: url('{{ URL::asset('pic/welcome.jpg') }}'); background-size: 100%;">
+    <div class="section" id="section0">
 
     </div>
     {{-- About section--}}
@@ -39,6 +39,13 @@
 @section('css')
     body {
         padding-top: 0px;
+    }
+
+    #section0 {
+        background-image: url({{ URL::asset('pic/welcome.jpg') }});
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 @endsection
 
