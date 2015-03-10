@@ -15,7 +15,7 @@ class CreateSigninsTable extends Migration
     {
         Schema::create('signins', function ($table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('card_id')->unsigned();
             $table->integer('course_id')->unsigned();
             $table->timestamp('time');
             $table->timestamps();
