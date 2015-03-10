@@ -9,6 +9,7 @@
         {!! HTML::style('css/app.css'); !!}
         {!! HTML::style('//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/slate/bootstrap.css'); !!}
         {!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.css'); !!}
+        {!! HTML::style('css/animate.css'); !!}
         {!! HTML::style('css/stylesheet.css'); !!}
         <style type="text/css">
             @yield('css')
@@ -28,13 +29,6 @@
         {{-- navbar--}}
         @include('common.navbar')
         <div class="container-fluid">
-            {{-- global message --}}
-            @if(Session::has('global'))
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    {{ Session::get('global') }}
-                </div>
-            @endif
             {{-- content --}}
             @yield('content')
         </div>
@@ -45,7 +39,29 @@
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
+        {!! HTML::script('js/bootstrap-notify.min.js'); !!}
         <script type="text/javascript">
+            @if(Session::has('global'))
+                /* Global message */
+                /* Bootstrap Notify */
+                $.notify({
+                    // options
+                    message: '{{ Session::get('global') }}'
+                },{
+                    // settings
+                    type: 'success',
+                    placement: {
+                        align: 'center'
+                    },
+                    offset: 70,
+                    timer: 500,
+                    mouse_over: 'pause',
+                    animate: {
+                        enter: 'animated zoomIn',
+                        exit: 'animated zoomOut'
+                    }
+                });
+            @endif
             @yield('javascript')
         </script>
     </body>
