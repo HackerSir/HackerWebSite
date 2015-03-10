@@ -40,7 +40,7 @@
                                             @if($errors->has('name'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                             <span class="label label-danger">{{ $errors->first('name') }}</span><br />@endif
                                         @else
-                                            {!! Form::text(null, $user->name, ['id' => 'name', 'placeholder' => '請輸入真實姓名', 'class' => 'form-control', 'readonly']) !!}
+                                            {!! Form::text('name', $user->name, ['id' => 'name', 'placeholder' => '請輸入真實姓名', 'class' => 'form-control', 'readonly']) !!}
                                         @endif
                                         <span class="label label-primary">真實姓名僅能設定一次，設定後將無法修改</span>
                                     </div>
@@ -53,7 +53,7 @@
                                             @if($errors->has('nid'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                             <span class="label label-danger">{{ $errors->first('nid') }}</span><br />@endif
                                         @else
-                                            {!! Form::text(null, $user->nid, ['id' => 'nid', 'placeholder' => '請輸入NID', 'class' => 'form-control', 'readonly']) !!}
+                                            {!! Form::text('nid', $user->nid, ['id' => 'nid', 'placeholder' => '請輸入NID', 'class' => 'form-control', 'readonly']) !!}
                                         @endif
                                         <span class="label label-primary">NID僅能設定一次，設定後將無法修改</span>
                                     </div>
