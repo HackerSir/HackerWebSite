@@ -19,6 +19,14 @@ class ApiController extends Controller
     }
 
     /*
+     * 直接訪問/api
+     */
+    public function anyIndex()
+    {
+        abort(400);
+    }
+
+    /*
      * 測試Http status code
      */
     public function anyTest($code)
@@ -50,5 +58,13 @@ class ApiController extends Controller
             "JSON Input" => $json
         );
         return Response::json($result);
+    }
+
+    /*
+     * 所有沒處理到的情況
+     */
+    public function missingMethod($parameters = array())
+    {
+        abort(400);
     }
 }
