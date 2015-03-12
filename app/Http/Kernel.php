@@ -2,7 +2,8 @@
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class Kernel extends HttpKernel {
+class Kernel extends HttpKernel
+{
 
     /**
      * The application's global HTTP middleware stack.
@@ -15,7 +16,6 @@ class Kernel extends HttpKernel {
         'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
         'Illuminate\Session\Middleware\StartSession',
         'Illuminate\View\Middleware\ShareErrorsFromSession',
-        'App\Http\Middleware\VerifyCsrfToken',
     ];
 
     /**
@@ -29,6 +29,7 @@ class Kernel extends HttpKernel {
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
         'email' => 'App\Http\Middleware\EmailConfirm',
         'staff' => 'App\Http\Middleware\StaffOnly',
+        'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
     ];
 
 }

@@ -16,6 +16,8 @@ class MemberController extends Controller
 {
     public function __construct()
     {
+        //CSRF防護
+        $this->middleware('csrf');
         //遊客限定
         $this->middleware('guest', [
             'only' => [
