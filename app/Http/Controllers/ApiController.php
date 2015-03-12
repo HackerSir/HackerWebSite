@@ -18,6 +18,9 @@ class ApiController extends Controller
         //$this->middleware('auth');
     }
 
+    /*
+     * 測試Http status code
+     */
     public function anyTest($code)
     {
         $json = array(
@@ -30,5 +33,22 @@ class ApiController extends Controller
             ),
         );
         return Response::json($json, $code);
+    }
+
+    /*
+     * 測試Json input
+     */
+    public function postTestJson(Request $request, $token = null)
+    {
+        //檢查是否為JSON
+        if (!$request->isJson()) {
+            return "Request must be json, not " . $request->header('Content-Type');
+        }
+        $json = (object)$request->all();
+        $result = array(
+            "Token" => $token,
+            "JSON Input" => $json
+        );
+        return Response::json($result);
     }
 }
