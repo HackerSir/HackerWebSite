@@ -32,7 +32,14 @@
                                     </tr>
                                     <tr>
                                         <td>Email：</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            {{ $user->email }}
+                                            @if($user->isConfirmed())
+                                                <span class="label label-success">已驗證</span>
+                                            @else
+                                                <a href="{{ URL::route('member.resend') }}"><span class="label label-danger">未驗證</span></a>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>NID：</td>

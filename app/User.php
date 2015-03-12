@@ -70,4 +70,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return false;
     }
+
+    public function isConfirmed()
+    {
+        if (!empty($this->confirm_at)) {
+            return true;
+        }
+        return false;
+    }
 }
