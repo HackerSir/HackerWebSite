@@ -1,13 +1,13 @@
 @extends('app')
 
 @section('title')
-    錯誤
+    {{ $code }}
 @endsection
 
 @section('content')
     <div class="container">
         <div class="row text-center">
-            {!! HTML::image('pic/400.jpg','Bad Request'); !!}
+            {!! HTML::image('pic/'. $code . '.jpg','Bad Request'); !!}
         </div>
     </div>
 @endsection
