@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
+
 Route::get('/', [
     'as' => 'home',
     'uses' => 'HomeController@index'
