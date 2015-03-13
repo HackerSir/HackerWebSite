@@ -1,5 +1,6 @@
 <?php namespace App\Exceptions;
 
+use App\Cat;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
@@ -115,9 +116,11 @@ class Handler extends ExceptionHandler
         );
 
         if (array_key_exists($status, $http_codes)) {
+            $pic = Cat::random();
             $error = array(
                 'code' => $status,
-                'message' => $http_codes[$status]
+                'message' => $http_codes[$status],
+                'pic' => $pic
             );
             return response()->view("errors.error", $error, $status);
         } else {

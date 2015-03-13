@@ -7,7 +7,11 @@
 @section('content')
     <div class="container">
         <div class="row text-center">
-            {!! HTML::image('pic/'. $code . '.jpg','Bad Request'); !!}
+            <h1>{{ $code }}</h1>
+            <h1>{{ $message }}</h1>
+            @if(!empty($pic))
+                {!! HTML::image($pic, $message, ['width' => '600px']); !!}
+            @endif
         </div>
     </div>
 @endsection
