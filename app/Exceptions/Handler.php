@@ -115,7 +115,14 @@ class Handler extends ExceptionHandler
             510 => 'Not Extended'
         );
 
-        if (array_key_exists($status, $http_codes)) {
+        //使用獨立錯誤頁面
+        $exclude_code = array(
+            '503'
+        );
+
+        if (in_array($status, $exclude_code) && view()->exists("errors.{$status}")) {
+            return response()->view("errors.{$status}", [], $status);
+        } else if (array_key_exists($status, $http_codes)) {
             $pic = Cat::random();
             $error = array(
                 'code' => $status,
