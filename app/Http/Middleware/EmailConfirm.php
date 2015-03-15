@@ -42,7 +42,7 @@ class EmailConfirm
         } else if (empty($this->auth->confirm_at)) {
             //未驗證
             return redirect()->route('member.resend')
-                ->with('global', '完成信箱驗證方可進入此頁面');
+                ->with('warning', '完成信箱驗證方可進入此頁面');
         }
 
         return $next($request);
