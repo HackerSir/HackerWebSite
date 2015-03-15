@@ -42,7 +42,7 @@ class StaffOnly
         } else if (!$this->auth->user()->isStaff()) {
             //未驗證
             return redirect()->back()
-                ->with('global', '權限不足');
+                ->with('warning', '權限不足');
         }
 
         return $next($request);
