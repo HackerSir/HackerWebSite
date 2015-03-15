@@ -39,7 +39,7 @@ class EmailConfirm
             } else {
                 return redirect()->route('member.login');
             }
-        } else if (empty($this->auth->confirm_at)) {
+        } else if (empty($this->auth->user()->confirm_at)) {
             //未驗證
             return redirect()->route('member.resend')
                 ->with('warning', '完成信箱驗證方可進入此頁面');
