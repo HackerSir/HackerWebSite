@@ -473,6 +473,7 @@ class MemberController extends Controller
 
     public function postEditOtherProfile(Request $request, $uid = null)
     {
+        $user = Auth::user();
         $showUser = User::find($uid);
         if (!$showUser) {
             return Redirect::route('member.list')
@@ -512,9 +513,11 @@ class MemberController extends Controller
             $showUser->name = $request->get('name');
             $showUser->nid = strtolower($request->get('nid'));
             $showUser->grade = $request->get('grade');
-            $groupName = $request->get('group');
-            $group = Group::where('name', '=', $groupName)->first();
-            $showUser = $group->users()->save($showUser);
+            if ($showUser->id != $user->id) {
+                $groupName = $request->get('group');
+                $group = Group::where('name', '=', $groupName)->first();
+                $showUser = $group->users()->save($showUser);
+            }
             if ($showUser->group->name == "staff") {
                 $showUser->job = $request->get('job');
             } else {
