@@ -379,7 +379,7 @@ class MemberController extends Controller
                 ),
                 'nid' => array(
                     'size:8',
-                    'regex:/^([d|e|p|m]([0-9]){7})|(t[0-9]{5})$/i'
+                    'regex:/^([depm]([0-9]){7})|(t[0-9]{5})$/i'
                 ),
                 'grade' => array(
                     'max:20'
