@@ -66,6 +66,16 @@
                                         <span class="label label-danger">{{ $errors->first('grade') }}</span>@endif
                                     </div>
                                 </div>
+                                @if($user->isStaff())
+                                    <div class="form-group has-feedback{{ ($errors->has('job'))?' has-error':'' }}">
+                                        <label class="control-label col-md-2" for="job">職務</label>
+                                        <div class="col-md-9">
+                                            {!! Form::text('job', $user->job, ['id' => 'job', 'placeholder' => '請輸入在社團內擔任的職務', 'class' => 'form-control']) !!}
+                                            @if($errors->has('job'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                            <span class="label label-danger">{{ $errors->first('job') }}</span>@endif
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     <div class="col-md-9 col-md-offset-2">
                                         {!! Form::submit('修改資料', ['class' => 'btn btn-primary']) !!}

@@ -384,6 +384,9 @@ class MemberController extends Controller
                 'grade' => array(
                     'max:20'
                 ),
+                'job' => array(
+                    'max:20'
+                ),
             )
         );
 
@@ -401,6 +404,9 @@ class MemberController extends Controller
                 $user->nid = strtolower($request->get('nid'));
             }
             $user->grade = $request->get('grade');
+            if ($user->isStaff()) {
+                $user->job = $request->get('job');
+            }
             if ($user->save()) {
                 return Redirect::route('member.profile')
                     ->with('global', '個人資料修改完成。');

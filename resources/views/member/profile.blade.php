@@ -18,7 +18,8 @@
                                 {!! HTML::image($user->gravatar(), null, ['class' => 'img-circle']) !!}
                             </div>
                         </div>
-                        <br />
+                        <br/>
+
                         <div class="row">
                             <div class="text-center col-md-10 col-md-offset-1">
                                 <table class="table table-hover">
@@ -53,6 +54,12 @@
                                         <td>用戶組：</td>
                                         <td>{{ $user->group->title }}</td>
                                     </tr>
+                                    @if($user->isStaff())
+                                        <tr>
+                                            <td>職務：</td>
+                                            <td>{{ $user->job }}</td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td>註冊：</td>
                                         <td>{{ $user->register_at }}</td>
