@@ -60,7 +60,7 @@ class MemberController extends Controller
             //幹部可取得完整名單
             $userList = User::paginate(20);
         } else {
-            //分幹部僅能取得幹部名單
+            //非幹部僅能取得幹部名單
             $userList = User::whereHas('group', function ($q) {
                 $q->where('name', '=', 'staff');
             })->paginate(20);
