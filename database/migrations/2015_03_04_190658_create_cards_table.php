@@ -15,7 +15,7 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function ($table) {
             $table->increments('id');
-            $table->integer('nid');
+            $table->string('nid', 8);
             $table->string('card_number', 20);
             $table->timestamps();
         });
