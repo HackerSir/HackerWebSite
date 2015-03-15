@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="name">Email</label>
                                 <div class="col-md-9">
-                                    {!! Form::email('email', $user->email, ['id' => 'email', 'placeholder' => '信箱', 'class' => 'form-control', 'readonly']) !!}
+                                    {!! Form::email('email', $showUser->email, ['id' => 'email', 'placeholder' => '信箱', 'class' => 'form-control', 'readonly']) !!}
                                     <span class="label label-primary">信箱作為帳號使用，故無法修改</span>
                                 </div>
                             </div>
