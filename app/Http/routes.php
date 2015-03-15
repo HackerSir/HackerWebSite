@@ -19,6 +19,7 @@ Route::get('/', [
 ]);
 
 Route::controller('member', 'MemberController', array(
+    'getIndex' => 'member.list',
     'getLogin' => 'member.login',
     'postLogin' => 'member.login',
     'getRegister' => 'member.register',

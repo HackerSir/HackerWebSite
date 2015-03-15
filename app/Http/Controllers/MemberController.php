@@ -32,6 +32,7 @@ class MemberController extends Controller
         //會員限定
         $this->middleware('auth', [
             'only' => [
+                'getIndex',
                 'getResend',
                 'postResend',
                 'getChangePassword',
@@ -48,6 +49,23 @@ class MemberController extends Controller
                 'method_needs_email_confirm'
             ]
         ]);
+    }
+
+    //會員清單
+    public function getIndex()
+    {
+        $user = Auth::user();
+        //取得會員清單
+        if ($user->isStaff()) {
+            //幹部可取得完整名單
+            $userList = User::paginate(20);
+        } else {
+            //分幹部僅能取得幹部名單
+            $userList = User::whereHas('group', function ($q) {
+                $q->where('name', '=', 'staff');
+            })->paginate(20);
+        }
+        return view('member.list')->with('userList', $userList);
     }
 
     //登入

@@ -11,6 +11,10 @@ body {
     background: rgba(72, 78, 85, 0.7);
 }
 
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    vertical-align: middle;
+}
+
 /* Bootstrap Notify */
 [data-notify="progressbar"] {
     margin-bottom: 0px;

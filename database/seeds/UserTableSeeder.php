@@ -46,6 +46,7 @@ class UserTableSeeder extends Seeder
                     $lastlogin_at = $faker->dateTime();
                     break;
             }
+
             $user = User::create(array(
                 'nid' => (rand(0, 1)) ? $faker->regexify('[depm]([0-9]){7})') : '',
                 'email' => $email,
@@ -63,6 +64,13 @@ class UserTableSeeder extends Seeder
             //群組
             $group = Group::where('id', '=', rand(1, 3))->first();
             $user = $group->users()->save($user);
+            if ($user->group->name == "staff") {
+                //職務
+                $jobs = array("社長", "副社長", "學術", "事務", "公關", "網管", "顧問");
+                shuffle($jobs);
+                $user->job = $jobs[0];
+            }
+            $user->save();
 
             $this->command->info("[$i] Add user:" . $user->nickname);
         }

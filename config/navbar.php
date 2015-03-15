@@ -21,9 +21,10 @@ return array(
 
     //會員
     'member' => array(
+        '成員清單' => 'member',
         '%user%' => array(
-            '個人資料'=>'member/profile',
-            '修改密碼'=>'member/change-password',
+            '個人資料' => 'member/profile',
+            '修改密碼' => 'member/change-password',
             '登出' => 'member/logout'
         )
     ),
