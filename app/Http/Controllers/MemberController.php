@@ -47,6 +47,13 @@ class MemberController extends Controller
                 'getIndex',
             ]
         ]);
+        //限工作人員
+        $this->middleware('staff', [
+            'only' => [
+                'getEditOtherProfile',
+                'postEditOtherProfile'
+            ]
+        ]);
     }
 
     //會員清單
@@ -429,7 +436,7 @@ class MemberController extends Controller
             $user = Auth::user();
             $user->nickname = $request->get('nickname');
             if (empty($user->name)) {
-                $user->name = strtolower($request->get('name'));
+                $user->name = $request->get('name');
             }
             if (empty($user->nid)) {
                 $user->nid = strtolower($request->get('nid'));
@@ -445,6 +452,82 @@ class MemberController extends Controller
         }
         return Redirect::route('member.edit-profile')
             ->with('warning', '個人資料無法修改。');
+    }
+
+    //修改他人資料
+    public function getEditOtherProfile($uid)
+    {
+        $user = Auth::user();
+        $showUser = User::find($uid);
+        if ($showUser) {
+            $groups = Group::all();
+            foreach ($groups as $group) {
+                $groupList[$group->name] = $group->title;
+            }
+            return view('member.edit-other-profile')->with('user', $user)->with('showUser', $showUser)->with('groupList', $groupList);
+        } else {
+            return Redirect::route('member.list')
+                ->with('warning', '該成員不存在。');
+        }
+    }
+
+    public function postEditOtherProfile(Request $request, $uid = null)
+    {
+        $showUser = User::find($uid);
+        if (!$showUser) {
+            return Redirect::route('member.list')
+                ->with('warning', '該成員不存在。');
+        }
+
+        $validator = Validator::make($request->all(),
+            array(
+                'name' => array(
+                    'max:20'
+                ),
+                'nickname' => array(
+                    'required',
+                    'unique:users,nickname,' . $showUser->id,
+                    'min:2',
+                    'max:20'
+                ),
+                'nid' => array(
+                    'size:8',
+                    'regex:/^([depm]([0-9]){7})|(t[0-9]{5})$/i'
+                ),
+                'grade' => array(
+                    'max:20'
+                ),
+                'job' => array(
+                    'max:20'
+                ),
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('member.edit-other-profile', $uid)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $showUser->nickname = $request->get('nickname');
+            $showUser->name = $request->get('name');
+            $showUser->nid = strtolower($request->get('nid'));
+            $showUser->grade = $request->get('grade');
+            $groupName = $request->get('group');
+            $group = Group::where('name', '=', $groupName)->first();
+            $showUser = $group->users()->save($showUser);
+            if ($showUser->group->name == "staff") {
+                $showUser->job = $request->get('job');
+            } else {
+                $showUser->job = "";
+            }
+
+            if ($showUser->save()) {
+                return Redirect::route('member.profile', $uid)
+                    ->with('global', '資料修改完成。');
+            }
+        }
+        return Redirect::route('member.edit-other-profile', $uid)
+            ->with('warning', '資料無法修改。');
     }
 
     //登出

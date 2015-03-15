@@ -90,7 +90,7 @@
                                             <td>{{ $showUser->lastlogin_ip }}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">{!! HTML::linkRoute('member.edit-profile', '編輯個人資料', null, ['class' => 'btn btn-primary']) !!}</td>
+                                            <td colspan="2">{!! HTML::linkRoute('member.edit-other-profile', '編輯資料', $showUser->id, ['class' => 'btn btn-primary']) !!}</td>
                                         </tr>
                                     @endif
                                 </table>

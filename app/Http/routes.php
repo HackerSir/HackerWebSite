@@ -36,6 +36,8 @@ Route::controller('member', 'MemberController', array(
     'getProfile' => 'member.profile',
     'getEditProfile' => 'member.edit-profile',
     'postEditProfile' => 'member.edit-profile',
+    'getEditOtherProfile' => 'member.edit-other-profile',
+    'postEditOtherProfile' => 'member.edit-other-profile',
     'getLogout' => 'member.logout'
 ));
 
