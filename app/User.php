@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -74,6 +75,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function isConfirmed()
     {
         if (!empty($this->confirm_at)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function hasCard()
+    {
+        if (empty($this->nid)) {
+            return false;
+        }
+        if (DB::table('cards')->where('nid', '=', $this->nid)->count()) {
             return true;
         }
         return false;

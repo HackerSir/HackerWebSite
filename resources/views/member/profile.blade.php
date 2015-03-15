@@ -44,7 +44,14 @@
                                     </tr>
                                     <tr>
                                         <td>NID：</td>
-                                        <td>{{ $user->nid }}</td>
+                                        <td>
+                                            {{ $user->nid }}
+                                            @if($user->hasCard())
+                                                <span class="label label-success">卡片已綁定</span>
+                                            @elseif($user->nid)
+                                                <span class="label label-danger">卡片未綁定</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>系級：</td>
@@ -69,7 +76,10 @@
                                         <td>{{ $user->lastlogin_at }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">{!! HTML::linkRoute('member.edit-profile', '編輯個人資料', null, ['class' => 'btn btn-primary']) !!}</td>
+                                        <td colspan="2">
+                                            {!! HTML::linkRoute('member.edit-profile', '編輯個人資料', null, ['class' => 'btn btn-primary']) !!}
+                                            {!! HTML::linkRoute('member.profile', '預覽個人資料', $user->id, ['class' => 'btn btn-default']) !!}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>

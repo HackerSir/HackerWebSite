@@ -64,7 +64,14 @@
                                         </tr>
                                         <tr>
                                             <td>NID：</td>
-                                            <td>{{ $showUser->nid }}</td>
+                                            <td>
+                                                {{ $showUser->nid }}
+                                                @if($showUser->hasCard())
+                                                    <span class="label label-success">卡片已綁定</span>
+                                                @elseif($showUser->nid)
+                                                    <span class="label label-danger">卡片未綁定</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>註冊時間：</td>
@@ -82,10 +89,10 @@
                                             <td>最後登入IP：</td>
                                             <td>{{ $showUser->lastlogin_ip }}</td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="2">{!! HTML::linkRoute('member.edit-profile', '編輯個人資料', null, ['class' => 'btn btn-primary']) !!}</td>
+                                        </tr>
                                     @endif
-                                    <tr>
-                                        <td colspan="2">{!! HTML::linkRoute('member.edit-profile', '編輯個人資料', null, ['class' => 'btn btn-primary']) !!}</td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
