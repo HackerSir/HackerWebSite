@@ -32,7 +32,6 @@ class MemberController extends Controller
         //會員限定
         $this->middleware('auth', [
             'only' => [
-                'getIndex',
                 'getResend',
                 'postResend',
                 'getChangePassword',
@@ -45,8 +44,7 @@ class MemberController extends Controller
         //需完成信箱驗證
         $this->middleware('email', [
             'only' => [
-                //條件不能空白，否則會出錯
-                'method_needs_email_confirm'
+                'getIndex',
             ]
         ]);
     }
