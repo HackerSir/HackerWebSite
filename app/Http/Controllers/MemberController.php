@@ -365,10 +365,25 @@ class MemberController extends Controller
     }
 
     //個人資料
-    public function getProfile()
+    public function getProfile($uid = null)
     {
         $user = Auth::user();
-        return view('member.profile')->with('user', $user);
+        if (empty($uid)) {
+            return view('member.profile')->with('user', $user);
+        } else {
+            $showUser = User::find($uid);
+            if ($showUser) {
+                if ($user->isStaff() || $showUser->isStaff() || $user == $showUser) {
+                    return view('member.other-profile')->with('user', $user)->with('showUser', $showUser);
+                } else {
+                    return Redirect::route('member.list')
+                        ->with('warning', '無權訪問該成員資料。');
+                }
+            } else {
+                return Redirect::route('member.list')
+                    ->with('warning', '該成員不存在。');
+            }
+        }
     }
 
     //修改資料

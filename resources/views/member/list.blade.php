@@ -28,7 +28,7 @@
                             @foreach($userList as $userItem)
                                 <tr>
                                     <td>{!! HTML::image($userItem->gravatar(40), null, ['class' => 'img-circle']) !!}</td>
-                                    <td>{{ $userItem->nickname }}</td>
+                                    <td><a href="{{ URL::route('member.profile',$userItem->id) }}">{{ $userItem->nickname }}</a></td>
                                     <td>{{ $userItem->name }}</td>
                                     <td>{{ $userItem->group->title }}</td>
                                     <td>{{ $userItem->job }}</td>
