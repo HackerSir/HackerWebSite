@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 use Illuminate\Http\Request;
+use Illuminate\Session\TokenMismatchException;
 
 class VerifyCsrf extends BaseVerifier
 {
