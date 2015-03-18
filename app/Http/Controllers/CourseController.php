@@ -15,7 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        return "index()";
     }
 
     /**
@@ -25,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return "create()";
     }
 
     /**
@@ -35,7 +35,7 @@ class CourseController extends Controller
      */
     public function store()
     {
-        //
+        return "store()";
     }
 
     /**
@@ -46,7 +46,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        return "show($id)";
     }
 
     /**
@@ -57,7 +57,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "edit($id)";
     }
 
     /**
@@ -68,7 +68,7 @@ class CourseController extends Controller
      */
     public function update($id)
     {
-        //
+        return "update($id)";
     }
 
     /**
@@ -79,7 +79,7 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "destroy($id)";
     }
 
 }
