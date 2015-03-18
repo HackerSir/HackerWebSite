@@ -72,7 +72,7 @@ class UserTableSeeder extends Seeder
             }
             $user->save();
 
-            $this->command->info("[$i] Add user:" . $user->nickname);
+            $this->command->info("[$i] Add user: " . $user->nickname);
         }
     }
 }

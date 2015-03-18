@@ -15,9 +15,9 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>課程</th>
-                                <th>講師</th>
-                                <th>時間</th>
+                                <th class="col-md-8">課程</th>
+                                <th class="col-md-2">講師</th>
+                                <th class="col-md-2">時間</th>
                             </tr>
                             </thead>
                             <tbody>
