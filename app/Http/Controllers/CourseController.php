@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function __construct()
+    {
+        //限工作人員
+        $this->middleware('staff');
+    }
 
     /**
      * Display a listing of the resource.
