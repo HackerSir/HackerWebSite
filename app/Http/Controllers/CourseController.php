@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Course;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +21,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return "index()";
+        $courseList = Course::paginate(20);
+        return view('course.list')->with('courseList', $courseList);
     }
 
     /**
