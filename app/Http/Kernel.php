@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
         'email' => 'App\Http\Middleware\EmailConfirm',
         'staff' => 'App\Http\Middleware\StaffOnly',
+        'secure' => 'App\Http\Middleware\Secure',
     ];
 
 }
