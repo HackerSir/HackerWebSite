@@ -44,12 +44,9 @@
                                         {!! HTML::linkRoute('course.show', '返回', $course->id, ['class' => 'btn btn-default']) !!}
                                     </div>
                                 </div>
-
                             {!! Form::close() !!}
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
