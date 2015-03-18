@@ -112,7 +112,7 @@ class CourseController extends Controller
             $course->save();
 
             return Redirect::route('course.show', $id)
-                ->with('warning', '課程資料已更新');
+                ->with('global', '課程資料已更新');
         }
     }
 

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" style="min-height: 600px">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
@@ -33,9 +33,13 @@
                                 <div class="form-group has-feedback{{ ($errors->has('time'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="time">日期時間</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('time', $course->time, ['id' => 'time', 'placeholder' => 'YYYY/mm/dd HH:ii:ss', 'class' => 'form-control', 'required']) !!}
-                                        @if($errors->has('time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('time') }}</span>@endif
+                                        <div class='input-group date' id='datetimepicker'>
+                                            {!! Form::text('time', $course->time, ['id' => 'time', 'placeholder' => 'YYYY/mm/dd HH:ii:ss', 'class' => 'form-control', 'required']) !!}
+                                            @if($errors->has('time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                            <span class="label label-danger">{{ $errors->first('time') }}</span>@endif
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -51,4 +55,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    $(function () {
+        $('#datetimepicker').datetimepicker({
+            format: 'YYYY/MM/DD HH:mm:ss'
+        });
+    });
 @endsection

@@ -11,6 +11,7 @@
         {!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.css'); !!}
         {!! HTML::style('css/animate.css'); !!}
         {!! HTML::style('css/stylesheet.css'); !!}
+        {!! HTML::style('css/bootstrap-datetimepicker.css'); !!}
         <style type="text/css">
             @yield('css')
         </style>
@@ -39,6 +40,9 @@
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
+        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'); !!}
+        {!! HTML::script('js/moment_zh-tw.js'); !!}
+        {!! HTML::script('js/bootstrap-datetimepicker.js'); !!}
         {!! HTML::script('js/bootstrap-notify.min.js'); !!}
         <script type="text/javascript">
             @if(Session::has('global'))
