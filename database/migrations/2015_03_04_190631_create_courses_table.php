@@ -16,8 +16,8 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function ($table) {
             $table->increments('id');
             $table->timestamp('time');
-            $table->string('subject', 20);
-            $table->string('lecturer', 20);
+            $table->string('subject', 100);
+            $table->string('lecturer', 100);
             $table->timestamps();
         });
     }
