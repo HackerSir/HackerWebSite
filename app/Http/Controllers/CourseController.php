@@ -23,7 +23,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courseList = Course::paginate(20);
+        $courseList = Course::orderBy('time', 'desc')->paginate(20);
         return view('course.list')->with('courseList', $courseList);
     }
 
