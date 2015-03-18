@@ -43,6 +43,8 @@ Route::controller('member', 'MemberController', array(
 
 Route::controller('api', 'ApiController');
 
+Route::resource('course', 'CourseController');
+
 //未定義路由
 Route::get('{all}', array(
     'as' => 'not-found',
