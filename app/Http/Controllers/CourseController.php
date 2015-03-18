@@ -34,7 +34,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return "create()";
+        return view('course.create');
     }
 
     /**
@@ -42,9 +42,30 @@ class CourseController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        return "store()";
+        $validator = Validator::make($request->all(),
+            array(
+                'subject' => 'required|max:100',
+                'lecturer' => 'max:100',
+                'time' => 'required|date',
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('course.create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $course = Course::create(array(
+                'subject' => $request->get('subject'),
+                'lecturer' => $request->get('lecturer'),
+                'time' => $request->get('time')
+            ));
+
+            return Redirect::route('course.show', $course->id)
+                ->with('global', '課程資料已更新');
+        }
     }
 
     /**
@@ -53,7 +74,8 @@ class CourseController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         $course = Course::find($id);
         if ($course) {
@@ -69,7 +91,8 @@ class CourseController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         $course = Course::find($id);
         if ($course) {
@@ -85,7 +108,8 @@ class CourseController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         $course = Course::find($id);
         if (!$course) {
@@ -122,7 +146,8 @@ class CourseController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         return "destroy($id)";
     }
