@@ -12,6 +12,7 @@
                     <div class="panel-heading">課程清單</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
+                        {!! HTML::linkRoute('course.create', '新增課程', [], ['class' => 'btn btn-primary']) !!}
                         <table class="table table-hover">
                             <thead>
                             <tr>
