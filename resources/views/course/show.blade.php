@@ -34,6 +34,7 @@
                                             {!! Form::open(['route' => ['course.destroy', $course->id], 'style' => 'display: inline', 'method' => 'DELETE',
                                             'onSubmit' => "return confirm('確定要刪除課程嗎？');"]) !!}
                                             {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 </table>
