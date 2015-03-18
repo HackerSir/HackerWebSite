@@ -31,6 +31,9 @@
                                         <td colspan="2">
                                             {!! HTML::linkRoute('course.edit', '編輯課程資料', $course->id, ['class' => 'btn btn-primary']) !!}
                                             {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
+                                            {!! Form::open(['route' => ['course.destroy', $course->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                            'onSubmit' => "return confirm('確定要刪除課程嗎？');"]) !!}
+                                            {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
                                         </td>
                                     </tr>
                                 </table>

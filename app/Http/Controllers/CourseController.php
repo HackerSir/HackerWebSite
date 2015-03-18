@@ -149,7 +149,9 @@ class CourseController extends Controller
     public
     function destroy($id)
     {
-        return "destroy($id)";
+        Course::find($id)->delete();
+        return Redirect::route('course.index')
+            ->with('global', '課程已刪除');
     }
 
 }
