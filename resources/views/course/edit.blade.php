@@ -33,7 +33,7 @@
                                 <div class="form-group has-feedback{{ ($errors->has('time'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="time">日期時間</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('time', $course->time, ['id' => 'time', 'placeholder' => '請輸入日期時間', 'class' => 'form-control', 'required']) !!}
+                                        {!! Form::text('time', $course->time, ['id' => 'time', 'placeholder' => 'YYYY/mm/dd HH:ii:ss', 'class' => 'form-control', 'required']) !!}
                                         @if($errors->has('time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('time') }}</span>@endif
                                     </div>
