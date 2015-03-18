@@ -23,7 +23,7 @@
                             <tbody>
                             @foreach($courseList as $courseItem)
                                 <tr>
-                                    <td>{{ $courseItem->subject }}</td>
+                                    <td>{!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}</td>
                                     <td>{{ $courseItem->lecturer }}</td>
                                     <td>{{ $courseItem->time }}</td>
                                 </tr>

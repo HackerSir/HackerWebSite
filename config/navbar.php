@@ -29,6 +29,11 @@ return array(
         )
     ),
 
+    //工作人員
+    'staff' => array(
+        '課程清單' => 'course'
+    ),
+
     //遊客
     'guest' => array(
         '登入' => 'member/login'

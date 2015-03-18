@@ -5,6 +5,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -53,7 +55,12 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        return "show($id)";
+        $course = Course::find($id);
+        if ($course) {
+            return view('course.show')->with('course', $course);
+        }
+        return Redirect::route('course.index')
+            ->with('warning', '課程不存在');
     }
 
     /**
@@ -64,7 +71,12 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        return "edit($id)";
+        $course = Course::find($id);
+        if ($course) {
+            return view('course.edit')->with('course', $course);
+        }
+        return Redirect::route('course.index')
+            ->with('warning', '課程不存在');
     }
 
     /**
@@ -73,9 +85,35 @@ class CourseController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        return "update($id)";
+        $course = Course::find($id);
+        if (!$course) {
+            return Redirect::route('course.index')
+                ->with('warning', '課程不存在');
+        }
+
+        $validator = Validator::make($request->all(),
+            array(
+                'subject' => 'required|max:100',
+                'lecturer' => 'max:100',
+                'time' => 'required|date',
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('course.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $course->subject = $request->get('subject');
+            $course->lecturer = $request->get('lecturer');
+            $course->time = $request->get('time');
+            $course->save();
+
+            return Redirect::route('course.show', $id)
+                ->with('warning', '課程資料已更新');
+        }
     }
 
     /**
