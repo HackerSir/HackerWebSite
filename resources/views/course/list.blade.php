@@ -24,7 +24,8 @@
                             <tbody>
                             @foreach($courseList as $courseItem)
                                 <tr>
-                                    <td>{!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}</td>
+                                    <td>@foreach($courseItem->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach
+                                        {!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}</td>
                                     <td>{{ $courseItem->lecturer }}</td>
                                     <td>{{ $courseItem->time }}</td>
                                 </tr>

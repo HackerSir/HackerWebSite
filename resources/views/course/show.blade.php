@@ -28,6 +28,10 @@
                                         <td>{{ $course->time }}</td>
                                     </tr>
                                     <tr>
+                                        <td>分類標籤：</td>
+                                        <td>@foreach($course->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach</td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="2">
                                             {!! HTML::linkRoute('course.edit', '編輯課程資料', $course->id, ['class' => 'btn btn-primary']) !!}
                                             {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}

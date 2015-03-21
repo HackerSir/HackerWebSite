@@ -62,6 +62,8 @@ class CourseController extends Controller
                 'lecturer' => $request->get('lecturer'),
                 'time' => $request->get('time')
             ));
+            //更新標籤
+            $course->retag($request->get('tag'));
 
             return Redirect::route('course.show', $course->id)
                 ->with('global', '課程資料已更新');
@@ -134,6 +136,8 @@ class CourseController extends Controller
             $course->lecturer = $request->get('lecturer');
             $course->time = $request->get('time');
             $course->save();
+            //更新標籤
+            $course->retag($request->get('tag'));
 
             return Redirect::route('course.show', $id)
                 ->with('global', '課程資料已更新');
