@@ -19,6 +19,18 @@ class CourseTableSeeder extends Seeder
                 'lecturer' => $faker->name
             ));
 
+            $tag = array();
+            if (rand(0, 2) == 0) {
+                $tag[] = "課程";
+            }
+            if (rand(0, 3) == 0) {
+                $tag[] = "活動";
+            }
+            if (rand(0, 4) == 0) {
+                $tag[] = "演講";
+            }
+            $course->retag($tag);
+
             $this->command->info("[$i] Add course: " . $course->subject);
         }
     }
