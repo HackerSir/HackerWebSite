@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    use \Conner\Tagging\TaggableTrait;
 
     /**
      * The database table used by the model.

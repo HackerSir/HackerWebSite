@@ -136,6 +136,7 @@ return [
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
+        'Conner\Tagging\TaggingServiceProvider',
 
         /*
          * Application Service Providers...
