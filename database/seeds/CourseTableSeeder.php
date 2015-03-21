@@ -8,6 +8,11 @@ class CourseTableSeeder extends Seeder
 {
     public function run()
     {
+        //移除所有標籤
+        foreach(Course::all() as $course){
+            $course->untag();
+        }
+
         DB::table('courses')->delete();
 
         $faker = Faker::create();
