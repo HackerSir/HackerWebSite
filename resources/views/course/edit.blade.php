@@ -34,18 +34,17 @@
                                     <label class="control-label col-md-2" for="time">日期時間</label>
                                     <div class="col-md-9">
                                         <div class='input-group date' id='datetimepicker'>
-                                            {!! Form::text('time', $course->time, ['id' => 'time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control', 'required']) !!}
-                                            @if($errors->has('time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                            <span class="label label-danger">{{ $errors->first('time') }}</span>@endif
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
+                                            {!! Form::text('time', null, ['id' => 'time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control', 'required']) !!}
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
+                                        @if($errors->has('time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('time') }}</span>@endif
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback{{ ($errors->has('tag'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="tag">分類標籤</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('tag', implode(",", $course->tagNames()), ['id' => 'tag', 'placeholder' => '請輸入分類標籤（多個請以半形逗號分隔）', 'class' => 'form-control', 'required']) !!}
+                                        {!! Form::text('tag', implode(",", $course->tagNames()), ['id' => 'tag', 'placeholder' => '請輸入分類標籤（多個請以半形逗號分隔）', 'class' => 'form-control']) !!}
                                         @if($errors->has('tag'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('tag') }}</span>@endif
                                     </div>

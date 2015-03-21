@@ -21,10 +21,16 @@ class CourseController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courseList = Course::orderBy('time', 'desc')->paginate(20);
-        return view('course.list')->with('courseList', $courseList);
+        if ($request->has('tag')) {
+            $tag = $request->get('tag');
+            $courseList = Course::withAllTags($tag)->orderBy('time', 'desc')->paginate(20);
+        } else {
+            $courseList = Course::orderBy('time', 'desc')->paginate(20);
+        }
+        $existingTags = Course::existingTags();
+        return view('course.list')->with('courseList', $courseList)->with('existingTags', $existingTags);
     }
 
     /**
@@ -63,7 +69,11 @@ class CourseController extends Controller
                 'time' => $request->get('time')
             ));
             //更新標籤
-            $course->retag($request->get('tag'));
+            if ($request->has('tag')) {
+                $course->retag($request->get('tag'));
+            } else {
+                $course->untag();
+            }
 
             return Redirect::route('course.show', $course->id)
                 ->with('global', '課程資料已更新');
@@ -137,7 +147,11 @@ class CourseController extends Controller
             $course->time = $request->get('time');
             $course->save();
             //更新標籤
-            $course->retag($request->get('tag'));
+            if ($request->has('tag')) {
+                $course->retag($request->get('tag'));
+            } else {
+                $course->untag();
+            }
 
             return Redirect::route('course.show', $id)
                 ->with('global', '課程資料已更新');
@@ -153,7 +167,11 @@ class CourseController extends Controller
     public
     function destroy($id)
     {
-        Course::find($id)->delete();
+        $course = Course::find($id);
+        //移除標籤
+        $course->untag();
+        //移除課程
+        $course->delete();
         return Redirect::route('course.index')
             ->with('global', '課程已刪除');
     }

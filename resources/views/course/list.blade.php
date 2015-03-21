@@ -12,7 +12,25 @@
                     <div class="panel-heading">課程清單</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
-                        {!! HTML::linkRoute('course.create', '新增課程', [], ['class' => 'btn btn-primary']) !!}
+                        {!! HTML::linkRoute('course.create', '新增課程', [], ['class' => 'btn btn-primary pull-right']) !!}
+                        <div class="btn-toolbar" role="toolbar" aria-label="TagBar">
+                            <div class="btn-group" role="group" aria-label="All">
+                                @if(Input::has('tag'))
+                                    {!! HTML::linkRoute('course.index', '所有課程', [], ['class' => 'btn btn-info']) !!}
+                                @else
+                                    {!! HTML::linkRoute('course.index', '所有課程', [], ['class' => 'btn btn-primary']) !!}
+                                @endif
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Tag">
+                                @foreach($existingTags as $tag)
+                                    @if(Input::get('tag')==$tag->name)
+                                        {!! HTML::linkRoute('course.index', $tag->name, ['tag' => $tag->name], ['class' => 'btn btn-primary']) !!}
+                                    @else
+                                        {!! HTML::linkRoute('course.index', $tag->name, ['tag' => $tag->name], ['class' => 'btn btn-info']) !!}
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -33,7 +51,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {!! str_replace('/?', '?', $courseList->render()); !!}
+                            {!! str_replace('/?', '?', $courseList->appends(Input::except(array('page')))->render()); !!}
                         </div>
                     </div>
                 </div>
