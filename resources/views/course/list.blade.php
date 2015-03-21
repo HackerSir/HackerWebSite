@@ -18,13 +18,13 @@
                                 @if(Input::has('tag'))
                                     {!! HTML::linkRoute('course.index', '所有課程', [], ['class' => 'btn btn-info']) !!}
                                 @else
-                                    {!! HTML::linkRoute('course.index', '所有課程', [], ['class' => 'btn btn-primary']) !!}
+                                    {!! HTML::linkRoute('course.index', '所有課程', [], ['class' => 'btn btn-info active']) !!}
                                 @endif
                             </div>
                             <div class="btn-group" role="group" aria-label="Tag">
                                 @foreach($existingTags as $tag)
                                     @if(Input::get('tag')==$tag->name)
-                                        {!! HTML::linkRoute('course.index', $tag->name, ['tag' => $tag->name], ['class' => 'btn btn-primary']) !!}
+                                        {!! HTML::linkRoute('course.index', $tag->name, ['tag' => $tag->name], ['class' => 'btn btn-info active']) !!}
                                     @else
                                         {!! HTML::linkRoute('course.index', $tag->name, ['tag' => $tag->name], ['class' => 'btn btn-info']) !!}
                                     @endif
