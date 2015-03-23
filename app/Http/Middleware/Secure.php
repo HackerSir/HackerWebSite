@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Secure
