@@ -36,12 +36,16 @@ class Secure implements Middleware
             if (!$this->excludedRoutes($request)) {
                 //強制https
                 if (!$request->secure()) {
-                    return redirect()->secure($request->getRequestUri());
+                    return redirect()->secure($request->getRequestUri())
+                        ->with('global', Session::get('global'))
+                        ->with('warning', Session::get('warning'));
                 }
             } else {
                 //強制http
                 if ($request->secure()) {
-                    return redirect()->to($request->getRequestUri(), 302, array(), false);
+                    return redirect()->to($request->getRequestUri(), 302, array(), false)
+                        ->with('global', Session::get('global'))
+                        ->with('warning', Session::get('warning'));
                 }
             }
         }
