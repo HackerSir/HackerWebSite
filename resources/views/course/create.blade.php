@@ -52,7 +52,7 @@
                                 <div class="form-group">
                                     <div class="col-md-9 col-md-offset-2">
                                         {!! Form::submit('新增課程', ['class' => 'btn btn-primary']) !!}
-                                        {!! HTML::linkRoute('course.index', '返回', null, ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('course.index', '返回', [], ['class' => 'btn btn-default']) !!}
                                     </div>
                                 </div>
                             {!! Form::close() !!}
