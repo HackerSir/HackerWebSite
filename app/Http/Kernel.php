@@ -18,6 +18,7 @@ class Kernel extends HttpKernel
         'Illuminate\View\Middleware\ShareErrorsFromSession',
         //'App\Http\Middleware\VerifyCsrfToken',
         'App\Http\Middleware\VerifyCsrf',
+        'App\Http\Middleware\Secure',
     ];
 
     /**
@@ -31,7 +32,6 @@ class Kernel extends HttpKernel
         'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
         'email' => 'App\Http\Middleware\EmailConfirm',
         'staff' => 'App\Http\Middleware\StaffOnly',
-        'secure' => 'App\Http\Middleware\Secure',
     ];
 
 }
