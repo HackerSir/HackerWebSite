@@ -32,8 +32,18 @@ class Secure implements Middleware
 
     public function handle($request, Closure $next)
     {
-        if (!$request->secure() && $this->app->environment() === 'production' && !$this->excludedRoutes($request)) {
-            return redirect()->secure($request->getRequestUri());
+        if ($this->app->environment() === 'production') {
+            if (!$this->excludedRoutes($request)) {
+                //強制https
+                if (!$request->secure()) {
+                    return redirect()->secure($request->getRequestUri());
+                }
+            } else {
+                //強制http
+                if ($request->secure()) {
+                    return redirect()->to($request->getRequestUri(), 302, array(), false);
+                }
+            }
         }
         return $next($request);
     }
