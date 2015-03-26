@@ -34,7 +34,8 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th class="col-md-8">課程</th>
+                                <th class="col-md-7">課程</th>
+                                <th class="col-md-1"></th>
                                 <th class="col-md-2">講師</th>
                                 <th class="col-md-2">時間</th>
                             </tr>
@@ -44,6 +45,14 @@
                                 <tr>
                                     <td>@foreach($courseItem->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach
                                         {!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}</td>
+                                    <td class="text-right">
+                                        @if(count($courseItem->signins))
+                                            @if($courseItem->check($user))
+                                                <i class="glyphicon glyphicon-ok" title="已簽到"></i>
+                                            @endif
+                                            <span class="badge" title="簽到人數">{{ count($courseItem->signins) }}</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $courseItem->lecturer }}</td>
                                     <td>{{ $courseItem->time }}</td>
                                 </tr>

@@ -31,4 +31,17 @@ class Course extends Model
     {
         return $this->hasMany('App\Signin');
     }
+
+    public function check($user)
+    {
+        if (!($user instanceof User)) {
+            return false;
+        }
+        foreach ($this->signins as $signin) {
+            if ($signin->card->user()->nid == $user->nid) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
