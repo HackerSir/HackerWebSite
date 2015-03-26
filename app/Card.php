@@ -30,4 +30,13 @@ class Card extends Model
     {
         return $this->hasMany('App\Signin');
     }
+
+    public function user()
+    {
+        $user = User::where('nid', '=', $this->nid)->first();
+        if ($user) {
+            return $user;
+        }
+        return null;
+    }
 }

@@ -7,13 +7,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $course->subject }} - 課程資料</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
                         <div class="row">
-                            <div class="text-center col-md-10 col-md-offset-1">
+                            <div class="text-center col-md-12 col-md-offset-0">
                                 <table class="table table-hover">
                                     <tr>
                                         <td>課程名稱：</td>
@@ -46,6 +46,40 @@
                         </div>
                     </div>
                 </div>
+                @if($user->isStaff())
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">簽到記錄（僅工作人員可見）</div>
+                        {{-- Panel body --}}
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="text-center col-md-12 col-md-offset-0">
+                                    <table class="table table-hover">
+                                        @if(count($course->signins))
+                                            <tr>
+                                                <td>簽到者</td>
+                                                <td>時間</td>
+                                            </tr>
+                                            @foreach($course->signins as $signin)
+                                                <tr>
+                                                    <td>
+                                                        {!! HTML::linkRoute('member.profile', $signin->card->user()->nickname, $signin->card->user()->id, []) !!}
+                                                    </td>
+                                                    <td>
+                                                        {{ $signin->time }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td>無簽到記錄</td>
+                                            </tr>
+                                        @endif
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

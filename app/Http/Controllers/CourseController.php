@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -89,9 +90,10 @@ class CourseController extends Controller
     public
     function show($id)
     {
+        $user = Auth::user();
         $course = Course::find($id);
         if ($course) {
-            return view('course.show')->with('course', $course);
+            return view('course.show')->with('user', $user)->with('course', $course);
         }
         return Redirect::route('course.index')
             ->with('warning', '課程不存在');
