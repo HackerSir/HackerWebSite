@@ -55,19 +55,23 @@
                                 <div class="text-center col-md-12 col-md-offset-0">
                                     <table class="table table-hover">
                                         @if(count($course->signins))
-                                            <tr>
-                                                <td>簽到者</td>
-                                                <td>時間</td>
-                                            </tr>
-                                            @foreach($course->signins as $signin)
+                                            <thead>
                                                 <tr>
-                                                    <td>
-                                                        {!! HTML::linkRoute('member.profile', $signin->card->user()->nickname, $signin->card->user()->id, []) !!}
-                                                    </td>
-                                                    <td>
-                                                        {{ $signin->time }}
-                                                    </td>
+                                                    <td>簽到者</td>
+                                                    <td>時間</td>
                                                 </tr>
+                                            </thead>
+                                            @foreach($course->signins as $signin)
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            {!! HTML::linkRoute('member.profile', $signin->card->user()->nickname, $signin->card->user()->id, []) !!}
+                                                        </td>
+                                                        <td>
+                                                            {{ $signin->time }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                             @endforeach
                                         @else
                                             <tr>
