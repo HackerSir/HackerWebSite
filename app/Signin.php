@@ -2,23 +2,22 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Signin extends Model
 {
-    use \Conner\Tagging\TaggableTrait;
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'courses';
+    protected $table = 'signins';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['time', 'subject', 'lecturer'];
+    protected $fillable = ['time'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -27,8 +26,13 @@ class Course extends Model
      */
     protected $hidden = [];
 
-    public function signins()
+    public function card()
     {
-        return $this->hasMany('App\Signin');
+        return $this->belongsTo('App\Card');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo('App\Course');
     }
 }
