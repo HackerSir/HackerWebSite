@@ -17,7 +17,7 @@ class Signin extends Model
      *
      * @var array
      */
-    protected $fillable = ['time'];
+    protected $fillable = ['time', 'card_id', 'course_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
