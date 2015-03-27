@@ -13,16 +13,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 {{-- 右側主要選單 --}}
-                @include('common.navbar_item', ['navbar' => Config::get('navbar.navbar')])
+                @include('common.navbar_set', ['navbar' => Config::get('navbar.navbar')])
                 {{-- 工作人員 --}}
                 @if (Auth::check() && Auth::user()->isStaff())
-                    @include('common.navbar_item', ['navbar' => Config::get('navbar.staff')])
+                    @include('common.navbar_set', ['navbar' => Config::get('navbar.staff')])
                 @endif
                 {{-- Auth --}}
                 @if (Auth::guest())
-                    @include('common.navbar_item', ['navbar' => Config::get('navbar.guest')])
+                    @include('common.navbar_set', ['navbar' => Config::get('navbar.guest')])
                 @else
-                    @include('common.navbar_item', ['navbar' => Config::get('navbar.member')])
+                    @include('common.navbar_set', ['navbar' => Config::get('navbar.member')])
                 @endif
             </ul>
         </div>
