@@ -31,7 +31,11 @@ return array(
 
     //工作人員
     'staff' => array(
-        '課程清單' => 'course'
+        '課程清單' => 'course',
+        '相關連結' => array(
+            'Hackpad' => 'https://hackersir.hackpad.com/',
+            'Google Drive' => 'https://drive.google.com/open?id=0B9v9i5Qg6TFgfklzVFQ1V1RscEd5dHN6VEVOUlNNdUNEeTQtTk0yeUxlVXZPOW5ZNlBpbWs&authuser=0'
+        )
     ),
 
     //遊客
