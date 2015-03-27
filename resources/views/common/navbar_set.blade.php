@@ -6,16 +6,12 @@
             <ul class="dropdown-menu" role="menu">
                 @foreach ($uri as $subName => $subUri)
                     {{-- 一般項目 --}}
-                    <li @if((Request::is($subUri) && $subUri!="/") || Request::route()->getPath()==$subUri) class="active" @endif>
-                        <a href="{{ URL::to($subUri) }}">{{ (Auth::check())?str_replace('%user%',Auth::user()->nickname,$subName):$subName }}</a>
-                    </li>
+                    @include('common.navbar_item', ['uri' => $subUri, 'name' => $subName])
                 @endforeach
             </ul>
         </li>
     @else
         {{-- 一般項目 --}}
-        <li @if((Request::is($uri) && $uri!="/") || Request::route()->getPath()==$uri) class="active" @endif>
-            <a href="{{ URL::to($uri) }}">{{ (Auth::check())?str_replace('%user%',Auth::user()->nickname,$name):$name }}</a>
-        </li>
+        @include('common.navbar_item', ['uri' => $uri, 'name' => $name])
     @endif
 @endforeach
