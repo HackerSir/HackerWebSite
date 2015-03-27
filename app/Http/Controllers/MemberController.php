@@ -156,8 +156,7 @@ class MemberController extends Controller
 
             if ($user) {
                 //發送驗證信件
-                //FIXME 路由產生帶參數
-                Mail::send('emails.confirm', array('link' => URL::route('member.confirm') . "/" . $code), function ($message) use ($user) {
+                Mail::send('emails.confirm', array('link' => URL::route('member.confirm', $code)), function ($message) use ($user) {
                     $message->to($user->email)->subject("[" . Config::get('config.sitename') . "] 信箱驗證");
                 });
                 return Redirect::route('home')
@@ -214,8 +213,7 @@ class MemberController extends Controller
 
         if ($user->save()) {
             //重新發送驗證信件
-            //FIXME 路由產生帶參數
-            Mail::send('emails.confirm', array('link' => URL::route('member.confirm') . "/" . $code), function ($message) use ($user) {
+            Mail::send('emails.confirm', array('link' => URL::route('member.confirm', $code)), function ($message) use ($user) {
                 $message->to($user->email)->subject("[" . Config::get('config.sitename') . "] 信箱驗證");
             });
             return Redirect::route('home')
