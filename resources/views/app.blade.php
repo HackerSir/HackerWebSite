@@ -12,6 +12,7 @@
         {!! HTML::style('css/animate.css'); !!}
         {!! HTML::style('css/stylesheet.css'); !!}
         {!! HTML::style('css/bootstrap-datetimepicker.css'); !!}
+        {!! HTML::style('css/tipped/tipped.css'); !!}
         <style type="text/css">
             @yield('css')
         </style>
@@ -44,6 +45,7 @@
         {!! HTML::script('js/moment_zh-tw.js'); !!}
         {!! HTML::script('js/bootstrap-datetimepicker.js'); !!}
         {!! HTML::script('js/bootstrap-notify.min.js'); !!}
+        {!! HTML::script('js/tipped/tipped.js'); !!}
         <script type="text/javascript">
             @if(Session::has('global'))
                 /* Global message */
@@ -89,6 +91,15 @@
                     }
                 });
             @endif
+
+            $(document).ready(function() {
+                Tipped.create('*',{
+                    fadeIn: 0,
+                    fadeOut: 0,
+                    target: 'mouse'
+                });
+            });
+
             @yield('javascript')
         </script>
     </body>
