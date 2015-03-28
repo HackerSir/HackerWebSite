@@ -72,6 +72,7 @@ return [
     ],
     "unique"               => ":attribute 已被使用。",
     "url"                  => ":attribute 格式不正確。",
+    "youtube"                  => ":attribute 必須是Youtube網址。",
     "timezone"             => ":attribute 必須是正確的時區。",
 
     /*

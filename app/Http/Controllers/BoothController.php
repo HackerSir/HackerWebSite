@@ -4,6 +4,7 @@ use App\Booth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -15,6 +16,10 @@ class BoothController extends Controller
     {
         //學生會限定
         $this->middleware('sa');
+
+        Validator::extend('youtube', function ($field, $value, $parameters) {
+            return Youtube::isYoutube($value);
+        });
     }
 
     /**
@@ -49,7 +54,7 @@ class BoothController extends Controller
         $validator = Validator::make($request->all(),
             array(
                 'name' => 'required|max:20',
-                'url' => 'max:255'
+                'url' => 'youtube|max:255'
             )
         );
 
@@ -118,7 +123,7 @@ class BoothController extends Controller
         $validator = Validator::make($request->all(),
             array(
                 'name' => 'required|max:20',
-                'url' => 'max:255'
+                'url' => 'youtube|max:255'
             )
         );
 
