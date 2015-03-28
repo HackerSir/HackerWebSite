@@ -90,4 +90,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return false;
     }
+
+    public function isSA()
+    {
+        if ($this->group->name == "sa") {
+            return true;
+        }
+        return false;
+    }
 }
