@@ -106,7 +106,7 @@ class CandidateController extends Controller
             return view('candidate.edit')->with('candidate', $candidate);
         }
         return Redirect::route('candidate.index')
-            ->with('warning', '課程不存在');
+            ->with('warning', '候選人不存在');
     }
 
     /**
@@ -148,7 +148,7 @@ class CandidateController extends Controller
             $candidate->save();
 
             return Redirect::route('candidate.show', $id)
-                ->with('global', '課程資料已更新');
+                ->with('global', '候選人資料已更新');
         }
     }
 
@@ -163,7 +163,7 @@ class CandidateController extends Controller
         $candidate = Candidate::find($id);
         $candidate->delete();
         return Redirect::route('candidate.index')
-            ->with('global', '課程已刪除');
+            ->with('global', '候選人已刪除');
     }
 
 }
