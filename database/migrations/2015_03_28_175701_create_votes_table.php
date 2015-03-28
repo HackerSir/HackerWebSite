@@ -16,7 +16,7 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function ($table) {
             $table->increments('id');
             $table->integer('candidate_id')->nullable()->unsigned();
-            $table->integer('booths_id')->nullable()->unsigned();
+            $table->integer('booth_id')->nullable()->unsigned();
             $table->integer('count')->default(0);
             $table->timestamps();
         });
