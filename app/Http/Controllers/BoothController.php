@@ -1,9 +1,13 @@
 <?php namespace App\Http\Controllers;
 
+use App\Booth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class BoothController extends Controller
 {
@@ -20,7 +24,9 @@ class BoothController extends Controller
      */
     public function index()
     {
-        return "index()";
+        $user = Auth::user();
+        $boothList = Booth::orderBy('id', 'asc')->get();
+        return view('booth.list')->with('boothList', $boothList);
     }
 
     /**
@@ -30,7 +36,7 @@ class BoothController extends Controller
      */
     public function create()
     {
-        return "create()";
+        return view('booth.create');
     }
 
     /**
@@ -40,7 +46,26 @@ class BoothController extends Controller
      */
     public function store(Request $request)
     {
-        return "store()";
+        $validator = Validator::make($request->all(),
+            array(
+                'name' => 'required|max:20',
+                'url' => 'max:255'
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('booth.create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $candidate = Booth::create(array(
+                'name' => $request->get('name'),
+                'url' => $request->get('url')
+            ));
+
+            return Redirect::route('booth.show', $candidate->id)
+                ->with('global', '投票所資料已更新');
+        }
     }
 
     /**
@@ -51,7 +76,13 @@ class BoothController extends Controller
      */
     public function show($id)
     {
-        return "show($id)";
+        $user = Auth::user();
+        $booth = Booth::find($id);
+        if ($booth) {
+            return view('booth.show')->with('user', $user)->with('booth', $booth);
+        }
+        return Redirect::route('booth.index')
+            ->with('warning', '投票所不存在');
     }
 
     /**
@@ -62,7 +93,12 @@ class BoothController extends Controller
      */
     public function edit($id)
     {
-        return "edit($id)";
+        $booth = Booth::find($id);
+        if ($booth) {
+            return view('booth.edit')->with('booth', $booth);
+        }
+        return Redirect::route('booth.index')
+            ->with('warning', '投票所不存在');
     }
 
     /**
@@ -73,7 +109,31 @@ class BoothController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "update($id)";
+        $booth = Booth::find($id);
+        if (!$booth) {
+            return Redirect::route('booth.index')
+                ->with('warning', '投票所不存在');
+        }
+
+        $validator = Validator::make($request->all(),
+            array(
+                'name' => 'required|max:20',
+                'url' => 'max:255'
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('booth.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $booth->name = $request->get('name');
+            $booth->url = $request->get('url');
+            $booth->save();
+
+            return Redirect::route('booth.show', $id)
+                ->with('global', '投票所資料已更新');
+        }
     }
 
     /**
@@ -84,7 +144,10 @@ class BoothController extends Controller
      */
     public function destroy($id)
     {
-        return "destroy($id)";
+        $booth = Booth::find($id);
+        $booth->delete();
+        return Redirect::route('booth.index')
+            ->with('global', '投票所已刪除');
     }
 
 }
