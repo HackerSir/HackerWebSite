@@ -16,7 +16,7 @@ class Vote extends Model
      *
      * @var array
      */
-    protected $fillable = ['candidate_id', 'booths_id', 'count'];
+    protected $fillable = ['candidate_id', 'booth_id', 'count'];
 
     /**
      * The attributes excluded from the model's JSON form.
