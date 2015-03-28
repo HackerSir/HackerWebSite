@@ -25,7 +25,7 @@
                                 <div class="form-group has-feedback{{ ($errors->has('url'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="url">頻道網址</label>
                                     <div class="col-md-9">
-                                        {!! Form::url('url', null, ['id' => 'url', 'placeholder' => '請輸入Youtube直播頻道網址', 'class' => 'form-control', 'required']) !!}
+                                        {!! Form::url('url', null, ['id' => 'url', 'placeholder' => '請輸入Youtube直播頻道網址', 'class' => 'form-control']) !!}
                                         @if($errors->has('url'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('url') }}</span>@endif
                                     </div>
