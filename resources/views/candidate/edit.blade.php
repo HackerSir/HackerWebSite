@@ -58,7 +58,7 @@
                             <div class="form-group has-feedback{{ ($errors->has('type'))?' has-error':'' }}">
                                 <label class="control-label col-md-2" for="type">投票類型</label>
                                 <div class="col-md-9">
-                                    {!! Form::select('type', ["學生會會長"=>"學生會會長", "學生議長"=>"學生議長", "系會長"=>"系會長"], $candidate->type, ['class' => 'form-control']) !!}
+                                    {!! Form::select('type', ["學生會會長"=>"學生會會長", "學生議員"=>"學生議員", "系會長"=>"系會長"], $candidate->type, ['class' => 'form-control']) !!}
                                     @if($errors->has('type'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                     <span class="label label-danger">{{ $errors->first('type') }}</span>@endif
                                 </div>
