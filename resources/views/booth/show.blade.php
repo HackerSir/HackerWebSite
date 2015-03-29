@@ -73,11 +73,11 @@
                                                 @endif
                                                 <td>{!! HTML::linkRoute('candidate.show', $candidate->name, $candidate->id, null) !!}</td>
                                                 <td>{{ $candidate->department }}{{ $candidate->class }}</td>
-                                                <td>@if($candidate->canVote()){{ $candidate->voteCount($booth->id) }}@endif</td>
+                                                <td id="count_{{ $booth->id }}_{{ $candidate->id }}">@if($candidate->canVote()){{ $candidate->voteCount($booth->id) }}@endif</td>
                                                 <td>
                                                     @if($candidate->canVote())
-                                                        <a href="javascript:void(0)" class="btn btn-primary glyphicon glyphicon-plus"></a>
-                                                        <a href="javascript:void(0)" class="btn btn-danger glyphicon glyphicon-minus"></a>
+                                                        <a href="javascript:void(0)" class="btn btn-primary glyphicon glyphicon-plus" onclick="vote('add', {{ $booth->id }}, {{ $candidate->id }})"></a>
+                                                        <a href="javascript:void(0)" class="btn btn-danger glyphicon glyphicon-minus" onclick="vote('minus', {{ $booth->id }}, {{ $candidate->id }})"></a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -92,4 +92,39 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    var vote=function($action,$booth,$candidate){
+        var URLs="{{ URL::route('vote-api.vote') }}";
+
+        $.ajax({
+            url: URLs,
+            data: {
+                action: $action,
+                booth: $booth,
+                candidate:$candidate
+            },
+            headers: {
+                'X-CSRF-Token': "{{ Session::token() }}" ,
+                "Accept": "application/json"
+            },
+            type:"POST",
+            dataType: "json",
+
+            success: function(data){
+                if(data.success == true){
+                    //alert(data.count);
+                    $('#count_' + $booth + '_' + $candidate).html(data.count);
+                }else{
+                    alert("error");
+                }
+            },
+
+            error:function(xhr, ajaxOptions, thrownError){
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    }
 @endsection

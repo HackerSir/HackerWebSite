@@ -5,13 +5,20 @@ use App\Candidate;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 
 class VoteApiController extends Controller
 {
+    public function __construct()
+    {
+        //學生會限定
+        $this->middleware('sa', ['only' => ['anyVote']]);
+    }
 
     public function anyVotes($id = null)
     {
@@ -97,6 +104,31 @@ class VoteApiController extends Controller
     {
         $boothCount = Booth::count();
         return Response::json($boothCount);
+    }
+
+    public function anyVote(Request $request)
+    {
+        //只接受Ajax請求
+        if (!$request->ajax()) {
+            return "error";
+        }
+        $data = Input::all();
+        //取得候選人
+        $candidate = Candidate::find($data['candidate']);
+        //更改票數
+        $vote = Vote::where('booth_id', '=', $data['booth'])->where('candidate_id', '=', $data['candidate'])->first();
+        if ($data['action'] == 'add') {
+            $vote->count++;
+        } else if ($data['action'] == 'minus' && $vote->count > 0) {
+            $vote->count--;
+        }
+        $vote->save();
+
+        $result = array(
+            'success' => true,
+            'count' => $vote->count
+        );
+        return Response::json($result);
     }
 
 }
