@@ -91,12 +91,12 @@ class VoteApiController extends Controller
         } else {
             $booth = Booth::find($boothId);
             $boothName = $booth->name;
-            $boothUrl = $booth->url;
+            $boothUrl = "https://www.youtube.com/embed/" . Youtube::getVid($booth->url);
         }
 
         $json = array(
             "name" => $boothName,
-            "url" => "https://www.youtube.com/embed/" . Youtube::getVid($boothUrl),
+            "url" => $boothUrl,
             "votes" => $votes
         );
         return Response::json($json);
