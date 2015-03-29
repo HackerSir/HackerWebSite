@@ -14,6 +14,10 @@
             <ul class="nav navbar-nav navbar-right">
                 {{-- 右側主要選單 --}}
                 @include('common.navbar_set', ['navbar' => Config::get('navbar.navbar')])
+                {{-- 學生會--}}
+                @if (Auth::check() && (Auth::user()->isStaff() || Auth::user()->isSA()))
+                    @include('common.navbar_set', ['navbar' => Config::get('navbar.sa')])
+                @endif
                 {{-- 工作人員 --}}
                 @if (Auth::check() && Auth::user()->isStaff())
                     @include('common.navbar_set', ['navbar' => Config::get('navbar.staff')])
