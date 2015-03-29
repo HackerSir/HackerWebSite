@@ -91,7 +91,7 @@ class VoteApiController extends Controller
         } else {
             $booth = Booth::find($boothId);
             $boothName = $booth->name;
-            $boothUrl = "https://www.youtube.com/embed/" . Youtube::getVid($booth->url);
+            $boothUrl = (!empty($booth->url)) ? "https://www.youtube.com/embed/" . Youtube::getVid($booth->url) : "";
         }
 
         $json = array(
