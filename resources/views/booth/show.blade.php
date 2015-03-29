@@ -25,6 +25,11 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
+                                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ App\Youtube::getVid($booth->url) }}" frameborder="0" allowfullscreen></iframe>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
                                             {!! HTML::linkRoute('booth.edit', '編輯投票所資料', $booth->id, ['class' => 'btn btn-primary']) !!}
                                             {!! HTML::linkRoute('booth.index', '返回投票所列表', [], ['class' => 'btn btn-default']) !!}
                                             {!! Form::open(['route' => ['booth.destroy', $booth->id], 'style' => 'display: inline', 'method' => 'DELETE',
