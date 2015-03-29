@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="js/prelude-browser.js"></script>
+    <script src="js/app.js" charset="utf-8"></script>
+    <script src="bower_components/ChartNew.js/ChartNew.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/slate/bootstrap.css">
+    <style type="text/css" media="all">
+      body { padding-top: 70px; }
+      .canvases {
+        height: 75vh;
+        overflow: auto
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://hackersir.info">逢甲大學黑客社</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" onclick="setBooth('')">合計</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">投票所<span class="caret"></span></a>
+              <ul class="dropdown-menu" id=booths role="menu">
+              </ul>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <h1 id=booth-name></h1>
+    <div class="row">
+      <div id="video-column" class="col-md-8">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe
+            id="embed-video"
+            class="embed-responsive-item"
+            src="">
+          </iframe>
+        </div>
+        <span> 本網站票數僅提供參考，詳細票數請參考選委會公告 </span>
+      </div>
+      <div id="votes-column" class="col-md-4">
+        <div style="height: 75vh" class="canvases" id="canvases">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
