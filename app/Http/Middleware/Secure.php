@@ -27,6 +27,7 @@ class Secure implements Middleware
         'vote-api/votes*',
         'vote-api/booth',
         'vote/*',
+        'vote',
     ];
 
     public function __construct(Application $app)
