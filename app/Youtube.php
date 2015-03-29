@@ -7,7 +7,14 @@ class Youtube extends Model
     //檢查網址是否為Youtube網址
     public static function isYoutube($url)
     {
-        $host = parse_url($url)["host"];
+        if (empty($url)) {
+            return false;
+        }
+        $parseUrl = parse_url($url);
+        if (!isset($parseUrl["host"])) {
+            return false;
+        }
+        $host = $parseUrl["host"];
         if (strpos($host, 'youtube.com') !== false || strpos($host, 'youtu.be') !== false) {
             return true;
         }
