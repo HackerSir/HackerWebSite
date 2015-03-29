@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Booth;
+use App\Candidate;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -84,7 +85,14 @@ class BoothController extends Controller
         $user = Auth::user();
         $booth = Booth::find($id);
         if ($booth) {
-            return view('booth.show')->with('user', $user)->with('booth', $booth);
+            //投票類型
+            $voteTypeList = ["學生會會長", "學生議員", "系會長"];
+            foreach ($voteTypeList as $voteType) {
+                //取得候選人清單
+                $candidateList[$voteType] = Candidate::where('type', '=', $voteType)->get();
+            }
+            return view('booth.show')->with('user', $user)->with('booth', $booth)->with('candidateList', $candidateList)
+                ->with('voteTypeList', $voteTypeList);
         }
         return Redirect::route('booth.index')
             ->with('warning', '投票所不存在');
