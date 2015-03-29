@@ -48,7 +48,7 @@ Route::resource('course', 'CourseController');
 //學生會開票系統
 Route::resource('candidate', 'CandidateController');
 Route::resource('booth', 'BoothController');
-Route::resource('vote', 'VoteController');
+Route::controller('vote', 'VoteController');
 
 //未定義路由
 Route::get('{all}', array(
