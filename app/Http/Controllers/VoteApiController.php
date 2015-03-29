@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use stdClass;
 
 
 class VoteApiController extends Controller
@@ -101,10 +102,16 @@ class VoteApiController extends Controller
         return Response::json($json);
     }
 
-    public function anyBoothCount()
+    public function anyBooth()
     {
-        $boothCount = Booth::count();
-        return Response::json($boothCount);
+        $boothNameList = Booth::select('name')->get();
+        $booth = new stdClass();
+        $i = 0;
+        foreach ($boothNameList as $boothName) {
+            $booth->$i = $boothName->name;
+            $i++;
+        }
+        return Response::json($booth);
     }
 
     public function anyVote(Request $request)
