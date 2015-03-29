@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -85,14 +86,11 @@ class BoothController extends Controller
         $user = Auth::user();
         $booth = Booth::find($id);
         if ($booth) {
-            //投票類型
-            $voteTypeList = ["學生會會長", "學生議員", "系會長"];
-            foreach ($voteTypeList as $voteType) {
+            foreach (Config::get('vote.type') as $voteType) {
                 //取得候選人清單
                 $candidateList[$voteType] = Candidate::where('type', '=', $voteType)->get();
             }
-            return view('booth.show')->with('user', $user)->with('booth', $booth)->with('candidateList', $candidateList)
-                ->with('voteTypeList', $voteTypeList);
+            return view('booth.show')->with('user', $user)->with('booth', $booth)->with('candidateList', $candidateList);
         }
         return Redirect::route('booth.index')
             ->with('warning', '投票所不存在');

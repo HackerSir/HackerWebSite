@@ -49,6 +49,7 @@ Route::resource('course', 'CourseController');
 Route::resource('candidate', 'CandidateController');
 Route::resource('booth', 'BoothController');
 Route::controller('vote', 'VoteController');
+Route::controller('vote-api', 'VoteApiController');
 
 //未定義路由
 Route::get('{all}', array(

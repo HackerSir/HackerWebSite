@@ -44,7 +44,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="text-center col-md-12 col-md-offset-0">
-                                @foreach($voteTypeList as $voteType)
+                                @foreach(Config::get('vote.type') as $voteType)
                                     <h2>{{ $voteType }}</h2>
                                     <table class="table table-hover">
                                         <thead>
