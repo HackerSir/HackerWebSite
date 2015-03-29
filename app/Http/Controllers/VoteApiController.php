@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Vote;
+use App\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
@@ -94,7 +95,7 @@ class VoteApiController extends Controller
 
         $json = array(
             "name" => $boothName,
-            "url" => $boothUrl,
+            "url" => "https://www.youtube.com/embed/" . Youtube::getVid($boothUrl),
             "votes" => $votes
         );
         return Response::json($json);
