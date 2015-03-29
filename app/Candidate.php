@@ -46,6 +46,7 @@ class Candidate extends Model
     public function canVote()
     {
         $candidate_id = DB::table('candidates')->where('number', '=', $this->number)
+            ->where('type', '=', $this->type)
             ->select(DB::raw('min(id) as id'))
             ->groupBy('number')
             ->get();
