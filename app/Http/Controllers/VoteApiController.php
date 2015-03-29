@@ -117,7 +117,14 @@ class VoteApiController extends Controller
         //取得候選人
         $candidate = Candidate::find($data['candidate']);
         //更改票數
-        $vote = Vote::where('booth_id', '=', $data['booth'])->where('candidate_id', '=', $data['candidate'])->first();
+        if (Vote::where('booth_id', '=', $data['booth'])->where('candidate_id', '=', $data['candidate'])->count() > 0) {
+            $vote = Vote::where('booth_id', '=', $data['booth'])->where('candidate_id', '=', $data['candidate'])->first();
+        } else {
+            $vote = Vote::create(array(
+                'booth_id' => $data['booth'],
+                'candidate_id' => $data['candidate']
+            ));
+        }
         if ($data['action'] == 'add') {
             $vote->count++;
         } else if ($data['action'] == 'minus' && $vote->count > 0) {
