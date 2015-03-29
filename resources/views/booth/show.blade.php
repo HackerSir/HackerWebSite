@@ -23,11 +23,13 @@
                                         <td>直播頻道網址：</td>
                                         <td>{!! HTML::link($booth->url, $booth->url, ["target" => "_blank"]) !!}</td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ App\Youtube::getVid($booth->url) }}" frameborder="0" allowfullscreen></iframe>
-                                        </td>
-                                    </tr>
+                                    @if(!empty($booth->url))
+                                        <tr>
+                                            <td colspan="2">
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ App\Youtube::getVid($booth->url) }}" frameborder="0" allowfullscreen></iframe>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td colspan="2">
                                             {!! HTML::linkRoute('booth.edit', '編輯投票所資料', $booth->id, ['class' => 'btn btn-primary']) !!}
