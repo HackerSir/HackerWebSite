@@ -75,7 +75,7 @@ class VoteSeeder extends Seeder
                     'booth_id' => $booth->id,
                     'count' => rand(0, 50)
                 ));
-                $this->command->info("[$i] Vote: " . $vote->candidate_id . "-" . $vote->booth_id . "-" . $vote->count);
+                $this->command->info("Vote: " . $vote->candidate_id . "-" . $vote->booth_id . "-" . $vote->count);
             }
         }
 
