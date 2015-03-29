@@ -50,6 +50,9 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">號碼</th>
+                                                @if($voteType=="學生會會長")
+                                                    <th class="text-center">職稱</th>
+                                                @endif
                                                 <th class="text-center">候選人</th>
                                                 <th class="text-center">系級</th>
                                                 <th class="text-center">票數</th>
@@ -60,6 +63,9 @@
                                         @foreach($candidateList[$voteType] as $candidate)
                                             <tr>
                                                 <td>@if($candidate->canVote()){{ $candidate->number }}@endif</td>
+                                                @if($voteType=="學生會會長")
+                                                    <td>{{ $candidate->job }}</td>
+                                                @endif
                                                 <td>{!! HTML::linkRoute('candidate.show', $candidate->name, $candidate->id, null) !!}</td>
                                                 <td>{{ $candidate->department }}{{ $candidate->class }}</td>
                                                 <td>@if($candidate->canVote()){{ $candidate->voteCount($booth->id) }}@endif</td>
