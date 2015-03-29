@@ -17,8 +17,9 @@
                             <thead>
                                 <tr>
                                     <th class="col-md-1">號碼</th>
+                                    <th class="col-md-1">總得票數</th>
                                     <th class="col-md-2">職稱</th>
-                                    <th class="col-md-3">姓名</th>
+                                    <th class="col-md-2">姓名</th>
                                     <th class="col-md-2">系所</th>
                                     <th class="col-md-2">班級</th>
                                     <th class="col-md-2">投票類型</th>
@@ -28,6 +29,7 @@
                                 @foreach($candidateList as $candidateItem)
                                     <tr>
                                         <td>{{ $candidateItem->number }}</td>
+                                        <td>{{ $candidateItem->voteCount() }}</td>
                                         <td>{{ $candidateItem->job }}</td>
                                         <td>{!! HTML::linkRoute('candidate.show', $candidateItem->name, $candidateItem->id, null) !!}</td>
                                         <td>{{ $candidateItem->department }}</td>

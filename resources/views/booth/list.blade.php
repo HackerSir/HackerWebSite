@@ -17,13 +17,15 @@
                             <thead>
                                 <tr>
                                     <th class="col-md-4">名稱</th>
-                                    <th class="col-md-8">頻道網址</th>
+                                    <th class="col-md-1">總開票數</th>
+                                    <th class="col-md-7">頻道網址</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($boothList as $boothItem)
                                     <tr>
                                         <td>{!! HTML::linkRoute('booth.show', $boothItem->name, $boothItem->id, null) !!}</td>
+                                        <td>{{ $boothItem->voteCount() }}</td>
                                         <td>{!! HTML::link($boothItem->url, $boothItem->url, ["target" => "_blank"]) !!}</td>
                                     </tr>
                                 @endforeach

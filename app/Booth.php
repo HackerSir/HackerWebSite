@@ -30,4 +30,10 @@ class Booth extends Model
         return $this->hasMany('App\Vote');
     }
 
+    public function voteCount()
+    {
+        $count = $this->votes()->sum('count');
+        return $count;
+    }
+
 }
