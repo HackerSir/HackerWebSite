@@ -61,6 +61,8 @@ setBooth = function(path){
         res$.push(makeChart(d));
       }
       charts = res$;
+    } else {
+      updateCharts(votesData);
     }
     if (intervalHandle !== null) {
       clearInterval(intervalHandle);
