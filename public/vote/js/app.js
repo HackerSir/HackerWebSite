@@ -54,6 +54,15 @@ setBooth = function(path){
     var res$, i$, ref$, len$, d;
     $('#booth-name').text(votesData.name);
     $('#embed-video').attr('src', votesData.url);
+    if (path === '') {
+      $('#canvases').removeClass('canvases');
+      $('#video-column').addClass('hide');
+      $('#votes-column').removeClass('col-md-4');
+    } else {
+      $('#canvases').addClass('canvases');
+      $('#video-column').removeClass('hide');
+      $('#votes-column').addClass('col-md-4');
+    }
     if (charts.length === 0) {
       res$ = [];
       for (i$ = 0, len$ = (ref$ = votesData.votes).length; i$ < len$; ++i$) {
@@ -70,16 +79,7 @@ setBooth = function(path){
     intervalHandle = setInterval(function(){
       return fetchVotes(path, updateCharts);
     }, 30000);
-    console.log(intervalHandle);
-    if (path === '') {
-      $('#canvases').removeClass('canvases');
-      $('#video-column').addClass('hide');
-      return $('#votes-column').removeClass('col-md-4');
-    } else {
-      $('#canvases').addClass('canvases');
-      $('#video-column').removeClass('hide');
-      return $('#votes-column').addClass('col-md-4');
-    }
+    return console.log(intervalHandle);
   });
 };
 window.onload = function(){
