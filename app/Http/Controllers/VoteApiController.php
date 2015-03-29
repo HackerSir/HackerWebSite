@@ -13,8 +13,15 @@ use Illuminate\Support\Facades\Response;
 class VoteApiController extends Controller
 {
 
-    public function getVotes($boothId = null)
+    public function anyVotes($id = null)
     {
+        //ID轉換
+        $boothId = null;
+        if ($id != null) {
+            $booth = Booth::distinct('id')->select('id')->get()->toArray();
+            $boothId = $booth[$id]['id'];
+        }
+
         $votes = array();
         //分類
         $subTypeList = [];
@@ -84,6 +91,12 @@ class VoteApiController extends Controller
             "votes" => $votes
         );
         return Response::json($json);
+    }
+
+    public function anyBoothCount()
+    {
+        $boothCount = Booth::count();
+        return Response::json($boothCount);
     }
 
 }
