@@ -24,7 +24,8 @@ class Secure implements Middleware
      */
     protected $routes = [
         '/',
-        'vote-api/*',
+        'vote-api/votes*',
+        'vote-api/booth-count',
     ];
 
     public function __construct(Application $app)
