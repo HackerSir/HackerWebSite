@@ -4,7 +4,6 @@ use App\Candidate;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
