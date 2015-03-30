@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Card;
+use App\Course;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -156,6 +157,88 @@ class ApiController extends Controller
                     "status" => 0,
                     "message" => "Success",
                     "cid" => $card->card_number
+                ];
+            } else {
+                $json = [
+                    "status" => 5,
+                    "message" => "Data Not Found"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    public function anyListEvents()
+    {
+        $courses = Course::all();
+        $data = [];
+        foreach ($courses as $course) {
+            $data[] = [
+                "eid" => $course->id,
+                "time" => $course->time,
+                "name" => $course->subject
+            ];
+        }
+        $json = [
+            "status" => 0,
+            "message" => "Success",
+            "data" => $data
+        ];
+        return Response::json($json);
+    }
+
+    public function anyGetEventData()
+    {
+        $eid = Input::get('eid');
+        if (empty($eid)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            $course = Course::find($eid);
+            if ($course) {
+                $json = [
+                    "status" => 0,
+                    "message" => "Success",
+                    "time" => $course->time,
+                    "name" => $course->subject,
+                    "category" => $course->tagNames()
+                ];
+            } else {
+                $json = [
+                    "status" => 5,
+                    "message" => "Data Not Found"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    public function anyGetEventParticipant()
+    {
+        $eid = Input::get('eid');
+        if (empty($eid)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            $course = Course::find($eid);
+            if ($course) {
+                $participants = [];
+                foreach ($course->signins as $signin) {
+                    $participants[] = [
+                        "nid" => $signin->card->nid,
+                        "cid" => $signin->card->card_number
+                    ];
+                }
+                $json = [
+                    "status" => 0,
+                    "message" => "Success",
+                    "time" => $course->time,
+                    "name" => $course->subject,
+                    "participants" => $participants
                 ];
             } else {
                 $json = [
