@@ -96,7 +96,9 @@
                 Tipped.create('*',{
                     fadeIn: 0,
                     fadeOut: 0,
-                    target: 'mouse'
+                    target: 'mouse',
+                    showDelay: 0,
+                    hideDelay: 0
                 });
             });
 
