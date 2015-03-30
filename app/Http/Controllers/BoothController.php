@@ -9,6 +9,7 @@ use App\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,9 +87,28 @@ class BoothController extends Controller
         $user = Auth::user();
         $booth = Booth::find($id);
         if ($booth) {
+            //科系（依出現順序）
+            $departmentArray = Candidate::orderBy('id', 'asc')->distinct('department')->select('department')->get()->toArray();
+            $departmentList = [];
+            foreach ($departmentArray as $department) {
+                $departmentList[] = $department['department'];
+            }
+            foreach ($departmentList as &$value) {
+                $value = "'$value'";
+            }
+            $departments = implode(',', $departmentList);
             foreach (Config::get('vote.type') as $voteType) {
                 //取得候選人清單
-                $candidateList[$voteType] = Candidate::where('type', '=', $voteType)->get();
+                if ($voteType == '學生會會長') {
+                    $candidateList[$voteType] = Candidate::where('type', '=', $voteType)
+                        ->orderBy('number', 'asc')
+                        ->get();
+                } else {
+                    $candidateList[$voteType] = Candidate::where('type', '=', $voteType)
+                        ->orderByRaw(DB::raw("FIELD(department, " . $departments . ")"))
+                        ->orderBy('number', 'asc')
+                        ->get();
+                }
             }
             return view('booth.show')->with('user', $user)->with('booth', $booth)->with('candidateList', $candidateList);
         }

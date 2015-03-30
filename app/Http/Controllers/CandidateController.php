@@ -4,8 +4,12 @@ use App\Candidate;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,7 +29,32 @@ class CandidateController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $candidateList = Candidate::orderBy('id', 'asc')->get();
+        $candidateList = new Collection();
+        //科系（依出現順序）
+        $departmentArray = Candidate::orderBy('id', 'asc')->distinct('department')->select('department')->get()->toArray();
+        $departmentList = [];
+        foreach ($departmentArray as $department) {
+            $departmentList[] = $department['department'];
+        }
+        foreach ($departmentList as &$value) {
+            $value = "'$value'";
+        }
+        $departments = implode(',', $departmentList);
+        //類型（依設定順序）
+        foreach (Config::get('vote.type') as $voteType) {
+            //取得候選人清單
+            if ($voteType == '學生會會長') {
+                $candidateTemp = Candidate::where('type', '=', $voteType)
+                    ->orderBy('number', 'asc')
+                    ->get();
+            } else {
+                $candidateTemp = Candidate::where('type', '=', $voteType)
+                    ->orderByRaw(DB::raw("FIELD(department, " . $departments . ")"))
+                    ->orderBy('number', 'asc')
+                    ->get();
+            }
+            $candidateList = $candidateList->merge($candidateTemp);
+        }
         return view('candidate.list')->with('candidateList', $candidateList);
     }
 
