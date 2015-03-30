@@ -50,10 +50,12 @@
                                         {!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}</td>
                                     <td class="text-right">
                                         @if(count($courseItem->signins))
-                                            @if($courseItem->check($user))
+                                            @if($courseItem->check(Auth::user()))
                                                 <i class="glyphicon glyphicon-ok" title="已簽到"></i>
                                             @endif
-                                            <span class="badge" title="簽到人數">{{ count($courseItem->signins) }}</span>
+                                            @if(Auth::check() && Auth::user()->isStaff())
+                                                <span class="badge" title="簽到人數">{{ count($courseItem->signins) }}</span>
+                                            @endif
                                         @endif
                                     </td>
                                     <td>{{ $courseItem->lecturer }}</td>
