@@ -85,7 +85,11 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            {!! HTML::linkRoute('member.profile', $signin->card->user()->nickname, $signin->card->user()->id, []) !!}
+                                                            @if($signin->card->user() != null)
+                                                                {!! HTML::linkRoute('member.profile', $signin->card->user()->nickname, $signin->card->user()->id, []) !!}
+                                                            @else
+                                                                {{ $signin->card->nid }}
+                                                            @endif
                                                         </td>
                                                         <td>
                                                             {{ $signin->time }}
