@@ -18,6 +18,7 @@ return array(
         '關於我們' => '/#about',
         '社團課程' => '/#class',
         '社團活動' => '/#activity',
+        '課程清單' => 'course',
         '學生會選舉' => 'http://hackersir.info/vote',
     ),
 
@@ -41,7 +42,6 @@ return array(
 
     //工作人員
     'staff' => array(
-        '課程清單' => 'course',
         '相關連結' => array(
             'Hackpad' => 'https://hackersir.hackpad.com/',
             'Google Drive' => 'https://drive.google.com/open?id=0B9v9i5Qg6TFgfklzVFQ1V1RscEd5dHN6VEVOUlNNdUNEeTQtTk0yeUxlVXZPOW5ZNlBpbWs&authuser=0'

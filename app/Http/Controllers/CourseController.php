@@ -14,7 +14,12 @@ class CourseController extends Controller
     public function __construct()
     {
         //限工作人員
-        $this->middleware('staff');
+        $this->middleware('staff', [
+            'except' => [
+                'index',
+                'show'
+            ]
+        ]);
     }
 
     /**
@@ -24,7 +29,6 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $user = Auth::user();
         if ($request->has('tag')) {
             $tag = $request->get('tag');
             $courseList = Course::withAllTags($tag)->orderBy('time', 'desc')->paginate(20);
@@ -32,7 +36,7 @@ class CourseController extends Controller
             $courseList = Course::orderBy('time', 'desc')->paginate(20);
         }
         $existingTags = Course::existingTags();
-        return view('course.list')->with('courseList', $courseList)->with('existingTags', $existingTags)->with('user', $user);
+        return view('course.list')->with('courseList', $courseList)->with('existingTags', $existingTags);
     }
 
     /**

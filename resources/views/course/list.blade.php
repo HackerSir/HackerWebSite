@@ -12,7 +12,9 @@
                     <div class="panel-heading">課程清單</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
-                        {!! HTML::linkRoute('course.create', '新增課程', [], ['class' => 'btn btn-primary pull-right']) !!}
+                        @if(Auth::check() && Auth::user()->isStaff())
+                            {!! HTML::linkRoute('course.create', '新增課程', [], ['class' => 'btn btn-primary pull-right']) !!}
+                        @endif
                         <div class="btn-toolbar" role="toolbar" aria-label="TagBar">
                             <div class="btn-group" role="group" aria-label="All">
                                 @if(Input::has('tag'))

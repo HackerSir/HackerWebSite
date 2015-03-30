@@ -49,12 +49,16 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            {!! HTML::linkRoute('course.edit', '編輯課程資料', $course->id, ['class' => 'btn btn-primary']) !!}
-                                            {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
-                                            {!! Form::open(['route' => ['course.destroy', $course->id], 'style' => 'display: inline', 'method' => 'DELETE',
-                                            'onSubmit' => "return confirm('確定要刪除課程嗎？');"]) !!}
-                                            {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
-                                            {!! Form::close() !!}
+                                            @if(Auth::check() && Auth::user()->isStaff())
+                                                {!! HTML::linkRoute('course.edit', '編輯課程資料', $course->id, ['class' => 'btn btn-primary']) !!}
+                                                {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
+                                                {!! Form::open(['route' => ['course.destroy', $course->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                                'onSubmit' => "return confirm('確定要刪除課程嗎？');"]) !!}
+                                                {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
+                                                {!! Form::close() !!}
+                                            @else
+                                                {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
+                                            @endif
                                         </td>
                                     </tr>
                                 </table>
@@ -62,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                @if($user->isStaff())
+                @if(Auth::check() && Auth::user()->isStaff())
                     <div class="panel panel-danger">
                         <div class="panel-heading">簽到記錄（僅工作人員可見）</div>
                         {{-- Panel body --}}
