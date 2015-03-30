@@ -57,6 +57,7 @@ class CourseController extends Controller
                 'subject' => 'required|max:100',
                 'lecturer' => 'max:100',
                 'time' => 'required|date',
+                'location' => 'max:20',
             )
         );
 
@@ -68,7 +69,8 @@ class CourseController extends Controller
             $course = Course::create(array(
                 'subject' => $request->get('subject'),
                 'lecturer' => $request->get('lecturer'),
-                'time' => $request->get('time')
+                'time' => $request->get('time'),
+                'location' => $request->get('location')
             ));
             //更新標籤
             if ($request->has('tag')) {
@@ -137,6 +139,9 @@ class CourseController extends Controller
                 'subject' => 'required|max:100',
                 'lecturer' => 'max:100',
                 'time' => 'required|date',
+                'location' => 'max:20',
+                'info' => 'max:65535',
+                'link' => 'max:65535',
             )
         );
 
@@ -148,6 +153,9 @@ class CourseController extends Controller
             $course->subject = $request->get('subject');
             $course->lecturer = $request->get('lecturer');
             $course->time = $request->get('time');
+            $course->location = $request->get('location');
+            $course->info = $request->get('info');
+            $course->link = $request->get('link');
             $course->save();
             //更新標籤
             if ($request->has('tag')) {

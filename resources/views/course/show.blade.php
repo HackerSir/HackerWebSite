@@ -28,8 +28,24 @@
                                         <td>{{ $course->time }}</td>
                                     </tr>
                                     <tr>
+                                        <td>課程地點：</td>
+                                        <td>{{ $course->location }}</td>
+                                    </tr>
+                                    <tr>
                                         <td>分類標籤：</td>
                                         <td>@foreach($course->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach</td>
+                                    </tr>
+                                    <tr>
+                                        <td>內容簡介：</td>
+                                        <td>{!! nl2br($course->info) !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>相關連結：</td>
+                                        <td>
+                                            @foreach(preg_split("/((\r?\n)|(\r\n?))/", $course->link) as $line)
+                                                {!! HTML::link($line, $line, ['target' => '_blank']) !!}<br />
+                                            @endforeach
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">

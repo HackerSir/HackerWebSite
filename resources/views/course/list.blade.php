@@ -34,10 +34,11 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th class="col-md-7">課程</th>
+                                <th class="col-md-5">課程</th>
                                 <th class="col-md-1"></th>
                                 <th class="col-md-2">講師</th>
                                 <th class="col-md-2">時間</th>
+                                <th class="col-md-2">地點</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,6 +56,7 @@
                                     </td>
                                     <td>{{ $courseItem->lecturer }}</td>
                                     <td>{{ $courseItem->time }}</td>
+                                    <td>{{ $courseItem->location }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

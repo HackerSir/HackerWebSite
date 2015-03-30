@@ -34,11 +34,19 @@
                                     <label class="control-label col-md-2" for="time">日期時間</label>
                                     <div class="col-md-9">
                                         <div class='input-group date' id='datetimepicker'>
-                                            {!! Form::text('time', null, ['id' => 'time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control', 'required']) !!}
+                                            {!! Form::text('time', $course->time, ['id' => 'time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control', 'required']) !!}
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                         @if($errors->has('time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('time') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('location'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="location">課程地點</label>
+                                    <div class="col-md-9">
+                                        {!! Form::text('location', $course->location, ['id' => 'location', 'placeholder' => '請輸入課程地點', 'class' => 'form-control']) !!}
+                                        @if($errors->has('location'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('location') }}</span>@endif
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback{{ ($errors->has('tag'))?' has-error':'' }}">
@@ -47,6 +55,22 @@
                                         {!! Form::text('tag', implode(",", $course->tagNames()), ['id' => 'tag', 'placeholder' => '請輸入分類標籤（多個請以半形逗號分隔）', 'class' => 'form-control']) !!}
                                         @if($errors->has('tag'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('tag') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('info'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="info">內容簡介</label>
+                                    <div class="col-md-9">
+                                        {!! Form::textarea('info', $course->info, ['id' => 'info', 'placeholder' => '請輸入內容簡介', 'class' => 'form-control']) !!}
+                                        @if($errors->has('info'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('info') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('link'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="link">相關連結</label>
+                                    <div class="col-md-9">
+                                        {!! Form::textarea('link', $course->link, ['id' => 'link', 'placeholder' => '請輸入相關連結，每行一個網址', 'class' => 'form-control', 'rows' => 5]) !!}
+                                        @if($errors->has('link'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('link') }}</span>@endif
                                     </div>
                                 </div>
                                 <div class="form-group">
