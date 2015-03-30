@@ -29,7 +29,7 @@
                                 @foreach($candidateList as $candidateItem)
                                     <tr>
                                         <td>{{ $candidateItem->number }}</td>
-                                        <td>{{ $candidateItem->voteCount() }}</td>
+                                        <td>@if($candidateItem->canVote()){{ $candidateItem->voteCount() }}@endif</td>
                                         <td>{{ $candidateItem->job }}</td>
                                         <td>{!! HTML::linkRoute('candidate.show', $candidateItem->name, $candidateItem->id, null) !!}</td>
                                         <td>{{ $candidateItem->department }}</td>
