@@ -9,7 +9,7 @@ class CourseTableSeeder extends Seeder
     public function run()
     {
         //移除所有標籤
-        foreach(Course::all() as $course){
+        foreach (Course::all() as $course) {
             $course->untag();
         }
 
@@ -18,10 +18,18 @@ class CourseTableSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 50; $i++) {
+            $links = "";
+            $linkCount = rand(0, 3);
+            for ($j = 0; $j < $linkCount; $j++) {
+                $links .= $faker->url . "\n";
+            }
             $course = Course::create(array(
                 'time' => $faker->dateTime(),
                 'subject' => $faker->text(60),
-                'lecturer' => $faker->name
+                'lecturer' => $faker->name,
+                'location' => $faker->country,
+                'info' => $faker->text,
+                'link' => trim($links),
             ));
 
             $tag = array();

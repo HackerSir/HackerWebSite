@@ -16,7 +16,7 @@
                             <div class="text-center col-md-12 col-md-offset-0">
                                 <table class="table table-hover">
                                     <tr>
-                                        <td>課程名稱：</td>
+                                        <td class="col-md-2">課程名稱：</td>
                                         <td>{{ $course->subject }}</td>
                                     </tr>
                                     <tr>
