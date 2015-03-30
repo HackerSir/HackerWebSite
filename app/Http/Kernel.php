@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
         'email' => 'App\Http\Middleware\EmailConfirm',
         'staff' => 'App\Http\Middleware\StaffOnly',
         'sa' => 'App\Http\Middleware\SAOnly',
+        'api' => 'App\Http\Middleware\ApiToken',
     ];
 
 }

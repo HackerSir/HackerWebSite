@@ -1,9 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Card;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 
 class ApiController extends Controller
@@ -15,7 +18,9 @@ class ApiController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('api');
+        //取得Token參數並檢查合法性
+        $token = Input::get('token');
     }
 
     /*
@@ -60,10 +65,113 @@ class ApiController extends Controller
         return Response::json($result);
     }
 
+    public function anyListUsers()
+    {
+        $cards = Card::all();
+        $data = [];
+        foreach ($cards as $card) {
+            $data[$card->nid] = $card->card_number;
+        }
+        $json = [
+            "status" => 0,
+            "message" => "Success",
+            "data" => $data
+        ];
+        return Response::json($json);
+    }
+
+    public function anyBindNid()
+    {
+        $nid = Input::get('nid');
+        $cid = Input::get('cid');
+
+        if (empty($nid) || empty($cid)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            if (Card::where('nid', '=', $nid)->count() > 0) {
+                $json = [
+                    "status" => 4,
+                    "message" => "Bind Failed (Same nid)"
+                ];
+            } else if (Card::where('card_number', '=', $cid)->count() > 0) {
+                $json = [
+                    "status" => 4,
+                    "message" => "Bind Failed (Same cid)"
+                ];
+            } else {
+                $card = Card::create(array(
+                    "nid" => $nid,
+                    "card_number" => $cid,
+                ));
+                $json = [
+                    "status" => 0,
+                    "message" => "Success"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    public function anyGetNid()
+    {
+        $cid = Input::get('cid');
+        if (empty($cid)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            $card = Card::where('card_number', '=', $cid)->first();
+            if ($card) {
+                $json = [
+                    "status" => 0,
+                    "message" => "Success",
+                    "nid" => $card->nid
+                ];
+            } else {
+                $json = [
+                    "status" => 5,
+                    "message" => "Data Not Found"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    public function anyGetCid()
+    {
+        $nid = Input::get('nid');
+        if (empty($nid)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            $card = Card::where('nid', '=', $nid)->first();
+            if ($card) {
+                $json = [
+                    "status" => 0,
+                    "message" => "Success",
+                    "cid" => $card->card_number
+                ];
+            } else {
+                $json = [
+                    "status" => 5,
+                    "message" => "Data Not Found"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
     /*
      * 所有沒處理到的情況
      */
-    public function missingMethod($parameters = array())
+    public
+    function missingMethod($parameters = array())
     {
         abort(400);
     }
