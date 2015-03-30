@@ -18,7 +18,7 @@ return array(
         '關於我們' => '/#about',
         '社團課程' => '/#class',
         '社團活動' => '/#activity',
-        '學生會選舉' => url('vote', [], false),
+        '學生會選舉' => 'http://hackersir.info/vote',
     ),
 
     //會員
