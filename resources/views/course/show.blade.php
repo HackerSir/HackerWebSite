@@ -21,7 +21,13 @@
                                     </tr>
                                     <tr>
                                         <td>課程講師：</td>
-                                        <td>{{ $course->lecturer }}</td>
+                                        <td>
+                                            @if(App\User::find($course->lecturer))
+                                                {!! link_to_route('member.profile', App\User::find($course->lecturer)->nickname, App\User::find($course->lecturer)->id) !!}
+                                            @else
+                                                {{ $course->lecturer }}
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>日期時間：</td>

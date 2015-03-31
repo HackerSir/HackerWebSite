@@ -58,7 +58,13 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td>{{ $courseItem->lecturer }}</td>
+                                    <td>
+                                        @if(App\User::find($courseItem->lecturer))
+                                            {!! link_to_route('member.profile', App\User::find($courseItem->lecturer)->nickname, App\User::find($courseItem->lecturer)->id) !!}
+                                        @else
+                                            {{ $courseItem->lecturer }}
+                                        @endif
+                                    </td>
                                     <td>{{ $courseItem->time }}</td>
                                     <td>{{ $courseItem->location }}</td>
                                 </tr>
