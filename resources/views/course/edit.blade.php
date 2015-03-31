@@ -28,7 +28,7 @@
                                         {!! Form::text('lecturer', $course->lecturer, ['id' => 'lecturer', 'placeholder' => '請輸入課程講師', 'class' => 'form-control']) !!}
                                         @if($errors->has('lecturer'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('lecturer') }}</span><br />@endif
-                                        <span class="label label-primary">若講師為會員，可直接輸入數字UID，否則請直接輸入全名</span>
+                                        <span class="label label-primary">若講師為會員，可直接輸入<span title="從成員清單進入該成員頁面時，網址最後面的數字。<br />你的UID為 {{ Auth::user()->id }}" style="color: #ffff00">數字UID</span>，否則請直接輸入全名</span>
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback{{ ($errors->has('time'))?' has-error':'' }}">
