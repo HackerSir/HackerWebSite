@@ -38,7 +38,7 @@ class Course extends Model
             return false;
         }
         foreach ($this->signins as $signin) {
-            if ($signin->card->user()->nid == $user->nid) {
+            if ($signin->card->user() != null && $signin->card->user()->nid == $user->nid) {
                 return true;
             }
         }
