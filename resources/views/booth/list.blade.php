@@ -16,9 +16,9 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-4">名稱</th>
+                                    <th class="col-md-6">名稱</th>
                                     <th class="col-md-1">總開票數</th>
-                                    <th class="col-md-7">頻道網址</th>
+                                    <th class="col-md-5">頻道網址</th>
                                 </tr>
                             </thead>
                             <tbody>
