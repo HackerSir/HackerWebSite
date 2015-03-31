@@ -38,7 +38,7 @@
                                             @if($user->isConfirmed())
                                                 <span class="label label-success">已驗證</span>
                                             @else
-                                                <a href="{{ URL::route('member.resend') }}"><span class="label label-danger">未驗證</span></a>
+                                                <a href="{{ URL::route('member.resend') }}" title="點此重新發送驗證信"><span class="label label-danger">未驗證</span></a>
                                             @endif
                                         </td>
                                     </tr>
