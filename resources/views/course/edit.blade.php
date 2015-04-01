@@ -7,7 +7,7 @@
 @section('content')
     <div class="container" style="min-height: 600px">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">編輯課程資料</div>
                     {{-- Panel body --}}

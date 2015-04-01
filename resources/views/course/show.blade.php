@@ -42,10 +42,6 @@
                                         <td>@foreach($course->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach</td>
                                     </tr>
                                     <tr>
-                                        <td>內容簡介：</td>
-                                        <td>{!! Markdown::parse($course->info) !!}</td>
-                                    </tr>
-                                    <tr>
                                         <td>相關連結：</td>
                                         <td>
                                             @foreach(preg_split("/((\r?\n)|(\r\n?))/", $course->link) as $line)
@@ -53,21 +49,24 @@
                                             @endforeach
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            @if(Auth::check() && Auth::user()->isStaff())
-                                                {!! HTML::linkRoute('course.edit', '編輯課程資料', $course->id, ['class' => 'btn btn-primary']) !!}
-                                                {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
-                                                {!! Form::open(['route' => ['course.destroy', $course->id], 'style' => 'display: inline', 'method' => 'DELETE',
-                                                'onSubmit' => "return confirm('確定要刪除課程嗎？');"]) !!}
-                                                {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
-                                                {!! Form::close() !!}
-                                            @else
-                                                {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
-                                            @endif
-                                        </td>
-                                    </tr>
                                 </table>
+                                <hr />
+                                <div>
+                                    {!! Markdown::parse($course->info) !!}
+                                </div>
+                                <hr />
+                                <div>
+                                    @if(Auth::check() && Auth::user()->isStaff())
+                                        {!! HTML::linkRoute('course.edit', '編輯課程資料', $course->id, ['class' => 'btn btn-primary']) !!}
+                                        {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
+                                        {!! Form::open(['route' => ['course.destroy', $course->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                        'onSubmit' => "return confirm('確定要刪除課程嗎？');"]) !!}
+                                        {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
+                                        {!! Form::close() !!}
+                                    @else
+                                        {!! HTML::linkRoute('course.index', '返回課程列表', [], ['class' => 'btn btn-default']) !!}
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
