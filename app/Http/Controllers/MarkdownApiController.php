@@ -21,6 +21,15 @@ class MarkdownApiController extends Controller
 
     public function markdownPreview(Request $request)
     {
-        return Response::make(Markdown::parse($request->instance()->getContent()));
+        //只接受Ajax請求
+        if (!$request->ajax()) {
+            return "error";
+        }
+        $data = $request->getContent();
+        //檢查是否有內容
+        if(empty($data)){
+            return Response::make(" ");
+        }
+        return Response::make(Markdown::parse($data));
     }
 }
