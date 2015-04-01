@@ -137,6 +137,7 @@ return [
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Conner\Tagging\TaggingServiceProvider',
+        'AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider',
 
         /*
          * Application Service Providers...
@@ -196,6 +197,7 @@ return [
         'View' => 'Illuminate\Support\Facades\View',
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Form' => 'Illuminate\Html\FormFacade',
+        'Markdown'  => 'AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra',
 
     ],
 

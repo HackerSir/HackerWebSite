@@ -43,7 +43,7 @@
                                     </tr>
                                     <tr>
                                         <td>內容簡介：</td>
-                                        <td>{!! nl2br($course->info) !!}</td>
+                                        <td>{!! Markdown::parse($course->info) !!}</td>
                                     </tr>
                                     <tr>
                                         <td>相關連結：</td>
