@@ -51,7 +51,7 @@
                                     </tr>
                                 </table>
                                 <hr />
-                                <div>
+                                <div class="text-left">
                                     {!! Markdown::parse($course->info) !!}
                                 </div>
                                 <hr />
