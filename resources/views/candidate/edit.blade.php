@@ -50,7 +50,7 @@
                             <div class="form-group has-feedback{{ ($errors->has('class'))?' has-error':'' }}">
                                 <label class="control-label col-md-2" for="class">班級</label>
                                 <div class="col-md-9">
-                                    {!! Form::text('class', $candidate->class, ['id' => 'class', 'placeholder' => '請輸入候選人班級', 'class' => 'form-control', 'required']) !!}
+                                    {!! Form::text('class', $candidate->class, ['id' => 'class', 'placeholder' => '請輸入候選人班級', 'class' => 'form-control']) !!}
                                     @if($errors->has('class'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                     <span class="label label-danger">{{ $errors->first('class') }}</span>@endif
                                 </div>
