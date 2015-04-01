@@ -53,6 +53,12 @@ Route::controller('vote-api', 'VoteApiController', array(
     'anyVote' => 'vote-api.vote',
 ));
 
+//Markdown API
+Route::any('markdown', [
+    'as' => 'markdown.preview',
+    'uses' => 'MarkdownApiController@markdownPreview'
+]);
+
 //未定義路由
 Route::get('{all}', array(
     'as' => 'not-found',
