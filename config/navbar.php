@@ -9,7 +9,7 @@ return array(
      *
      * 基本格式：'連結名稱' => '連結路由'
      *
-     * 多層：最多支援兩層，二級選單以下拉式選單呈現
+     * 多層：二級選單以下拉式選單呈現，更多層級以巢狀顯示，太多層可能會超過螢幕顯示範圍
      * 外部連結：在連結路由部分，直接填上完整網址（開頭需包含協定類型）
      */
 
@@ -42,9 +42,11 @@ return array(
 
     //工作人員
     'staff' => array(
-        '相關連結' => array(
-            'Hackpad' => 'https://hackersir.hackpad.com/',
-            'Google Drive' => 'https://drive.google.com/open?id=0B9v9i5Qg6TFgfklzVFQ1V1RscEd5dHN6VEVOUlNNdUNEeTQtTk0yeUxlVXZPOW5ZNlBpbWs&authuser=0'
+        '工作人員' => array(
+            '相關連結' => array(
+                'Hackpad' => 'https://hackersir.hackpad.com/',
+                'Google Drive' => 'https://drive.google.com/open?id=0B9v9i5Qg6TFgfklzVFQ1V1RscEd5dHN6VEVOUlNNdUNEeTQtTk0yeUxlVXZPOW5ZNlBpbWs&authuser=0'
+            )
         )
     ),
 
