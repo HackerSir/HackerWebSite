@@ -49,6 +49,14 @@ Route::delete('signin/destroy/{id}', array(
     'as' => 'signin.destroy',
     'uses' => 'SigninController@destroy'
 ));
+Route::get('signin/create/{courseId}', array(
+    'as' => 'signin.create',
+    'uses' => 'SigninController@create'
+));
+Route::post('signin/store/{courseId}', array(
+    'as' => 'signin.store',
+    'uses' => 'SigninController@store'
+));
 
 //學生會開票系統
 Route::resource('candidate', 'CandidateController');

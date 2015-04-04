@@ -78,6 +78,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="text-center col-md-12 col-md-offset-0">
+                                    {!! HTML::linkRoute('signin.create', '新增簽到記錄', $course->id, ['class' => 'btn btn-primary pull-right']) !!}
                                     <table class="table table-hover">
                                         @if(count($course->signins))
                                             <thead>
