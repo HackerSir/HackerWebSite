@@ -68,7 +68,7 @@ class ApiController extends Controller
 
     public function anyListUsers()
     {
-        $cards = Card::all();
+        $cards = Card::whereNotIn('card_number', [''])->get();
         $data = [];
         foreach ($cards as $card) {
             $data[$card->nid] = $card->card_number;
@@ -92,7 +92,7 @@ class ApiController extends Controller
                 "message" => "Arguments Error"
             ];
         } else {
-            if (Card::where('nid', '=', $nid)->count() > 0) {
+            if (Card::where('nid', '=', $nid)->whereNotIn('card_number', [''])->count() > 0) {
                 $json = [
                     "status" => 4,
                     "message" => "Bind Failed (Same nid)"
@@ -103,8 +103,9 @@ class ApiController extends Controller
                     "message" => "Bind Failed (Same cid)"
                 ];
             } else {
-                $card = Card::create(array(
-                    "nid" => $nid,
+                $card = Card::updateOrCreate(array(
+                    "nid" => $nid
+                ), array(
                     "card_number" => $cid,
                 ));
                 $json = [
@@ -151,7 +152,7 @@ class ApiController extends Controller
                 "message" => "Arguments Error"
             ];
         } else {
-            $card = Card::where('nid', '=', $nid)->first();
+            $card = Card::where('nid', '=', $nid)->whereNotIn('card_number', [''])->first();
             if ($card) {
                 $json = [
                     "status" => 0,
@@ -228,10 +229,12 @@ class ApiController extends Controller
             if ($course) {
                 $participants = [];
                 foreach ($course->signins as $signin) {
-                    $participants[] = [
-                        "nid" => $signin->card->nid,
-                        "cid" => $signin->card->card_number
-                    ];
+                    if(!empty($signin->card->card_number)) {
+                        $participants[] = [
+                            "nid" => $signin->card->nid,
+                            "cid" => $signin->card->card_number
+                        ];
+                    }
                 }
                 $json = [
                     "status" => 0,
