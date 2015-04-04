@@ -12,6 +12,7 @@
                     <div class="panel-heading">卡片清單</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
+                        {!! HTML::linkRoute('card.create', '新增卡片', [], ['class' => 'btn btn-primary pull-right']) !!}
                         <table class="table table-hover">
                             <thead>
                             <tr>
