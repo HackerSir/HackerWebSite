@@ -45,6 +45,10 @@ Route::controller('api', 'ApiController');
 
 Route::resource('course', 'CourseController');
 Route::resource('card', 'CardController');
+Route::delete('signin/destroy/{id}', array(
+    'as' => 'signin.destroy',
+    'uses' => 'SigninController@destroy'
+));
 
 //學生會開票系統
 Route::resource('candidate', 'CandidateController');

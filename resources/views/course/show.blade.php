@@ -86,6 +86,7 @@
                                                     <th>系級</th>
                                                     <th>姓名</th>
                                                     <th>時間</th>
+                                                    <th>操作</th>
                                                 </tr>
                                             </thead>
                                             @foreach($course->signins as $signin)
@@ -106,6 +107,12 @@
                                                         </td>
                                                         <td>
                                                             {{ $signin->time }}
+                                                        </td>
+                                                        <td>
+                                                            {!! Form::open(['route' => ['signin.destroy', $signin->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                                            'onSubmit' => "return confirm('確定要刪除 ".$signin->card->getName()." 的簽到記錄嗎？');"]) !!}
+                                                            {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
+                                                            {!! Form::close() !!}
                                                         </td>
                                                     </tr>
                                                 </tbody>
