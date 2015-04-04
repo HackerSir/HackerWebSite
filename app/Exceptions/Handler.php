@@ -1,6 +1,6 @@
 <?php namespace App\Exceptions;
 
-use App\Cat;
+use App\Utilities\Cat;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;

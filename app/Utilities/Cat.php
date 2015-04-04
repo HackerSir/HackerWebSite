@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Utilities;
 
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;

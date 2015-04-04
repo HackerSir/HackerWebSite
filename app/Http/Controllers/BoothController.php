@@ -5,7 +5,7 @@ use App\Candidate;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Youtube;
+use App\Utilities\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
