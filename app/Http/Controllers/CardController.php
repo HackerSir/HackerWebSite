@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Card;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +21,8 @@ class CardController extends Controller
      */
     public function index()
     {
-        return "index()";
+        $cardList = Card::orderBy('nid', 'asc')->paginate(20);
+        return view('card.list')->with('cardList', $cardList);
     }
 
     /**

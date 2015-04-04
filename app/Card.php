@@ -17,7 +17,7 @@ class Card extends Model
      *
      * @var array
      */
-    protected $fillable = ['time', 'nid', 'card_number'];
+    protected $fillable = ['time', 'nid', 'card_number', 'grade', 'name'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -38,5 +38,21 @@ class Card extends Model
             return $user;
         }
         return null;
+    }
+
+    public function getName()
+    {
+        if ($this->user() != null) {
+            return $this->user()->name;
+        }
+        return $this->name;
+    }
+
+    public function getGrade()
+    {
+        if ($this->user() != null) {
+            return $this->user()->grade;
+        }
+        return $this->grade;
     }
 }
