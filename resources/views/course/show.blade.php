@@ -82,8 +82,10 @@
                                         @if(count($course->signins))
                                             <thead>
                                                 <tr>
-                                                    <td>簽到者</td>
-                                                    <td>時間</td>
+                                                    <th>簽到者</th>
+                                                    <th>系級</th>
+                                                    <th>姓名</th>
+                                                    <th>時間</th>
                                                 </tr>
                                             </thead>
                                             @foreach($course->signins as $signin)
@@ -95,6 +97,12 @@
                                                             @else
                                                                 {{ $signin->card->nid }}
                                                             @endif
+                                                        </td>
+                                                        <td>
+                                                            {{ $signin->card->getGrade() }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $signin->card->getName() }}
                                                         </td>
                                                         <td>
                                                             {{ $signin->time }}
