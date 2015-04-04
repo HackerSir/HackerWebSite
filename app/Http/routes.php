@@ -44,6 +44,7 @@ Route::controller('member', 'MemberController', array(
 Route::controller('api', 'ApiController');
 
 Route::resource('course', 'CourseController');
+Route::resource('card', 'CardController');
 
 //學生會開票系統
 Route::resource('candidate', 'CandidateController');
