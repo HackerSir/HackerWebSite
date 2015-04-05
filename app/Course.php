@@ -29,7 +29,7 @@ class Course extends Model
 
     public function signins()
     {
-        return $this->hasMany('App\Signin');
+        return $this->hasMany('App\Signin')->orderBy('time', 'asc');
     }
 
     public function check($user)
