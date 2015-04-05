@@ -52,7 +52,7 @@
                                 </table>
                                 <hr />
                                 <div class="text-left">
-                                    {!! Markdown::parse($course->info) !!}
+                                    {!! Markdown::parse(htmlspecialchars($course->info)) !!}
                                 </div>
                                 <hr />
                                 <div>

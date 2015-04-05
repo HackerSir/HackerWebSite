@@ -30,6 +30,6 @@ class MarkdownApiController extends Controller
         if(empty($data)){
             return Response::make(" ");
         }
-        return Response::make(Markdown::parse($data));
+        return Response::make(Markdown::parse(htmlspecialchars($data)));
     }
 }
