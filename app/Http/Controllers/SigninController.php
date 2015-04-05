@@ -43,7 +43,7 @@ class SigninController extends Controller
                     continue;
                 }
                 $card = Card::firstOrCreate(array(
-                    'nid' => $nid
+                    'nid' => strtoupper($nid)
                 ));
                 if (Signin::where('course_id', '=', $courseId)->where('card_id', '=', $card->id)->count() == 0) {
                     $signin = Signin::create(array(

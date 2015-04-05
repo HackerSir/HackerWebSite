@@ -59,7 +59,7 @@ class CardController extends Controller
                 ->withInput();
         } else {
             $card = Card::create(array(
-                'nid' => $request->get('nid'),
+                'nid' => strtoupper($request->get('nid')),
                 'grade' => $request->get('grade'),
                 'name' => $request->get('name')
             ));

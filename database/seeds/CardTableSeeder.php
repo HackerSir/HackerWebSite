@@ -23,7 +23,7 @@ class CardTableSeeder extends Seeder
             }
             $user = User::whereNotIn('nid', [''])->skip($i)->first();
             $card = Card::create(array(
-                'nid' => $user->nid,
+                'nid' => strtoupper($user->nid),
                 //有機率不綁定
                 'card_number' => rand(0, 1) ? $faker->creditCardNumber : ''
             ));
@@ -42,7 +42,7 @@ class CardTableSeeder extends Seeder
             $grade = $department[0] . $year[0] . $class[0];
 
             $card = Card::create(array(
-                'nid' => $faker->regexify('[depm]([0-9]){7})'),
+                'nid' => $faker->regexify('[DEPM]([0-9]){7})'),
                 'grade' => $grade,
                 'name' => $faker->name,
                 //有機率不綁定

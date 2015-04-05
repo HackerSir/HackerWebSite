@@ -83,7 +83,7 @@ class ApiController extends Controller
 
     public function anyBindNid()
     {
-        $nid = Input::get('nid');
+        $nid = strtoupper(Input::get('nid'));
         $cid = Input::get('cid');
 
         if (empty($nid) || empty($cid)) {
@@ -145,7 +145,7 @@ class ApiController extends Controller
 
     public function anyGetCid()
     {
-        $nid = Input::get('nid');
+        $nid = strtoupper(Input::get('nid'));
         if (empty($nid)) {
             $json = [
                 "status" => 2,

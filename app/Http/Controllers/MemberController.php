@@ -439,7 +439,7 @@ class MemberController extends Controller
                 $user->name = $request->get('name');
             }
             if (empty($user->nid)) {
-                $user->nid = strtolower($request->get('nid'));
+                $user->nid = strtoupper($request->get('nid'));
             }
             $user->grade = $request->get('grade');
             if ($user->isStaff()) {
@@ -511,7 +511,7 @@ class MemberController extends Controller
         } else {
             $showUser->nickname = $request->get('nickname');
             $showUser->name = $request->get('name');
-            $showUser->nid = strtolower($request->get('nid'));
+            $showUser->nid = strtoupper($request->get('nid'));
             $showUser->grade = $request->get('grade');
             if ($showUser->id != $user->id) {
                 $groupName = $request->get('group');
