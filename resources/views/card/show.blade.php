@@ -77,6 +77,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">簽到記錄</div>
+                    {{-- Panel body --}}
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="text-center col-md-12 col-md-offset-0">
+                                <table class="table table-hover">
+                                    @if(count($card->signins))
+                                        <thead>
+                                        <tr>
+                                            <th>課程名稱</th>
+                                            <th>時間</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        @foreach($card->signins as $signin)
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    {!! HTML::linkRoute('course.show', $signin->course->subject, $signin->course->id, []) !!}
+                                                </td>
+                                                <td>
+                                                    {{ $signin->time }}
+                                                </td>
+                                                <td>
+                                                    {!! Form::open(['route' => ['signin.destroy', $signin->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                                    'onSubmit' => "return confirm('確定要刪除此卡片在 ".$signin->course->subject." 的簽到記錄嗎？');"]) !!}
+                                                    {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td>無簽到記錄</td>
+                                        </tr>
+                                    @endif
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -16,7 +16,8 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th class="col-md-3">NID</th>
+                                <th class="col-md-2">NID</th>
+                                <th class="col-md-1"></th>
                                 <th class="col-md-4">會員資料</th>
                                 <th class="col-md-2">系級</th>
                                 <th class="col-md-2">姓名</th>
@@ -27,6 +28,11 @@
                             @foreach($cardList as $cardItem)
                                 <tr>
                                     <td>{!! HTML::linkRoute('card.show', $cardItem->nid, $cardItem->id, null) !!}</td>
+                                    <td class="text-right">
+                                        @if($cardItem->signins()->count()>0)
+                                            <span class="badge" title="簽到次數">{{ $cardItem->signins()->count() }}</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if($cardItem->user() != null)
                                             {!! link_to_route('member.profile', $cardItem->user()->nickname, $cardItem->user()->id) !!}
