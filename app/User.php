@@ -80,15 +80,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
-    public function hasCard()
+    public function card()
     {
         if (empty($this->nid)) {
-            return false;
+            return null;
         }
-        if (DB::table('cards')->where('nid', '=', $this->nid)->count()) {
-            return true;
+        $card = Card::where('nid', '=', $this->nid)->first();
+        if ($card) {
+            return $card;
         }
-        return false;
+        return null;
     }
 
     public function isSA()

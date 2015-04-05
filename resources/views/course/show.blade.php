@@ -99,6 +99,7 @@
                                                             @else
                                                                 {{ $signin->card->nid }}
                                                             @endif
+                                                            <a href="{{ URL::route('card.show', $signin->card->id) }}" title="卡片資料"><i class="glyphicon glyphicon-credit-card"></i></a>
                                                         </td>
                                                         <td>
                                                             {{ $signin->card->getGrade() }}

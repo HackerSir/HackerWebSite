@@ -66,10 +66,8 @@
                                             <td>NID：</td>
                                             <td>
                                                 {{ $showUser->nid }}
-                                                @if($showUser->hasCard())
-                                                    <span class="label label-success">卡片已綁定</span>
-                                                @elseif($showUser->nid)
-                                                    <span class="label label-danger">卡片未綁定</span>
+                                                @if($showUser->card())
+                                                    <a href="{{ URL::route('card.show', $showUser->card()->id) }}" title="卡片資料"><i class="glyphicon glyphicon-credit-card"></i></a>
                                                 @endif
                                             </td>
                                         </tr>
