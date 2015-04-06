@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -99,6 +100,16 @@ class CandidateController extends Controller
                 'type' => $request->get('type')
             ));
 
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 新增了候選人：' . $candidate->name, [
+                'id' => $candidate->id,
+                'number' => $candidate->number,
+                'job' => $candidate->job,
+                'name' => $candidate->name,
+                'department' => $candidate->department,
+                'class' => $candidate->class,
+                'type' => $candidate->type
+            ]);
+
             return Redirect::route('candidate.show', $candidate->id)
                 ->with('global', '候選人資料已更新');
         }
@@ -175,6 +186,16 @@ class CandidateController extends Controller
             $candidate->type = $request->get('type');
             $candidate->save();
 
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 更新了候選人：' . $candidate->name, [
+                'id' => $candidate->id,
+                'number' => $candidate->number,
+                'job' => $candidate->job,
+                'name' => $candidate->name,
+                'department' => $candidate->department,
+                'class' => $candidate->class,
+                'type' => $candidate->type
+            ]);
+
             return Redirect::route('candidate.show', $id)
                 ->with('global', '候選人資料已更新');
         }
@@ -189,9 +210,23 @@ class CandidateController extends Controller
     public function destroy($id)
     {
         $candidate = Candidate::find($id);
-        $candidate->delete();
+        if ($candidate) {
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 刪除了候選人：' . $candidate->name, [
+                'id' => $candidate->id,
+                'number' => $candidate->number,
+                'job' => $candidate->job,
+                'name' => $candidate->name,
+                'department' => $candidate->department,
+                'class' => $candidate->class,
+                'type' => $candidate->type
+            ]);
+
+            $candidate->delete();
+            return Redirect::route('candidate.index')
+                ->with('global', '候選人已刪除');
+        }
         return Redirect::route('candidate.index')
-            ->with('global', '候選人已刪除');
+            ->with('warning', '候選人不存在');
     }
 
 }

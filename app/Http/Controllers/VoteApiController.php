@@ -8,8 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Vote;
 use App\Utilities\Youtube;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use stdClass;
 
@@ -134,8 +136,20 @@ class VoteApiController extends Controller
         }
         if ($data['action'] == 'add') {
             $vote->count++;
+
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 為候選人增加一票：' . $candidate->name, [
+                'booth_id' => $vote->booth_id,
+                'candidate_id' => $vote->candidate_id,
+                'count' => $vote->count
+            ]);
         } else if ($data['action'] == 'minus' && $vote->count > 0) {
             $vote->count--;
+
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 為候選人減少一票：' . $candidate->name, [
+                'booth_id' => $vote->booth_id,
+                'candidate_id' => $vote->candidate_id,
+                'count' => $vote->count
+            ]);
         }
         $vote->save();
 

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,12 +67,18 @@ class BoothController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            $candidate = Booth::create(array(
+            $booth = Booth::create(array(
                 'name' => $request->get('name'),
                 'url' => $request->get('url')
             ));
 
-            return Redirect::route('booth.show', $candidate->id)
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 新增了投票所：' . $booth->name, [
+                'id' => $booth->id,
+                'name' => $booth->name,
+                'url' => $booth->url
+            ]);
+
+            return Redirect::route('booth.show', $booth->id)
                 ->with('global', '投票所資料已更新');
         }
     }
@@ -162,6 +169,12 @@ class BoothController extends Controller
             $booth->url = $request->get('url');
             $booth->save();
 
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 更新了投票所：' . $booth->name, [
+                'id' => $booth->id,
+                'name' => $booth->name,
+                'url' => $booth->url
+            ]);
+
             return Redirect::route('booth.show', $id)
                 ->with('global', '投票所資料已更新');
         }
@@ -176,9 +189,19 @@ class BoothController extends Controller
     public function destroy($id)
     {
         $booth = Booth::find($id);
-        $booth->delete();
+        if ($booth) {
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 刪除了投票所：' . $booth->name, [
+                'id' => $booth->id,
+                'name' => $booth->name,
+                'url' => $booth->url
+            ]);
+
+            $booth->delete();
+            return Redirect::route('booth.index')
+                ->with('global', '投票所已刪除');
+        }
         return Redirect::route('booth.index')
-            ->with('global', '投票所已刪除');
+            ->with('warning', '投票所不存在');
     }
 
 }
