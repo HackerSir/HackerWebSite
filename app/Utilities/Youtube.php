@@ -28,6 +28,10 @@ class Youtube extends Model
             return null;
         }
         preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
-        return $matches[1];
+        if (count($matches) >= 2) {
+            return $matches[1];
+        } else {
+            return null;
+        }
     }
 }
