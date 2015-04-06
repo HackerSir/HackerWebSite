@@ -138,6 +138,7 @@ return [
         'Illuminate\Html\HtmlServiceProvider',
         'Conner\Tagging\TaggingServiceProvider',
         'AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider',
+        'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider',
 
         /*
          * Application Service Providers...
@@ -197,7 +198,7 @@ return [
         'View' => 'Illuminate\Support\Facades\View',
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Form' => 'Illuminate\Html\FormFacade',
-        'Markdown'  => 'AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra',
+        'Markdown' => 'AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra',
 
     ],
 

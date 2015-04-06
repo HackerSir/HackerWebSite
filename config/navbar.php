@@ -44,6 +44,7 @@ return array(
     'staff' => array(
         '工作人員' => array(
             '卡片管理' => 'card',
+            '記錄檢視器' => 'logs',
             '相關連結' => array(
                 'Hackpad' => 'https://hackersir.hackpad.com/',
                 'Google Drive' => 'https://drive.google.com/open?id=0B9v9i5Qg6TFgfklzVFQ1V1RscEd5dHN6VEVOUlNNdUNEeTQtTk0yeUxlVXZPOW5ZNlBpbWs&authuser=0'
