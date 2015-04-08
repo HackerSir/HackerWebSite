@@ -28,7 +28,6 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
         $candidateList = new Collection();
         //科系（依出現順序）
         $departmentArray = Candidate::orderBy('id', 'asc')->distinct('department')->select('department')->get()->toArray();
