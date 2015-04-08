@@ -46,7 +46,9 @@
         {!! HTML::script('js/bootstrap-datetimepicker.js'); !!}
         {!! HTML::script('js/bootstrap-notify.min.js'); !!}
         {!! HTML::script('js/tipped/tipped.js'); !!}
-        {!! HTML::script('js/analyticstracking.js'); !!}
+        @if(App::environment('production'))
+            {!! HTML::script('js/analyticstracking.js'); !!}
+        @endif
         <script type="text/javascript">
             @if(Session::has('global'))
                 /* Global message */
