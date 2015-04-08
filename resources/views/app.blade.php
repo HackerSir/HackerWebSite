@@ -38,9 +38,6 @@
         <!-- Scripts -->
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js'); !!}
-        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
-        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
-        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'); !!}
         {!! HTML::script('js/moment_zh-tw.js'); !!}
         {!! HTML::script('js/bootstrap-datetimepicker.js'); !!}
@@ -49,6 +46,7 @@
         @if(App::environment('production'))
             {!! HTML::script('js/analyticstracking.js'); !!}
         @endif
+        @yield('script')
         <script type="text/javascript">
             @if(Session::has('global'))
                 /* Global message */

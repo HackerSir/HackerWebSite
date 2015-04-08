@@ -61,6 +61,12 @@
     }
 @endsection
 
+@section('script')
+    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
+    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
+    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
+@endsection
+
 @section('javascript')
     $(document).ready(function() {
         $('#fullpage').fullpage({
