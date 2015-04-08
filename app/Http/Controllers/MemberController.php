@@ -417,6 +417,7 @@ class MemberController extends Controller
                 ),
                 'nid' => array(
                     'size:8',
+                    'unique:users,nid,' . Auth::user()->id,
                     'regex:/^([depm]([0-9]){7})|(t[0-9]{5})$/i'
                 ),
                 'grade' => array(
@@ -493,6 +494,7 @@ class MemberController extends Controller
                 ),
                 'nid' => array(
                     'size:8',
+                    'unique:users,nid,' . $showUser->id,
                     'regex:/^([depm]([0-9]){7})|(t[0-9]{5})$/i'
                 ),
                 'grade' => array(
