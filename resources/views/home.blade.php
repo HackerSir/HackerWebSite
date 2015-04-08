@@ -151,7 +151,8 @@
     }
     
     .tg {
-	text-align:center
+	text-align:center;
+	font-size: 13pt;
     }
     .tg td {
 	text-align:center
