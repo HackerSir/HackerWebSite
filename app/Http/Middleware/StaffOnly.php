@@ -40,9 +40,13 @@ class StaffOnly
                 return redirect()->route('member.login');
             }
         } else if (!$this->auth->user()->isStaff()) {
-            //未驗證
+            //權限不足
             return redirect()->back()
                 ->with('warning', '權限不足');
+        } else if (empty($this->auth->user()->confirm_at)) {
+            //未驗證信箱
+            return redirect()->route('member.resend')
+                ->with('warning', '完成信箱驗證方可進入此頁面');
         }
 
         return $next($request);
