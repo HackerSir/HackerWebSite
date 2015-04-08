@@ -11,7 +11,7 @@ class VoteController extends Controller
 
     public function getIndex()
     {
-        return File::get('vote/index.html');;
+        return File::get('vote/index.html');
     }
 
 }
