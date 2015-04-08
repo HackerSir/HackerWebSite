@@ -46,6 +46,7 @@
         {!! HTML::script('js/bootstrap-datetimepicker.js'); !!}
         {!! HTML::script('js/bootstrap-notify.min.js'); !!}
         {!! HTML::script('js/tipped/tipped.js'); !!}
+        {!! HTML::script('js/analyticstracking.js'); !!}
         <script type="text/javascript">
             @if(Session::has('global'))
                 /* Global message */
