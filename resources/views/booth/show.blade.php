@@ -78,8 +78,8 @@
                                                 <td id="count_{{ $booth->id }}_{{ $candidate->id }}">@if($candidate->canVote()){{ $candidate->voteCount($booth->id) }}@endif</td>
                                                 <td>
                                                     @if($candidate->canVote())
-                                                        <a href="javascript:void(0)" class="btn btn-primary glyphicon glyphicon-plus" onclick="vote('add', {{ $booth->id }}, {{ $candidate->id }})"></a>
-                                                        <a href="javascript:void(0)" class="btn btn-danger glyphicon glyphicon-minus" onclick="vote('minus', {{ $booth->id }}, {{ $candidate->id }})"></a>
+                                                        <a href="javascript:void(0)" class="btn btn-primary glyphicon glyphicon-plus" onclick="alert('開票已結束')"></a>
+                                                        <a href="javascript:void(0)" class="btn btn-danger glyphicon glyphicon-minus" onclick="alert('開票已結束')"></a>
                                                     @endif
                                                 </td>
                                             </tr>

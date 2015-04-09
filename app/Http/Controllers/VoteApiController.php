@@ -118,6 +118,8 @@ class VoteApiController extends Controller
 
     public function anyVote(Request $request)
     {
+        //強制結束
+        return "error";
         //只接受Ajax請求
         if (!$request->ajax()) {
             return "error";
