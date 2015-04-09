@@ -144,7 +144,7 @@
     }
 
     .section {
-        background-size: 100%;
+        background-size: contain;
         background-repeat: no-repeat;
         background-position: center center;
     }
