@@ -99,7 +99,7 @@ window.onload = function(){
       li = document.createElement('li');
       a = document.createElement('a');
       a.href = '#';
-      a.innerText = b;
+      $(a).text(b + "");
       a.onclick = onclick(i);
       li.appendChild(a);
       document.querySelector('#booths').appendChild(li);
