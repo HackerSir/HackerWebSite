@@ -35,12 +35,8 @@ makeChart = function(data){
   return canvas.getContext('2d');
 };
 updateCharts = function(data){
-<<<<<<< HEAD
+  var i$, to$, i, ctx, votesData, results$ = []; 
   for (i$ = 0, to$ = max(charts, data.votes.length) - 1; i$ < to$; ++i$) {
-=======
-  var i$, to$, i, ctx, votesData, results$ = [];
-  for (i$ = 0, to$ = max(charts, data.votes) - 1; i$ < to$; ++i$) {
->>>>>>> parent of e34d529... Revert "Update app.js"
     i = i$;
     ctx = charts[i];
     votesData = data.votes[i];
