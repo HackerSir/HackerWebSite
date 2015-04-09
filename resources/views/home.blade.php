@@ -144,7 +144,7 @@
     }
 
     .section {
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
     }
@@ -157,6 +157,7 @@
     }
 
     #section1 {
+        background-size: contain;
         background-image: url({{ URL::asset('pic/Header.jpg') }});
     }
     #section2 {
