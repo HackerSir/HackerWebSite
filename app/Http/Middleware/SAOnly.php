@@ -49,6 +49,11 @@ class SAOnly
                 ->with('warning', '完成信箱驗證方可進入此頁面');
         }
 
+        if ($this->auth->user()->isSA()) {
+            return redirect()->back()
+                ->with('warning', '權限已收回');
+        }
+
         return $next($request);
     }
 
