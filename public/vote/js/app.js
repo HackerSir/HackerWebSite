@@ -1,5 +1,5 @@
-var ref$, map, zip, API_URL, graphOptions, template, charts, makeChart, updateCharts, fetchBooth, fetchVotes, currentBooth, intervalHandle, setBooth;
-ref$ = require('prelude-ls'), map = ref$.map, zip = ref$.zip;
+var ref$, map, max, API_URL, graphOptions, template, datas, charts, makeChart, updateCharts, fetchBooth, fetchVotes, intervalHandle, setBooth;
+ref$ = require('prelude-ls'), map = ref$.map, max = ref$.max;
 API_URL = '../vote-api';
 graphOptions = function(title){
   return {
@@ -24,6 +24,7 @@ template = function(data){
     }]
   };
 };
+datas = [];
 charts = [];
 makeChart = function(data){
   var x$, canvas;
@@ -34,9 +35,11 @@ makeChart = function(data){
   return canvas.getContext('2d');
 };
 updateCharts = function(data){
-  var i$, ref$, len$, ref1$, ctx, votesData, results$ = [];
-  for (i$ = 0, len$ = (ref$ = zip(charts, data.votes)).length; i$ < len$; ++i$) {
-    ref1$ = ref$[i$], ctx = ref1$[0], votesData = ref1$[1];
+  var i$, to$, i, ctx, votesData, results$ = [];
+  for (i$ = 0, to$ = max(charts, data.votes) - 1; i$ < to$; ++i$) {
+    i = i$;
+    ctx = charts[i];
+    votesData = data.votes[i];
     results$.push(updateChart(ctx, template(votesData), graphOptions(votesData.name), true, true));
   }
   return results$;
@@ -47,21 +50,21 @@ fetchBooth = function(cb){
 fetchVotes = function(id, cb){
   return $.get(API_URL + "/votes" + id, cb);
 };
-currentBooth = "/0";
 intervalHandle = null;
 setBooth = function(path){
   return fetchVotes(path, function(votesData){
     var res$, i$, ref$, len$, d;
     $('#booth-name').text(votesData.name);
-    $('#embed-video').attr('src', votesData.url);
     if (path === '') {
       $('#canvases').removeClass('canvases');
       $('#video-column').addClass('hide');
       $('#votes-column').removeClass('col-md-4');
+      $('#embed-video').attr('src', null);
     } else {
       $('#canvases').addClass('canvases');
       $('#video-column').removeClass('hide');
       $('#votes-column').addClass('col-md-4');
+      $('#embed-video').attr('src', votesData.url);
     }
     if (charts.length === 0) {
       res$ = [];
@@ -76,10 +79,9 @@ setBooth = function(path){
     if (intervalHandle !== null) {
       clearInterval(intervalHandle);
     }
-    intervalHandle = setInterval(function(){
+    return intervalHandle = setInterval(function(){
       return fetchVotes(path, updateCharts);
     }, 30000);
-    return console.log(intervalHandle);
   });
 };
 window.onload = function(){
