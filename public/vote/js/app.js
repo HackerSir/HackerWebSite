@@ -34,9 +34,10 @@ makeChart = function(data){
   return canvas.getContext('2d');
 };
 updateCharts = function(data){
-  var i$, ref$, len$, ref1$, ctx, votesData, results$ = [];
-  for (i$ = 0, len$ = (ref$ = zip(charts, data.votes)).length; i$ < len$; ++i$) {
-    ref1$ = ref$[i$], ctx = ref1$[0], votesData = ref1$[1];
+  for (i$ = 0, to$ = max(charts, data.votes.length) - 1; i$ < to$; ++i$) {
+    i = i$;
+    ctx = charts[i];
+    votesData = data.votes[i];
     results$.push(updateChart(ctx, template(votesData), graphOptions(votesData.name), true, true));
   }
   return results$;
