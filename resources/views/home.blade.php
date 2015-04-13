@@ -26,6 +26,8 @@
                     <a class="btn btn-social-icon btn-github" target="_blank" href="https://github.com/HackerSir" title="Github組織<br />HackerSir">
                         <i class="fa fa-github"></i>
                     </a>
+                    <br /><br />
+                    <div class="g-ytsubscribe" data-channelid="UCeDnuTpnq_4As-ceZiWsi4A" data-layout="full" data-count="default"></div>
                 </div>
 
             </div>
@@ -198,6 +200,7 @@
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
+    {!! HTML::script('https://apis.google.com/js/platform.js'); !!}
 @endsection
 
 @section('javascript')
