@@ -73,9 +73,11 @@ Route::any('markdown', [
 ]);
 
 //記錄檢視器
-Route::group(['middleware' => 'staff'], function() {
+Route::group(['middleware' => 'staff'], function () {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
+
+Route::controller('export', 'ExportController');
 
 //未定義路由
 Route::get('{all}', array(
