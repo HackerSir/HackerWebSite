@@ -34,7 +34,7 @@ class ExportController extends Controller
         }
 
         $date = new DateTime($course->time);
-        $fileName = $date->format('Y-m-d') . ' - 簽到清單';
+        $fileName = $course->subject . ' - 出席成員';
 
         Excel::create($fileName, function ($excel) use ($data, $date) {
             $excel->setTitle($date->format('Y-m-d') . ' - SignList');
