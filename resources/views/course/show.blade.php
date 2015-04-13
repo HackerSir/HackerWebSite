@@ -79,6 +79,7 @@
                             <div class="row">
                                 <div class="text-center col-md-12 col-md-offset-0">
                                     {!! HTML::linkRoute('signin.create', '新增簽到記錄', $course->id, ['class' => 'btn btn-primary pull-right']) !!}
+                                    <a href="{{ URL::route('export.signin-list', $course->id) }}" title="匯出簽到清單(.xls)" class="btn btn-default pull-right"><i class="fa fa-download"></i></a>
                                     <table class="table table-hover">
                                         @if(count($course->signins))
                                             <thead>

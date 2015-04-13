@@ -77,7 +77,9 @@ Route::group(['middleware' => 'staff'], function () {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 });
 
-Route::controller('export', 'ExportController');
+Route::controller('export', 'ExportController', array(
+    'getSigninList' => 'export.signin-list'
+));
 
 //未定義路由
 Route::get('{all}', array(
