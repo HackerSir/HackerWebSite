@@ -19,6 +19,15 @@
                     希望可以讓每位社員甚至每位學生都能了解到資安的重要性及體驗到更加便利、有趣的未來！
                 </p>
 
+                <div>
+                    <a class="btn btn-social-icon btn-facebook" target="_blank" href="https://www.facebook.com/groups/HackerSir" title="Facebook社團<br />逢甲大學黑客社公開板 (Hackers Club, FCU)">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-social-icon btn-github" target="_blank" href="https://github.com/HackerSir" title="Github組織<br />HackerSir">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
         {{-- Class section--}}
