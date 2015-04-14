@@ -79,9 +79,10 @@ setBooth = function(path){
     if (intervalHandle !== null) {
       clearInterval(intervalHandle);
     }
+    /*
     return intervalHandle = setInterval(function(){
       return fetchVotes(path, updateCharts);
-    }, 30000);
+    }, 30000);*/
   });
 };
 window.onload = function(){
