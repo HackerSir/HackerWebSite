@@ -35,7 +35,7 @@ makeChart = function(data){
   return canvas.getContext('2d');
 };
 updateCharts = function(data){
-  var i$, to$, i, ctx, votesData, results$ = []; 
+  var i$, to$, i, ctx, votesData, results$ = [];
   for (i$ = 0, to$ = max(charts, data.votes.length); i$ < to$; ++i$) {
     i = i$;
     ctx = charts[i];
@@ -105,6 +105,6 @@ window.onload = function(){
       li.appendChild(a);
       document.querySelector('#booths').appendChild(li);
     }
-    return setBooth('/0');
+    return setBooth('');
   });
 };
