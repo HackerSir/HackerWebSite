@@ -36,7 +36,7 @@ makeChart = function(data){
 };
 updateCharts = function(data){
   var i$, to$, i, ctx, votesData, results$ = [];
-  for (i$ = 0, to$ = max(charts, data.votes.length); i$ < to$; ++i$) {
+  for (i$ = 0, to$ = max(charts.length, data.votes.length); i$ < to$; ++i$) {
     i = i$;
     ctx = charts[i];
     votesData = data.votes[i];
