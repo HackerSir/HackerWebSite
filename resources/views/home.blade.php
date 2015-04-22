@@ -208,6 +208,7 @@
 @endsection
 
 @section('javascript')
+    <script type="text/javascript">
     $(document).ready(function() {
         $('#fullpage').fullpage({
             paddingTop: '50px',
@@ -217,4 +218,5 @@
             anchors: ['welcome', 'about', 'class', 'activity'],
         });
     });
+    </script>
 @endsection
