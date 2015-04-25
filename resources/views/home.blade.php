@@ -215,7 +215,7 @@
             scrollOverflow: ($( window ).width() > 640),
             scrollBar: true,
             responsive: 640,
-            //sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'],
+            {{-- sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'], --}}
             anchors: ['welcome', 'about', 'class', 'activity']
         });
     });
