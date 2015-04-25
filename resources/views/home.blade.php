@@ -46,7 +46,7 @@
                     歡迎有興趣的人來聽課！(歡迎初學者！)<br />
                     每堂社課皆是 07:00 PM 至 09:00 PM！
                 </p>
-                <table class="tg table table-striped">
+                <table class="tg table table-striped" id="classList">
                     <caption style="color: #000000">課程名稱：<span class="label label-success">請問您今天要來點Python嗎？</span></caption>
                     <thead>
                     <tr class="active">
@@ -216,6 +216,43 @@
             {{-- sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'], --}}
             anchors: ['welcome', 'about', 'class', 'activity']
         });
+    });
+    $(document).ready(function () {
+        {{-- TODO:: 隱藏顯示不下的課程，暫時從前台下手，
+                    未來應該改成從後台下手，固定顯示數量，
+                    前台在動態固定表格高度，可能在加一層div
+                    這樣在空間不足時，還有個卷軸可用
+                    雖然應該會很難操作。--}}
+        var targetTableHeight = $('#section3').height() * 0.5;
+        if ($('#classList').height() > targetTableHeight) {
+            var trList = $('#classList tbody tr');
+            var hasNone = false;
+            for (var i = 0; i < trList.length; i++) {
+                if (trList[i].className == 'success') {
+                    trList[i].style.display = 'none';
+                    hasNone = true;
+                    if ($('#classList').height() <= targetTableHeight) break;
+                }
+            }
+            if (hasNone) {
+                $('#classList tbody').prepend('<tr class="success"><td colspan="5">...</td></tr>');
+            }
+        }
+
+        if ($('#classList').height() > targetTableHeight) {
+            var trList = $('#classList tbody tr');
+            var hasNone = false;
+            for (var i = trList.length - 1; i >= 0 ; i--) {
+                if (trList[i].className == 'info') {
+                    trList[i].style.display = 'none';
+                    hasNone = true;
+                    if ($('#classList').height() <= targetTableHeight) break;
+                }
+            }
+            if (hasNone) {
+                $('#classList tbody').append('<tr class="info"><td colspan="5">...</td></tr>');
+            }
+        }
     });
     </script>
 @endsection
