@@ -46,6 +46,7 @@
                     每堂社課皆是晚上七點至晚上九點！
                 </p>
                 <table class="tg table table-striped">
+                    <thead>
                     <tr class="active">
                         <th>日期</th>
                         <th>地點</th>
@@ -53,6 +54,8 @@
                         <th>講師</th>
                         <th>狀態</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr class="success">
                         <td>3/10 (二)</td>
                         <td>語文401</td>
@@ -133,6 +136,7 @@
                         <td>?</td>
                         <td></td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
