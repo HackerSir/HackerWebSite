@@ -216,7 +216,7 @@
             scrollBar: true,
             responsive: 640,
             //sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'],
-            anchors: ['welcome', 'about', 'class', 'activity'],
+            anchors: ['welcome', 'about', 'class', 'activity']
         });
     });
     </script>
