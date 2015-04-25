@@ -44,96 +44,96 @@
                 <p>
                     本學期我們開設了程式設計課程，歡迎有興趣的人來聽課！(初學者歡迎！)<br />
                     每堂社課皆是晚上七點至晚上九點！
-                    <table class="tg table table-striped">
-                        <tr class="active">
-                            <th>日期</th>
-                            <th>地點</th>
-                            <th>課程名稱</th>
-                            <th>講師</th>
-                            <th>狀態</th>
-                        </tr>
-                        <tr class="success">
-                            <td>3/10 (二)</td>
-                            <td>語文401</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 1<br />
-                                &gt;&gt;&gt; 安裝、基礎操作</td>
-                            <td>Jyny</td>
-                            <td>Finished</td>
-                        </tr>
-                        <tr class="success">
-                            <td>3/14 (二)</td>
-                            <td>商學301</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 2<br />
-                                &gt;&gt;&gt; 字串</td>
-                            <td>Tim</td>
-                            <td>Finished</td>
-                        </tr>
-                        <tr class="success">
-                            <td>3/24 (二)</td>
-                            <td>商學301</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 3<br />
-                                &gt;&gt;&gt; 格式化、日期與時間</td>
-                            <td>Danny</td>
-                            <td>Finished</td>
-                        </tr>
-                        <tr class="success">
-                            <td>3/31 (二)</td>
-                            <td>商學301</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 4<br />
-                                &gt;&gt;&gt; 函式、遞迴</td>
-                            <td>Vongola</td>
-                            <td>Finished</td>
-                        </tr>
-                        <tr class="warning">
-                            <td>4/28 (二)</td>
-                            <td>資電B19</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 5<br />
-                                &gt;&gt;&gt; 遞迴、迴圈</td>
-                            <td>Vongola</td>
-                            <td>Next</td>
-                        </tr>
-                        <tr class="info">
-                            <td>5/05 (二)</td>
-                            <td>資電B19</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 6<br />
-                                &gt;&gt;&gt; List、Dictionary</td>
-                            <td>?</td>
-                            <td></td>
-                        </tr>
-                        <tr class="info">
-                            <td>5/12 (二)</td>
-                            <td>資電B19</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 7<br />
-                                &gt;&gt;&gt; List + 迴圈應用</td>
-                            <td>?</td>
-                            <td></td>
-                        </tr>
-                        <tr class="info">
-                            <td>5/26 (二)</td>
-                            <td>資電B19</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 8<br />
-                                &gt;&gt;&gt; Review</td>
-                            <td>?</td>
-                            <td></td>
-                        </tr>
-                        <tr class="info">
-                            <td>6/02 (二)</td>
-                            <td>資電B19</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 9 <br />
-                                &gt;&gt;&gt; Class</td>
-                            <td>?</td>
-                            <td></td>
-                        </tr>
-                        <tr class="info">
-                            <td>6/09 (二)</td>
-                            <td>資電B19</td>
-                            <td class="tg-left">請問您今天要來點Python嗎？Day 10<br />
-                                &gt;&gt;&gt; File I/O<br /></td>
-                            <td>?</td>
-                            <td></td>
-                        </tr>
-                    </table>
                 </p>
+                <table class="tg table table-striped">
+                    <tr class="active">
+                        <th>日期</th>
+                        <th>地點</th>
+                        <th>課程名稱</th>
+                        <th>講師</th>
+                        <th>狀態</th>
+                    </tr>
+                    <tr class="success">
+                        <td>3/10 (二)</td>
+                        <td>語文401</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 1<br />
+                            &gt;&gt;&gt; 安裝、基礎操作</td>
+                        <td>Jyny</td>
+                        <td>Finished</td>
+                    </tr>
+                    <tr class="success">
+                        <td>3/14 (二)</td>
+                        <td>商學301</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 2<br />
+                            &gt;&gt;&gt; 字串</td>
+                        <td>Tim</td>
+                        <td>Finished</td>
+                    </tr>
+                    <tr class="success">
+                        <td>3/24 (二)</td>
+                        <td>商學301</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 3<br />
+                            &gt;&gt;&gt; 格式化、日期與時間</td>
+                        <td>Danny</td>
+                        <td>Finished</td>
+                    </tr>
+                    <tr class="success">
+                        <td>3/31 (二)</td>
+                        <td>商學301</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 4<br />
+                            &gt;&gt;&gt; 函式、遞迴</td>
+                        <td>Vongola</td>
+                        <td>Finished</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>4/28 (二)</td>
+                        <td>資電B19</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 5<br />
+                            &gt;&gt;&gt; 遞迴、迴圈</td>
+                        <td>Vongola</td>
+                        <td>Next</td>
+                    </tr>
+                    <tr class="info">
+                        <td>5/05 (二)</td>
+                        <td>資電B19</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 6<br />
+                            &gt;&gt;&gt; List、Dictionary</td>
+                        <td>?</td>
+                        <td></td>
+                    </tr>
+                    <tr class="info">
+                        <td>5/12 (二)</td>
+                        <td>資電B19</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 7<br />
+                            &gt;&gt;&gt; List + 迴圈應用</td>
+                        <td>?</td>
+                        <td></td>
+                    </tr>
+                    <tr class="info">
+                        <td>5/26 (二)</td>
+                        <td>資電B19</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 8<br />
+                            &gt;&gt;&gt; Review</td>
+                        <td>?</td>
+                        <td></td>
+                    </tr>
+                    <tr class="info">
+                        <td>6/02 (二)</td>
+                        <td>資電B19</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 9 <br />
+                            &gt;&gt;&gt; Class</td>
+                        <td>?</td>
+                        <td></td>
+                    </tr>
+                    <tr class="info">
+                        <td>6/09 (二)</td>
+                        <td>資電B19</td>
+                        <td class="tg-left">請問您今天要來點Python嗎？Day 10<br />
+                            &gt;&gt;&gt; File I/O<br /></td>
+                        <td>?</td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
         </div>
         {{-- Activity section--}}
