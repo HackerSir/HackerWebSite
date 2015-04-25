@@ -211,10 +211,11 @@
     <script type="text/javascript">
     $(document).ready(function() {
         $('#fullpage').fullpage({
-            paddingTop: '50px',
-            scrollOverflow: ($( window ).width() > 640),
+            {{-- Extra small devices (xs) is < 768px --}}
+            paddingTop: ($( window ).width() >= 768) ? '50px' : '0px',
+            scrollOverflow: ($( window ).width() >= 768),
             scrollBar: true,
-            responsive: 640,
+            responsive: 768,
             {{-- sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'], --}}
             anchors: ['welcome', 'about', 'class', 'activity']
         });
