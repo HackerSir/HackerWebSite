@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
@@ -19,9 +20,11 @@ class ApiController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('api');
-        //取得Token參數並檢查合法性
-        $token = Input::get('token');
+        $this->middleware('api', [
+            'except' => [
+                'anyGetToken'
+            ]
+        ]);
     }
 
     /*
@@ -32,6 +35,7 @@ class ApiController extends Controller
         abort(400);
     }
 
+    //==================== 測試用 ====================
     /*
      * 測試Http status code
      */
@@ -66,6 +70,42 @@ class ApiController extends Controller
         return Response::json($result);
     }
 
+    //==================== 驗證 ====================
+    /*
+     * 取得token
+     */
+    public function anyGetToken()
+    {
+        $username = Input::get('username');
+        $password = Input::get('password');
+        if (empty($username) || empty($password)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            if (Auth::once(['email' => $username, 'password' => $password])) {
+                //TODO token
+                $token = "Token Here";
+                $json = [
+                    "status" => 0,
+                    "message" => "Success",
+                    "token" => $token
+                ];
+            } else {
+                $json = [
+                    "status" => 1,
+                    "message" => "Permission Denied (Login Failed?)"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    //==================== 一般API ====================
+    /*
+     * 列出卡片清單
+     */
     public function anyListUsers()
     {
         $cards = Card::whereNotIn('card_number', [''])->get();
@@ -81,6 +121,9 @@ class ApiController extends Controller
         return Response::json($json);
     }
 
+    /*
+     * 綁定NID與卡號
+     */
     public function anyBindNid()
     {
         $nid = strtoupper(Input::get('nid'));
@@ -117,6 +160,9 @@ class ApiController extends Controller
         return Response::json($json);
     }
 
+    /*
+     * 取得NID
+     */
     public function anyGetNid()
     {
         $cid = Input::get('cid');
@@ -143,6 +189,9 @@ class ApiController extends Controller
         return Response::json($json);
     }
 
+    /*
+     * 取得卡號
+     */
     public function anyGetCid()
     {
         $nid = strtoupper(Input::get('nid'));
@@ -169,6 +218,9 @@ class ApiController extends Controller
         return Response::json($json);
     }
 
+    /*
+     * 列出活動清單
+     */
     public function anyListEvents()
     {
         $courses = Course::all();
@@ -188,6 +240,9 @@ class ApiController extends Controller
         return Response::json($json);
     }
 
+    /*
+     * 取的活動資料
+     */
     public function anyGetEventData()
     {
         $eid = Input::get('eid');
@@ -216,6 +271,9 @@ class ApiController extends Controller
         return Response::json($json);
     }
 
+    /*
+     * 取得活動參與者（簽到清單）
+     */
     public function anyGetEventParticipant()
     {
         $eid = Input::get('eid');
@@ -229,7 +287,7 @@ class ApiController extends Controller
             if ($course) {
                 $participants = [];
                 foreach ($course->signins as $signin) {
-                    if(!empty($signin->card->card_number)) {
+                    if (!empty($signin->card->card_number)) {
                         $participants[] = [
                             "nid" => $signin->card->nid,
                             "cid" => $signin->card->card_number
