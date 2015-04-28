@@ -277,6 +277,7 @@
                     這樣在空間不足時，還有個卷軸可用
                     雖然應該會很難操作。--}}
         {{-- 限制課程清單只有 section3 高度的 50% --}}
+        var html_hide_tr = '<tr class="info"><td colspan="5"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true" /></td></tr>';
         var targetTableHeight = $('#section3').height() * 0.5;
         if ($('#classList').height() > targetTableHeight) {
             var trList = $('#classList tbody tr');
@@ -291,7 +292,7 @@
                 }
             }
             if (hasNone) {
-                $('#classList tbody').prepend('<tr class="success"><td colspan="5">...</td></tr>');
+                $('#classList tbody').prepend(html_hide_tr);
             }
         }
 
@@ -306,7 +307,7 @@
                 }
             }
             if (hasNone) {
-                $('#classList tbody').append('<tr class="info"><td colspan="5">...</td></tr>');
+                $('#classList tbody').append(html_hide_tr);
             }
         }
     });
