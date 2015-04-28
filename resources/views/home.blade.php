@@ -46,7 +46,7 @@
                     歡迎有興趣的人來聽課！(歡迎初學者！)<br />
                     每堂社課皆是 07:00 PM 至 09:00 PM！
                 </p>
-                <table class="tg table table-striped" id="classList">
+                <table class="tg table table-striped noMoreTable" id="classList">
                     <caption style="color: #000000">課程名稱：<span class="label label-success">請問您今天要來點Python嗎？</span></caption>
                     <thead>
                     <tr class="active">
@@ -58,79 +58,79 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="success">
+                    <tr class="success classData">
                         <td>3/10 (二)</td>
                         <td>語文401</td>
-                        <td class="tg-left">Day 1<br />&gt;&gt;&gt;安裝、基礎操作</td>
+                        <td><span class="tg-left">Day 1<br />&gt;&gt;&gt;安裝、基礎操作</span></td>
                         <td>Jyny</td>
                         <td>Finished</td>
                     </tr>
-                    <tr class="success">
+                    <tr class="success classData">
                         <td>3/14 (二)</td>
                         <td>商學301</td>
-                        <td class="tg-left">Day 2<br />&gt;&gt;&gt;字串</td>
+                        <td><span class="tg-left">Day 2<br />&gt;&gt;&gt;字串</span></td>
                         <td>Tim</td>
                         <td>Finished</td>
                     </tr>
-                    <tr class="success">
+                    <tr class="success classData">
                         <td>3/24 (二)</td>
                         <td>商學301</td>
-                        <td class="tg-left">Day 3<br />&gt;&gt;&gt;格式化、日期與時間</td>
+                        <td><span class="tg-left">Day 3<br />&gt;&gt;&gt;格式化、日期與時間</span></td>
                         <td>Danny</td>
                         <td>Finished</td>
                     </tr>
-                    <tr class="success">
+                    <tr class="success classData">
                         <td>3/31 (二)</td>
                         <td>商學301</td>
-                        <td class="tg-left">Day 4<br />&gt;&gt;&gt;函式、遞迴</td>
+                        <td><span class="tg-left">Day 4<br />&gt;&gt;&gt;函式、遞迴</span></td>
                         <td>Vongola</td>
                         <td>Finished</td>
                     </tr>
-                    <tr class="warning">
+                    <tr class="warning classData">
                         <td>4/28 (二)</td>
                         <td>資電B19</td>
-                        <td class="tg-left">Day 5<br />&gt;&gt;&gt;遞迴、迴圈</td>
+                        <td><span class="tg-left">Day 5<br />&gt;&gt;&gt;遞迴、迴圈</span></td>
                         <td>Vongola</td>
                         <td>Next</td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info classData">
                         <td>5/05 (二)</td>
                         <td>資電B19</td>
-                        <td class="tg-left">Day 6<br />&gt;&gt;&gt;List、Dictionary</td>
+                        <td><span class="tg-left">Day 6<br />&gt;&gt;&gt;List、Dictionary</span></td>
                         <td>?</td>
-                        <td></td>
+                        <td>Coming Soon</td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info classData">
                         <td>5/12 (二)</td>
                         <td>資電B19</td>
-                        <td class="tg-left">Day 7<br />&gt;&gt;&gt;List + 迴圈應用</td>
+                        <td><span class="tg-left">Day 7<br />&gt;&gt;&gt;List + 迴圈應用</span></td>
                         <td>?</td>
-                        <td></td>
+                        <td>Coming Soon</td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info classData">
                         <td>5/26 (二)</td>
                         <td>資電B19</td>
-                        <td class="tg-left">Day 8<br />&gt;&gt;&gt;Review</td>
+                        <td><span class="tg-left">Day 8<br />&gt;&gt;&gt;Review</span></td>
                         <td>?</td>
-                        <td></td>
+                        <td>Coming Soon</td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info classData">
                         <td>6/02 (二)</td>
                         <td>資電B19</td>
-                        <td class="tg-left">Day 9 <br />&gt;&gt;&gt;Class</td>
+                        <td><span class="tg-left">Day 9 <br />&gt;&gt;&gt;Class</span></td>
                         <td>?</td>
-                        <td></td>
+                        <td>Coming Soon</td>
                     </tr>
-                    <tr class="info">
+                    <tr class="info classData">
                         <td>6/09 (二)</td>
                         <td>資電B19</td>
-                        <td class="tg-left">Day 10<br />&gt;&gt;&gt;File I/O</td>
+                        <td><span class="tg-left">Day 10<br />&gt;&gt;&gt;File I/O</span></td>
                         <td>?</td>
-                        <td></td>
+                        <td>Coming Soon</td>
                     </tr>
                     </tbody>
                 </table>
-                <a href="/course" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;課程清單</a>
+                <a href="/course" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;更多課程</a>
             </div>
         </div>
         {{-- Activity section--}}
@@ -192,8 +192,60 @@
     .tg th {
         text-align:center
     }
-    .tg .tg-left {
+    span.tg-left {
+        display: block;
         text-align:left
+    }
+
+    @media
+    only screen and (max-width: 479px) {
+
+        /* Force table to not be like tables anymore */
+        .noMoreTable table, thead, tbody, th, td, tr.classData {
+            display: block;
+        }
+
+        /* Hide table headers */
+        .noMoreTable thead tr.classData {
+            display: none;
+        }
+
+        .noMoreTable tr.classData { border: 1px solid #ccc; }
+
+        .noMoreTable tr:not(.classData) {
+            display: none;
+        }
+
+        .noMoreTable td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 40% !important;
+            white-space: normal;
+            text-align:left;
+        }
+
+        .noMoreTable td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align:left;
+        }
+
+        /*
+        Label the data
+        */
+        .noMoreTable td:nth-of-type(1):before { content: "日期"; }
+        .noMoreTable td:nth-of-type(2):before { content: "地點"; }
+        .noMoreTable td:nth-of-type(3):before { content: "課程名稱"; }
+        .noMoreTable td:nth-of-type(4):before { content: "講師"; }
+        .noMoreTable td:nth-of-type(5):before { content: "狀態"; }
     }
 @endsection
 
@@ -228,7 +280,7 @@
             var trList = $('#classList tbody tr');
             var hasNone = false;
             for (var i = 0; i < trList.length; i++) {
-                if (trList[i].className == 'success') {
+                if (trList[i].className.indexOf('success') != -1) {
                     trList[i].style.display = 'none';
                     hasNone = true;
                     if ($('#classList').height() <= targetTableHeight) break;
@@ -243,7 +295,7 @@
             var trList = $('#classList tbody tr');
             var hasNone = false;
             for (var i = trList.length - 1; i >= 0 ; i--) {
-                if (trList[i].className == 'info') {
+                if (trList[i].className.indexOf('info') != -1) {
                     trList[i].style.display = 'none';
                     hasNone = true;
                     if ($('#classList').height() <= targetTableHeight) break;
