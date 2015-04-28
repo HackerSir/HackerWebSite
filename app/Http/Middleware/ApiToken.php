@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use App\Token;
 use Closure;
 use Illuminate\Support\Facades\Response;
 
@@ -43,8 +44,7 @@ class ApiToken
      */
     private function checkToken($token)
     {
-        //FIXME 測試用
-        if ($token == "token") {
+        if (Token::check($token)) {
             return true;
         }
         return false;

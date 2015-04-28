@@ -5,6 +5,7 @@ use App\Course;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Token;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -85,9 +86,21 @@ class ApiController extends Controller
             ];
         } else {
             if (Auth::once(['email' => $username, 'password' => $password])) {
-                if (Auth::user()->isStaff()) {
-                    //TODO token
-                    $token = "Token Here";
+                $user = Auth::user();
+                if ($user->isStaff()) {
+                    //找出用戶所有未過期token，並立刻過期
+                    $activeTokens = $user->activeTokens();
+                    foreach ($activeTokens as $activeToken) {
+                        $activeToken->deadline = date('Y-m-d H:i:s', time());
+                        $activeToken->save();
+                    }
+                    //生成新token
+                    $token = str_random(20);
+                    Token::create([
+                        'user_id' => $user->id,
+                        'token' => $token,
+                        'deadline' => date('Y-m-d H:i:s', time() + 6 * 60 * 60)
+                    ]);
                     $json = [
                         "status" => 0,
                         "message" => "Success",

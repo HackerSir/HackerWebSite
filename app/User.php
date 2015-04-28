@@ -99,4 +99,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return false;
     }
+
+    public function tokens()
+    {
+        return $this->hasMany('App\Token');
+    }
+
+    public function activeTokens()
+    {
+        return $this->hasMany('App\Token')->where('deadline', '>=', date('Y-m-d H:i:s', time()))->get();
+    }
 }
