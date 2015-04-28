@@ -85,13 +85,20 @@ class ApiController extends Controller
             ];
         } else {
             if (Auth::once(['email' => $username, 'password' => $password])) {
-                //TODO token
-                $token = "Token Here";
-                $json = [
-                    "status" => 0,
-                    "message" => "Success",
-                    "token" => $token
-                ];
+                if (Auth::user()->isStaff()) {
+                    //TODO token
+                    $token = "Token Here";
+                    $json = [
+                        "status" => 0,
+                        "message" => "Success",
+                        "token" => $token
+                    ];
+                } else {
+                    $json = [
+                        "status" => 1,
+                        "message" => "Permission Denied (Not staff?)"
+                    ];
+                }
             } else {
                 $json = [
                     "status" => 1,
