@@ -197,6 +197,7 @@
         text-align:left
     }
 
+    {{-- 當表格太窄時，會切換顯示模式，改成兩行，左邊是標題，右邊是內容 --}}
     @media
     only screen and (max-width: 479px) {
 
@@ -270,16 +271,19 @@
         });
     });
     $(document).ready(function () {
-        {{-- TODO:: 隱藏顯示不下的課程，暫時從前台下手，
+        {{-- //TODO:: 隱藏顯示不下的課程，暫時從前台下手，
                     未來應該改成從後台下手，固定顯示數量，
                     前台在動態固定表格高度，可能在加一層div
                     這樣在空間不足時，還有個卷軸可用
                     雖然應該會很難操作。--}}
+        {{-- 限制課程清單只有 section3 高度的 50% --}}
         var targetTableHeight = $('#section3').height() * 0.5;
         if ($('#classList').height() > targetTableHeight) {
             var trList = $('#classList tbody tr');
             var hasNone = false;
             for (var i = 0; i < trList.length; i++) {
+                {{-- jQuery 怪怪的，不能用 hasClass ... --}}
+                {{-- //TODO:: 未來可能會有 Bug --}}
                 if (trList[i].className.indexOf('success') != -1) {
                     trList[i].style.display = 'none';
                     hasNone = true;
