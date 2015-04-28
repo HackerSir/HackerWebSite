@@ -130,7 +130,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="/course" class="btn btn-primary" role="button">課程清單&nbsp;<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+                <a href="/course" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;課程清單</a>
             </div>
         </div>
         {{-- Activity section--}}
