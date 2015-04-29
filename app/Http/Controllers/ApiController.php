@@ -239,6 +239,48 @@ class ApiController extends Controller
     }
 
     /*
+     * 取得卡片資料
+     */
+    public function anyGetCardData()
+    {
+        $nid = strtoupper(Input::get('nid'));
+        $cid = Input::get('cid');
+
+        if (empty($nid) && empty($cid)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            $card = null;
+            //嘗試透過NID或CID找出資料
+            if (!empty($nid)) {
+                $card = Card::where('nid', '=', $nid)->first();
+            }
+            if (!empty($cid) && is_null($card)) {
+                $card = Card::where('card_number', '=', $cid)->first();
+            }
+            //檢查是否有找到
+            if (!is_null($card)) {
+                $json = [
+                    "status" => 0,
+                    "message" => "Success",
+                    "nid" => $card->nid,
+                    "grade" => $card->getGrade(),
+                    "name" => $card->getName(),
+                    "cid" => $card->card_number
+                ];
+            } else {
+                $json = [
+                    "status" => 5,
+                    "message" => "Data Not Found"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    /*
      * 列出活動清單
      */
     public function anyListEvents()
