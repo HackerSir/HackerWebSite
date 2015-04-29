@@ -126,7 +126,7 @@ class ApiController extends Controller
     /*
      * 列出卡片清單
      */
-    public function anyListUsers()
+    public function anyListCards()
     {
         $cards = Card::whereNotIn('card_number', [''])->get();
         $data = [];
