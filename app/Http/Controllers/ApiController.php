@@ -262,14 +262,22 @@ class ApiController extends Controller
             }
             //檢查是否有找到
             if (!is_null($card)) {
-                $json = [
-                    "status" => 0,
-                    "message" => "Success",
-                    "nid" => $card->nid,
-                    "grade" => $card->getGrade(),
-                    "name" => $card->getName(),
-                    "cid" => $card->card_number
-                ];
+                //若同時有nid與cid，額外檢查是否相符
+                if (!empty($nid) && !empty($cid) && (strcasecmp($card->nid, $nid) != 0 || strcasecmp($card->card_number, $cid) != 0)) {
+                    $json = [
+                        "status" => 6,
+                        "message" => "Not Match"
+                    ];
+                } else {
+                    $json = [
+                        "status" => 0,
+                        "message" => "Success",
+                        "nid" => $card->nid,
+                        "grade" => $card->getGrade(),
+                        "name" => $card->getName(),
+                        "cid" => $card->card_number
+                    ];
+                }
             } else {
                 $json = [
                     "status" => 5,
