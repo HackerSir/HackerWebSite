@@ -277,7 +277,7 @@
                     雖然應該會很難操作。--}}
         {{-- 限制課程清單只有 section3 高度的 50% --}}
         var html_hide_tr = '<tr class="info"><td colspan="5"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true" /></td></tr>';
-        var targetTableHeight = $('#section3').height() * 0.5;
+        var targetTableHeight = ($( window ).width() >= 768) ? $( window ).height() * 0.5 : $( window ).height() * 1.5;
         if ($('#classList').height() > targetTableHeight) {
             var trList = $('#classList tbody tr');
             var hasNone = false;
