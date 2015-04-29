@@ -108,7 +108,7 @@
                     stem: false
                 });
             });
+            @yield('javascript')
         </script>
-        @yield('javascript')
     </body>
 </html>

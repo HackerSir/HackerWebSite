@@ -258,7 +258,6 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript">
     $(document).ready(function() {
         $('#fullpage').fullpage({
             {{-- Extra small devices (xs) is < 768px --}}
@@ -311,5 +310,4 @@
             }
         }
     });
-    </script>
 @endsection
