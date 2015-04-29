@@ -25,7 +25,7 @@ class UpdateTokensTable extends Migration
      */
     public function down()
     {
-        Schema::table('signins', function ($table) {
+        Schema::table('tokens', function ($table) {
             $table->dropForeign('tokens_user_id_foreign');
         });
     }
