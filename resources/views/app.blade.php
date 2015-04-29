@@ -108,6 +108,7 @@
                     stem: false
                 });
             });
+            
             @yield('javascript')
         </script>
     </body>
