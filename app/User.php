@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -107,6 +108,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function activeTokens()
     {
-        return $this->hasMany('App\Token')->where('deadline', '>=', date('Y-m-d H:i:s', time()))->get();
+        return $this->hasMany('App\Token')->where('deadline', '>=', Carbon::now()->toDateTimeString())->get();
     }
 }

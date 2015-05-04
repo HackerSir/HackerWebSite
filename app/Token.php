@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Token extends Model
@@ -33,7 +34,7 @@ class Token extends Model
 
     public static function check($token)
     {
-        $token = Token::where('token', '=', $token)->where('deadline', '>=', date('Y-m-d H:i:s', time()))->first();
+        $token = Token::where('token', '=', $token)->where('deadline', '>=', Carbon::now()->toDateTimeString())->first();
         if ($token) {
             return true;
         }

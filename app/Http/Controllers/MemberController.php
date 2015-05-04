@@ -2,6 +2,7 @@
 
 use App\Group;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -101,7 +102,7 @@ class MemberController extends Controller
                 $user = Auth::user();
                 //更新資料
                 $user->lastlogin_ip = $request->getClientIp();
-                $user->lastlogin_at = date('Y-m-d H:i:s', time());
+                $user->lastlogin_at = Carbon::now()->toDateTimeString();
                 $user->save();
                 //移除重新設定密碼的驗證碼
                 DB::table('password_resets')->where('email', '=', $user->email)->delete();
@@ -148,7 +149,7 @@ class MemberController extends Controller
                 'nickname' => $nickname,
                 'confirm_code' => $code,
                 'register_ip' => $request->getClientIp(),
-                'register_at' => date('Y-m-d H:i:s', time())
+                'register_at' => Carbon::now()->toDateTimeString()
             ));
             //預設群組
             $group = Group::where('name', '=', 'default')->first();
@@ -174,7 +175,7 @@ class MemberController extends Controller
         if ($user->count()) {
             $user = $user->first();
             //更新資料
-            $user->confirm_at = date('Y-m-d H:i:s', time());
+            $user->confirm_at = Carbon::now()->toDateTimeString();
             $user->confirm_code = '';
 
             if ($user->save()) {
@@ -250,15 +251,15 @@ class MemberController extends Controller
                     //更新找回密碼的驗證碼
                     DB::table('password_resets')->where('email', '=', $user->email)->update([
                         'token' => $code,
-                        'updated_at' => date('Y-m-d H:i:s', time())
+                        'updated_at' => Carbon::now()->toDateTimeString()
                     ]);
                 } else {
                     //產生找回密碼的驗證碼
                     DB::table('password_resets')->insert([
                         'email' => $user->email,
                         'token' => $code,
-                        'created_at' => date('Y-m-d H:i:s', time()),
-                        'updated_at' => date('Y-m-d H:i:s', time())
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'updated_at' => Carbon::now()->toDateTimeString()
                     ]);
                 }
                 if ($user->save()) {

@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Token;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -91,7 +92,7 @@ class ApiController extends Controller
                     //找出用戶所有未過期token，並立刻過期
                     $activeTokens = $user->activeTokens();
                     foreach ($activeTokens as $activeToken) {
-                        $activeToken->deadline = date('Y-m-d H:i:s', time());
+                        $activeToken->deadline = Carbon::now()->toDateTimeString();
                         $activeToken->save();
                     }
                     //生成新token
@@ -99,7 +100,7 @@ class ApiController extends Controller
                     Token::create([
                         'user_id' => $user->id,
                         'token' => $token,
-                        'deadline' => date('Y-m-d H:i:s', time() + 6 * 60 * 60)
+                        'deadline' => (new Carbon('+6 hour'))->toDateTimeString()
                     ]);
                     $json = [
                         "status" => 0,
