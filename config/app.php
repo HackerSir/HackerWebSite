@@ -201,6 +201,7 @@ return [
         'Form' => 'Illuminate\Html\FormFacade',
         'Markdown' => 'AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra',
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Carbon' => 'Carbon\Carbon',
 
     ],
 
