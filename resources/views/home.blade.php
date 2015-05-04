@@ -130,7 +130,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="/course" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true" />&nbsp;更多課程</a>
+                <a href="{{ URL::route('course.index') }}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true" />&nbsp;更多課程</a>
             </div>
         </div>
         {{-- Activity section--}}
