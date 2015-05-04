@@ -53,7 +53,11 @@
                                 <div class="form-group has-feedback{{ ($errors->has('tag'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="tag">分類標籤</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('tag', implode(",", $course->tagNames()), ['id' => 'tag', 'placeholder' => '請輸入分類標籤（多個請以半形逗號分隔）', 'class' => 'form-control']) !!}
+                                        <select name="tag[]" id="tag" class="form-control" multiple>
+                                            @foreach(App\Course::existingTags() as $tag)
+                                                <option value="{{ $tag->name }}" @if(in_array($tag->name, $course->tagNames())) selected @endif>{{ $tag->name }}</option>
+                                            @endforeach
+                                        </select>
                                         @if($errors->has('tag'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('tag') }}</span>@endif
                                     </div>
@@ -143,4 +147,11 @@
             });
         }
     })
+
+    $('#tag').select2({
+        placeholder: "請輸入分類標籤（多個請以半形逗號分隔）",
+        multiple: true,
+        tags: true,
+        tokenSeparators: [',', ' ']
+    });
 @endsection

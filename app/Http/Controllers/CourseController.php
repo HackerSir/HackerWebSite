@@ -117,7 +117,14 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
         if ($course) {
-            return view('course.edit')->with('course', $course);
+            $existingTags = Course::existingTags();
+            $tags = [];
+            foreach ($existingTags as $tag) {
+                $tags[] = $tag->name;
+            }
+            $tagsString= "['" . implode("','", $tags) . "']";
+
+            return view('course.edit')->with('course', $course)->with('tags',$tags)->with('tagsString',$tagsString);
         }
         return Redirect::route('course.index')
             ->with('warning', '課程不存在');

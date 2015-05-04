@@ -16,6 +16,8 @@
         {!! HTML::style('css/stylesheet.css'); !!}
         {!! HTML::style('css/bootstrap-datetimepicker.css'); !!}
         {!! HTML::style('css/tipped/tipped.css'); !!}
+        {!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css'); !!}
+        {!! HTML::style('css/select2-bootstrap.min.css'); !!}
         <style type="text/css">
             @yield('css')
         </style>
@@ -46,6 +48,7 @@
         {!! HTML::script('js/bootstrap-datetimepicker.js'); !!}
         {!! HTML::script('js/bootstrap-notify.min.js'); !!}
         {!! HTML::script('js/tipped/tipped.js'); !!}
+        {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js'); !!}
         @if(App::environment('production'))
             {!! HTML::script('js/analyticstracking.js'); !!}
         @endif
