@@ -130,13 +130,17 @@ class ApiController extends Controller
     public function anyListCards()
     {
         $cards = Card::whereNotIn('card_number', [''])->get();
+        $timestamp = Card::whereNotIn('card_number', [''])->max('updated_at');
         $data = [];
-        foreach ($cards as $card) {
-            $data[$card->nid] = $card->card_number;
+        if (!Input::get('timeOnly')) {
+            foreach ($cards as $card) {
+                $data[$card->nid] = $card->card_number;
+            }
         }
         $json = [
             "status" => 0,
             "message" => "Success",
+            "timestamp" => $timestamp,
             "data" => $data
         ];
         return Response::json($json);
