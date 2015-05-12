@@ -18,7 +18,7 @@ class Course extends Model
      *
      * @var array
      */
-    protected $fillable = ['time', 'subject', 'lecturer', 'location', 'info', 'link'];
+    protected $fillable = ['time', 'subject', 'description', 'lecturer', 'location', 'info', 'link'];
 
     /**
      * The attributes excluded from the model's JSON form.

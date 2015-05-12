@@ -59,6 +59,7 @@ class CourseController extends Controller
         $validator = Validator::make($request->all(),
             array(
                 'subject' => 'required|max:100',
+                'description' => 'max:100',
                 'lecturer' => 'max:100',
                 'time' => 'required|date',
                 'location' => 'max:20',
@@ -72,6 +73,7 @@ class CourseController extends Controller
         } else {
             $course = Course::create(array(
                 'subject' => $request->get('subject'),
+                'description' => $request->get('description'),
                 'lecturer' => $request->get('lecturer'),
                 'time' => $request->get('time'),
                 'location' => $request->get('location')
@@ -122,9 +124,9 @@ class CourseController extends Controller
             foreach ($existingTags as $tag) {
                 $tags[] = $tag->name;
             }
-            $tagsString= "['" . implode("','", $tags) . "']";
+            $tagsString = "['" . implode("','", $tags) . "']";
 
-            return view('course.edit')->with('course', $course)->with('tags',$tags)->with('tagsString',$tagsString);
+            return view('course.edit')->with('course', $course)->with('tags', $tags)->with('tagsString', $tagsString);
         }
         return Redirect::route('course.index')
             ->with('warning', '課程不存在');
@@ -148,6 +150,7 @@ class CourseController extends Controller
         $validator = Validator::make($request->all(),
             array(
                 'subject' => 'required|max:100',
+                'description' => 'max:100',
                 'lecturer' => 'max:100',
                 'time' => 'required|date',
                 'location' => 'max:20',
@@ -162,6 +165,7 @@ class CourseController extends Controller
                 ->withInput();
         } else {
             $course->subject = $request->get('subject');
+            $course->description = $request->get('description');
             $course->lecturer = $request->get('lecturer');
             $course->time = $request->get('time');
             $course->location = $request->get('location');

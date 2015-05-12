@@ -46,8 +46,14 @@
                             <tbody>
                             @foreach($courseList as $courseItem)
                                 <tr>
-                                    <td>@foreach($courseItem->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach
-                                        {!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}</td>
+                                    <td>
+                                        @foreach($courseItem->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach
+                                        {!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}
+                                        @if(!empty($courseItem->description))
+                                            <br />
+                                            >>> {{ $courseItem->description }}
+                                        @endif
+                                    </td>
                                     <td class="text-right">
                                         @if(count($courseItem->signins))
                                             @if($courseItem->check(Auth::user()))

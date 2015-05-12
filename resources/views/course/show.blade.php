@@ -20,6 +20,10 @@
                                         <td>{{ $course->subject }}</td>
                                     </tr>
                                     <tr>
+                                        <td class="col-md-2">課程簡介：</td>
+                                        <td>{{ $course->description }}</td>
+                                    </tr>
+                                    <tr>
                                         <td>課程講師：</td>
                                         <td>
                                             @if(App\User::find($course->lecturer))
