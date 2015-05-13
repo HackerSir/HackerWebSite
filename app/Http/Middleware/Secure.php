@@ -45,13 +45,6 @@ class Secure implements Middleware
                         ->with('global', Session::get('global'))
                         ->with('warning', Session::get('warning'));
                 }
-            } else {
-                //強制http
-                if ($request->secure()) {
-                    return redirect()->to($request->getRequestUri(), 302, array(), false)
-                        ->with('global', Session::get('global'))
-                        ->with('warning', Session::get('warning'));
-                }
             }
         }
         return $next($request);
