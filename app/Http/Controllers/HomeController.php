@@ -1,6 +1,13 @@
 <?php namespace App\Http\Controllers;
 
-class HomeController extends Controller {
+use App\Course;
+use Carbon\Carbon;
+use Doctrine\Common\Collections\ArrayCollection;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
+
+class HomeController extends Controller
+{
 
     /*
     |--------------------------------------------------------------------------
@@ -27,9 +34,37 @@ class HomeController extends Controller {
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        //找出下一次上課時間
+        $nextCourseTime = Course::where('time', '>=', Carbon::now()->toDateTimeString())->first()->time;
+        if ($nextCourseTime) {
+            //找出前後最多五筆課程資料
+            $prev5CourseList = Course::where('time', '<', $nextCourseTime)->orderBy('time', 'desc')->take(5)->get();
+            $next5CourseList = Course::where('time', '>=', $nextCourseTime)->orderBy('time', 'asc')->take(5)->get();
+            //合併為array
+            $courseArray = array_merge($prev5CourseList->toArray(), $next5CourseList->toArray());
+            //根據時間排序
+            usort($courseArray, function ($a, $b) {
+                return $a['time'] > $b['time'];
+            });
+        } else {
+            //找出最新十筆課程資料
+            $courseArray = Course::orderBy('time', 'desc')->take(5)->get()->toArray();
+            //根據時間排序
+            usort($courseArray, function ($a, $b) {
+                return $a['time'] > $b['time'];
+            });
+        }
+        /*
+        if ($request->has('tag')) {
+            $tag = $request->get('tag');
+            $courseList = Course::withAllTags($tag)->orderBy('time', 'desc')->paginate(20);
+        } else {
+            $courseList = Course::orderBy('time', 'desc')->paginate(20);
+        }*/
+
+        return view('home')->with('courseArray', $courseArray)->with('nextCourseTime', $nextCourseTime);
     }
 
 }
