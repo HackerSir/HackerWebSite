@@ -3,7 +3,7 @@
 use App\Course;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Request;
 
 class HomeController extends Controller
@@ -55,6 +55,12 @@ class HomeController extends Controller
             usort($courseArray, function ($a, $b) {
                 return $a['time'] > $b['time'];
             });
+
+        }
+        //建立Collection
+        $courseList = new Collection();
+        foreach ($courseArray as $courseItem) {
+            $courseList->add(Course::find($courseItem['id']));
         }
         /*
         if ($request->has('tag')) {
@@ -64,7 +70,7 @@ class HomeController extends Controller
             $courseList = Course::orderBy('time', 'desc')->paginate(20);
         }*/
 
-        return view('home')->with('courseArray', $courseArray)->with('nextCourseTime', $nextCourseTime);
+        return view('home')->with('courseList', $courseList)->with('nextCourseTime', $nextCourseTime);
     }
 
 }

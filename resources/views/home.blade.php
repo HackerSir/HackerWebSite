@@ -58,16 +58,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($courseArray as $course)
-                        <tr class="@if($course['time'] < $nextCourseTime) success @elseif($course['time'] > $nextCourseTime) info @else warning @endif classData">
-                            <td>{{ (new Carbon\Carbon($course['time']))->formatLocalized('%m/%d (%a)') }}</td>
-                            <td>{{ $course['location'] }}</td>
-                            <td><span class="tg-left">{{ $course['subject'] }}<br />&gt;&gt;&gt;{{ $course['description'] }}</span></td>
-                            <td>{{ $course['lecturer'] }}</td>
+                    @foreach($courseList as $course)
+                        <tr class="@if($course->time < $nextCourseTime) success @elseif($course->time > $nextCourseTime) info @else warning @endif classData">
+                            <td>{{ (new Carbon\Carbon($course->time))->formatLocalized('%m/%d (%a)') }}</td>
+                            <td>{{ $course->location }}</td>
+                            <td><span class="tg-left">{{ $course->subject }}<br />&gt;&gt;&gt;{{ $course->description }}</span></td>
                             <td>
-                                @if($course['time'] < $nextCourseTime)
+                                @if(App\User::find($course->lecturer))
+                                    {!! link_to_route('member.profile', App\User::find($course->lecturer)->nickname, App\User::find($course->lecturer)->id) !!}
+                                @else
+                                    {{ $course->lecturer }}
+                                @endif
+                            </td>
+                            <td>
+                                @if($course->time < $nextCourseTime)
                                     Finished
-                                @elseif($course['time'] > $nextCourseTime)
+                                @elseif($course->time > $nextCourseTime)
                                     Coming Soon
                                 @else
                                     Next
