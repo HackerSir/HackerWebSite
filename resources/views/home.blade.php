@@ -67,8 +67,10 @@
                             <td>
                                 @if(App\User::find($course->lecturer))
                                     {!! link_to_route('member.profile', App\User::find($course->lecturer)->nickname, App\User::find($course->lecturer)->id) !!}
-                                @else
+                                @elseif($course->lecturer !== '')
                                     {{ $course->lecturer }}
+                                @else
+                                    ？
                                 @endif
                             </td>
                             <td>
