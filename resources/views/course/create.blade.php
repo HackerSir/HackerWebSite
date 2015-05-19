@@ -25,7 +25,7 @@
                                 <div class="form-group has-feedback{{ ($errors->has('description'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="description">課程簡介</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('description', null, ['id' => 'description', 'placeholder' => '請輸入課程簡介', 'class' => 'form-control', 'required']) !!}
+                                        {!! Form::text('description', null, ['id' => 'description', 'placeholder' => '請輸入課程簡介', 'class' => 'form-control']) !!}
                                         @if($errors->has('description'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('description') }}</span>@endif
                                     </div>
