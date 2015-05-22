@@ -52,7 +52,7 @@ class HomeController extends Controller
             });
         } else {
             //找出最新十筆課程資料
-            $courseArray = Course::orderBy('time', 'desc')->take(5)->get()->toArray();
+            $courseArray = Course::orderBy('time', 'desc')->take(10)->get()->toArray();
             //根據時間排序
             usort($courseArray, function ($a, $b) {
                 return $a['time'] > $b['time'];
