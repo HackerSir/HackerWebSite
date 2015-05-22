@@ -76,7 +76,7 @@ class HomeController extends Controller
                 $nextCourseTime = $nextCourse->time;
             }
         }
-
+        $courseList = new Collection();
         return view('home')->with('courseList', $courseList)->with('nextCourseTime', $nextCourseTime);
     }
 

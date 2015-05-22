@@ -75,7 +75,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($courseList as $course)
+                    @forelse($courseList as $course)
                         <tr class="@if($course->time < $nextCourseTime) success @elseif($course->time > $nextCourseTime) info @else warning @endif classData">
                             <td>{{ (new Carbon\Carbon($course->time))->formatLocalized('%m/%d (%a)') }}</td>
                             <td>{{ $course->location }}</td>
@@ -100,7 +100,11 @@
                                 @endif
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5">暫無課程</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 <a href="{{ URL::route('course.index') }}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true" />&nbsp;更多課程</a>
