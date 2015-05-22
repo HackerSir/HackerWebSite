@@ -4,6 +4,28 @@
     課程清單
 @endsection
 
+@section('head')
+    {!! HTML::style('css/no-more-table.css'); !!}
+    <style type="text/css">
+        @media
+        only screen and (max-width: 479px) {
+            .container {
+                padding:0;
+                margin:0;
+            }
+
+            /*
+            Label the data
+            */
+            .noMoreTable td:nth-of-type(1):before { content: "課程"; }
+            .noMoreTable td:nth-of-type(2):before { content: "簽到資訊"; }
+            .noMoreTable td:nth-of-type(3):before { content: "講師"; }
+            .noMoreTable td:nth-of-type(4):before { content: "時間"; }
+            .noMoreTable td:nth-of-type(5):before { content: "地點"; }
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -33,7 +55,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <table class="table table-hover">
+                        <table class="table table-hover noMoreTable">
                             <thead>
                             <tr>
                                 <th class="col-md-5">課程</th>
@@ -45,7 +67,7 @@
                             </thead>
                             <tbody>
                             @foreach($courseList as $courseItem)
-                                <tr>
+                                <tr class="classData">
                                     <td>
                                         @foreach($courseItem->tagNames() as $tag)<span class="label label-info">{{ $tag }}</span> @endforeach
                                         {!! HTML::linkRoute('course.show', $courseItem->subject, $courseItem->id, null) !!}
@@ -54,7 +76,7 @@
                                             >>> {{ $courseItem->description }}
                                         @endif
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-right" style="min-height: 37px;">
                                         @if(count($courseItem->signins))
                                             @if($courseItem->check(Auth::user()))
                                                 <i class="glyphicon glyphicon-ok" title="已簽到"></i>

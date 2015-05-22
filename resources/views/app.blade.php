@@ -22,6 +22,8 @@
             @yield('css')
         </style>
 
+        @yield('head')
+
         <!-- Fonts -->
         {!! HTML::style('//fonts.googleapis.com/css?family=Roboto:400,300'); !!}
 

@@ -1,5 +1,22 @@
 @extends('app')
 
+@section('head')
+    {!! HTML::style('css/no-more-table.css'); !!}
+    <style type="text/css">
+        @media
+        only screen and (max-width: 479px) {
+            /*
+            Label the data
+            */
+            .noMoreTable td:nth-of-type(1):before { content: "日期"; }
+            .noMoreTable td:nth-of-type(2):before { content: "地點"; }
+            .noMoreTable td:nth-of-type(3):before { content: "課程名稱"; }
+            .noMoreTable td:nth-of-type(4):before { content: "講師"; }
+            .noMoreTable td:nth-of-type(5):before { content: "狀態"; }
+        }
+    </style>
+@endsection
+
 @section('content')
     <div id="fullpage">
         {{-- Welcome section--}}
@@ -107,6 +124,7 @@
 @endsection
 
 @section('css')
+
     body {
         padding-top: 0px;
     }
@@ -153,57 +171,6 @@
         text-align:left
     }
 
-    {{-- 當表格太窄時，會切換顯示模式，改成兩行，左邊是標題，右邊是內容 --}}
-    @media
-    only screen and (max-width: 479px) {
-
-        /* Force table to not be like tables anymore */
-        .noMoreTable table, thead, tbody, th, td, tr.classData {
-            display: block;
-        }
-
-        /* Hide table headers */
-        .noMoreTable thead tr.classData {
-            display: none;
-        }
-
-        .noMoreTable tr.classData { border: 1px solid #ccc; }
-
-        .noMoreTable tr:not(.classData) {
-            display: none;
-        }
-
-        .noMoreTable td {
-            /* Behave  like a "row" */
-            border: none;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            padding-left: 40% !important;
-            white-space: normal;
-            text-align:left;
-        }
-
-        .noMoreTable td:before {
-            /* Now like a table header */
-            position: absolute;
-            /* Top/left values mimic padding */
-            top: 6px;
-            left: 6px;
-            width: 45%;
-            padding-right: 10px;
-            white-space: nowrap;
-            text-align:left;
-        }
-
-        /*
-        Label the data
-        */
-        .noMoreTable td:nth-of-type(1):before { content: "日期"; }
-        .noMoreTable td:nth-of-type(2):before { content: "地點"; }
-        .noMoreTable td:nth-of-type(3):before { content: "課程名稱"; }
-        .noMoreTable td:nth-of-type(4):before { content: "講師"; }
-        .noMoreTable td:nth-of-type(5):before { content: "狀態"; }
-    }
 @endsection
 
 @section('script')
