@@ -55,7 +55,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <table class="table table-hover noMoreTable">
+                        <table class="table table-hover noMoreTable" style="margin-top: 5px">
                             <thead>
                             <tr>
                                 <th class="col-md-5">課程</th>
