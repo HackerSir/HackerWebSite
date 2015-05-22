@@ -63,7 +63,7 @@
                             <td>{{ (new Carbon\Carbon($course->time))->formatLocalized('%m/%d (%a)') }}</td>
                             <td>{{ $course->location }}</td>
                             {{-- TODO: 髒髒 code, 去除課程名稱前的"請問您今天要來點Python嗎？"字樣，因為表格上方有標示，也比較不占版面 --}}
-                            <td><span class="tg-left">{{ explode('？', $course->subject)[1] }}<br />@if(!empty($course->description)) &gt;&gt;&gt;{{ $course->description }} @endif</span></td>
+                            <td><span class="tg-left">{{ (str_contains($course->subject, '？'))?explode('？', $course->subject)[1]:$course->subject }}<br />@if(!empty($course->description)) &gt;&gt;&gt;{{ $course->description }} @endif</span></td>
                             <td>
                                 @if(App\User::find($course->lecturer))
                                     {!! link_to_route('member.profile', App\User::find($course->lecturer)->nickname, App\User::find($course->lecturer)->id) !!}

@@ -37,8 +37,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         //找出下一次上課時間
-        $nextCourseTime = Course::where('time', '>=', Carbon::now()->toDateTimeString())->first()->time;
-        if ($nextCourseTime) {
+        $nextCourse = Course::where('time', '>=', Carbon::now()->toDateTimeString())->first();
+        $nextCourseTime = Carbon::now()->toDateTimeString();
+        if ($nextCourse) {
+            $nextCourseTime = $nextCourse->time;
             //找出前後最多五筆課程資料
             $prev5CourseList = Course::where('time', '<', $nextCourseTime)->orderBy('time', 'desc')->take(5)->get();
             $next5CourseList = Course::where('time', '>=', $nextCourseTime)->orderBy('time', 'asc')->take(5)->get();
