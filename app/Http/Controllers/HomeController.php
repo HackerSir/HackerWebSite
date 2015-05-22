@@ -46,19 +46,15 @@ class HomeController extends Controller
             $next5CourseList = Course::where('time', '>=', $nextCourseTime)->orderBy('time', 'asc')->take(5)->get();
             //合併為array
             $courseArray = array_merge($prev5CourseList->toArray(), $next5CourseList->toArray());
-            //根據時間排序
-            usort($courseArray, function ($a, $b) {
-                return $a['time'] > $b['time'];
-            });
         } else {
             //找出最新十筆課程資料
             $courseArray = Course::orderBy('time', 'desc')->take(10)->get()->toArray();
-            //根據時間排序
-            usort($courseArray, function ($a, $b) {
-                return $a['time'] > $b['time'];
-            });
 
         }
+        //根據時間排序
+        usort($courseArray, function ($a, $b) {
+            return $a['time'] > $b['time'];
+        });
         //建立Collection
         $courseList = new Collection();
         foreach ($courseArray as $courseItem) {
