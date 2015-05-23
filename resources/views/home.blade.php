@@ -203,22 +203,16 @@
                     這樣在空間不足時，還有個卷軸可用
                     雖然應該會很難操作。--}}
         {{-- 限制課程清單只有 section3 高度的 50% --}}
-        var html_hide_tr = '<tr class="info"><td colspan="5"><span class="glyphicon glyphicon-option-vertical" aria-hidden="true" /></td></tr>';
         var targetTableHeight = ($( window ).width() >= 768) ? $( window ).height() * 0.5 : $( window ).height() * 1.5;
         if ($('#classList').height() > targetTableHeight) {
             var trList = $('#classList tbody tr');
-            var hasNone = false;
             for (var i = 0; i < trList.length; i++) {
                 {{-- jQuery 怪怪的，不能用 hasClass ... --}}
                 {{-- //TODO:: 未來可能會有 Bug --}}
                 if (trList[i].className.indexOf('success') != -1) {
                     trList[i].style.display = 'none';
-                    hasNone = true;
                     if ($('#classList').height() <= targetTableHeight) break;
                 }
-            }
-            if (hasNone) {
-                $('#classList tbody').prepend(html_hide_tr);
             }
         }
 
@@ -228,12 +222,8 @@
             for (var i = trList.length - 1; i >= 0 ; i--) {
                 if (trList[i].className.indexOf('info') != -1) {
                     trList[i].style.display = 'none';
-                    hasNone = true;
                     if ($('#classList').height() <= targetTableHeight) break;
                 }
-            }
-            if (hasNone) {
-                $('#classList tbody').append(html_hide_tr);
             }
         }
     });
