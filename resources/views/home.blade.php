@@ -91,7 +91,9 @@
                                 @endif
                             </td>
                             <td>
-                                @if($course->time < $nextCourseTime)
+                                @if((new Carbon($course->time))->startOfDay()->diffInDays(Carbon::now()->startOfDay())==0)
+                                    Today
+                                @elseif($course->time < $nextCourseTime)
                                     Finished
                                 @elseif($course->time > $nextCourseTime)
                                     Coming Soon
