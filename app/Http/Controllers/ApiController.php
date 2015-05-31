@@ -5,6 +5,7 @@ use App\Course;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Signin;
 use App\Token;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -387,10 +388,70 @@ class ApiController extends Controller
     }
 
     /*
+     * 活動簽到
+     */
+    public function anyCheckIn()
+    {
+        $eid = Input::get('eid');
+        $attendee = Input::get('attendee');
+        if (empty($eid) || empty($attendee) || !is_array($attendee)) {
+            $json = [
+                "status" => 2,
+                "message" => "Arguments Error"
+            ];
+        } else {
+            //找出活動資料
+            $course = Course::find($eid);
+            if ($course) {
+                $courseId = $course->id;
+                //逐一簽到
+                foreach ($attendee as $data) {
+                    //若無NID則跳過
+                    if (empty($data['nid'])) {
+                        continue;
+                    }
+                    //取得卡片
+                    $card = Card::where('nid', '=', $data['nid'])->first();
+                    //無卡片資料者跳過
+                    if (!$card) {
+                        continue;
+                    }
+                    //取得時間
+                    try {
+                        $time = Carbon::createFromTimestamp($data['time']);
+                    } catch (\Exception $e) {
+                        //發生任何錯誤時，改抓取當前時間
+                        $time = Carbon::now();
+                    }
+                    //檢查沒有在相同活動簽到過
+                    if (Signin::where('course_id', '=', $courseId)->where('card_id', '=', $card->id)->count() == 0) {
+                        //進行簽到
+                        $signin = Signin::create(array(
+                            'time' => $time,
+                            'card_id' => $card->id,
+                            'course_id' => $courseId
+                        ));
+                    }
+
+                }
+                $json = [
+                    "status" => 0,
+                    "message" => "Success"
+                ];
+            } else {
+                $json = [
+                    "status" => 5,
+                    "message" => "Data Not Found"
+                ];
+            }
+        }
+        return Response::json($json);
+    }
+
+    /*
      * 所有沒處理到的情況
      */
-    public
-    function missingMethod($parameters = array())
+    public function missingMethod($parameters = array())
     {
         abort(400);
     }
