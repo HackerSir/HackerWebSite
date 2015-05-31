@@ -316,7 +316,7 @@ class ApiController extends Controller
     }
 
     /*
-     * 取的活動資料
+     * 取得活動資料
      */
     public function anyGetEventData()
     {
