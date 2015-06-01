@@ -83,7 +83,7 @@ Route::controller('export', 'ExportController', array(
 
 //投票系統
 Route::controller('voting', 'VotingController', array(
-    'getVote' => 'voting.vote',
+    'getIndex' => 'voting.vote',
     'getBilling' => 'voting.billing',
 ));
 Route::resource('vote-event', 'VoteEventController');

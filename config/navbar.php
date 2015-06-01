@@ -48,6 +48,11 @@ return array(
             '相關連結' => array(
                 'Hackpad' => 'https://hackersir.hackpad.com/',
                 'Google Drive' => 'https://drive.google.com/open?id=0B9v9i5Qg6TFgfklzVFQ1V1RscEd5dHN6VEVOUlNNdUNEeTQtTk0yeUxlVXZPOW5ZNlBpbWs&authuser=0'
+            ),
+            '投票系統' => array(
+                '投票活動' => 'vote-event',
+                '投票選項' => 'vote-selection',
+                '投票頁面' => 'voting',
             )
         )
     ),
