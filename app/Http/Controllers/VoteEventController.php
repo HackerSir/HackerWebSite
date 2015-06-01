@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\VoteEvent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -75,11 +76,24 @@ class VoteEventController extends Controller
             if (!isset($watcher) || $watcher == null) {
                 $watcher = Auth::user();
             }
+            //檢查時間
+            $open_time = ($request->has('open_time')) ? $request->get('open_time') : null;
+            $close_time = ($request->has('close_time')) ? $request->get('close_time') : null;
+            if ($close_time != null) {
+                if ($open_time == null) {
+                    $close_time = null;
+                } else {
+                    if ((new Carbon($open_time))->gte(new Carbon($close_time))) {
+                        $close_time = null;
+                    }
+                }
+            }
+
             $course = VoteEvent::create(array(
                 'subject' => $request->get('subject'),
                 'location' => $request->get('location'),
-                'open_time' => ($request->has('open_time')) ? $request->get('open_time') : null,
-                'close_time' => ($request->has('close_time')) ? $request->get('close_time') : null,
+                'open_time' => $open_time,
+                'close_time' => $close_time,
                 'creator' => Auth::user()->id,
                 'watcher' => $watcher->id,
                 'info' => $request->get('info'),
@@ -160,10 +174,22 @@ class VoteEventController extends Controller
             if (!isset($watcher) || $watcher == null) {
                 $watcher = Auth::user();
             }
+            //檢查時間
+            $open_time = ($request->has('open_time')) ? $request->get('open_time') : null;
+            $close_time = ($request->has('close_time')) ? $request->get('close_time') : null;
+            if ($close_time != null) {
+                if ($open_time == null) {
+                    $close_time = null;
+                } else {
+                    if ((new Carbon($open_time))->gte(new Carbon($close_time))) {
+                        $close_time = null;
+                    }
+                }
+            }
             $voteEvent->subject = $request->get('subject');
             $voteEvent->location = $request->get('location');
-            $voteEvent->open_time = ($request->has('open_time')) ? $request->get('open_time') : null;
-            $voteEvent->close_time = ($request->has('close_time')) ? $request->get('close_time') : null;
+            $voteEvent->open_time = $open_time;
+            $voteEvent->close_time = $close_time;
             $voteEvent->watcher = $watcher->id;
             $voteEvent->info = $request->get('info');
             $voteEvent->save();
