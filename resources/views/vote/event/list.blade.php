@@ -17,12 +17,13 @@
             /*
             Label the data
             */
-            .noMoreTable td:nth-of-type(1):before { content: "投票主題"; }
-            .noMoreTable td:nth-of-type(2):before { content: "開始時間"; }
-            .noMoreTable td:nth-of-type(3):before { content: "結束時間"; }
-            .noMoreTable td:nth-of-type(4):before { content: "地點"; }
-            .noMoreTable td:nth-of-type(5):before { content: "建立者"; }
-            .noMoreTable td:nth-of-type(6):before { content: "監票者"; }
+            .noMoreTable td:nth-of-type(1):before { content: "狀態"; }
+            .noMoreTable td:nth-of-type(2):before { content: "投票主題"; }
+            .noMoreTable td:nth-of-type(3):before { content: "開始時間"; }
+            .noMoreTable td:nth-of-type(4):before { content: "結束時間"; }
+            .noMoreTable td:nth-of-type(5):before { content: "地點"; }
+            .noMoreTable td:nth-of-type(6):before { content: "建立者"; }
+            .noMoreTable td:nth-of-type(7):before { content: "監票者"; }
         }
     </style>
 @endsection
@@ -41,7 +42,8 @@
                         <table class="table table-hover noMoreTable" style="margin-top: 5px">
                             <thead>
                             <tr>
-                                <th class="col-md-4">投票主題</th>
+                                <th class="col-md-1">狀態</th>
+                                <th class="col-md-3">投票主題</th>
                                 <th class="col-md-2">開始時間</th>
                                 <th class="col-md-2">結束時間</th>
                                 <th class="col-md-2">地點</th>
@@ -52,6 +54,15 @@
                             <tbody>
                             @foreach($voteEventList as $voteEventItem)
                                 <tr class="classData">
+                                    <td>
+                                        @if($voteEventItem->isEnded())
+                                            已結束
+                                        @elseif($voteEventItem->isStarted())
+                                            進行中
+                                        @else
+                                            未開始
+                                        @endif
+                                    </td>
                                     <td>
                                         {!! HTML::linkRoute('vote-event.show', $voteEventItem->subject, $voteEventItem->id, null) !!}
                                     </td>

@@ -24,6 +24,18 @@
                                         <td>{{ $voteEvent->location }}</td>
                                     </tr>
                                     <tr>
+                                        <td>狀態：</td>
+                                        <td>
+                                            @if($voteEvent->isEnded())
+                                                已結束
+                                            @elseif($voteEvent->isStarted())
+                                                進行中
+                                            @else
+                                                未開始
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>開始時間：</td>
                                         <td>{{ $voteEvent->open_time }}</td>
                                     </tr>
