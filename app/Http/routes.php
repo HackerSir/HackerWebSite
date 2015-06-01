@@ -81,6 +81,13 @@ Route::controller('export', 'ExportController', array(
     'getSigninList' => 'export.signin-list'
 ));
 
+//投票系統
+Route::post('voting/start/{vid}', 'VotingController@start');
+Route::post('voting/end/{vid}', 'VotingController@end');
+Route::get('voting/vote/{vid}', 'VotingController@vote');
+Route::get('voting/billing/{vid}', 'VotingController@billing');
+Route::resource('voting', 'VotingController');
+
 //未定義路由
 Route::get('{all}', array(
     'as' => 'not-found',
