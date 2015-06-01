@@ -18,8 +18,8 @@ class UpdateVoteSystemTable extends Migration
             $table->foreign('vote_selection_id')->references('id')->on('vote_selections')->onUpdate('cascade')->onDelete('cascade');
         });
         Schema::table('vote_events', function ($table) {
-            $table->foreign('creator')->references('id')->on('cards')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('watcher')->references('id')->on('cards')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('creator')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('watcher')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
         Schema::table('vote_selections', function ($table) {
             $table->foreign('vote_event_id')->references('id')->on('vote_events')->onUpdate('cascade')->onDelete('cascade');
