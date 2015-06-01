@@ -86,7 +86,8 @@ Route::post('voting/start/{vid}', 'VotingController@start');
 Route::post('voting/end/{vid}', 'VotingController@end');
 Route::get('voting/vote/{vid}', 'VotingController@vote');
 Route::get('voting/billing/{vid}', 'VotingController@billing');
-Route::resource('voting', 'VotingController');
+Route::resource('vote-event', 'VoteEventController');
+Route::resource('vote-selection', 'VoteSelectionController');
 
 //未定義路由
 Route::get('{all}', array(
