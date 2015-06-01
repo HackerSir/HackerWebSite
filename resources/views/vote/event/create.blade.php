@@ -67,6 +67,28 @@
                                         <span class="label label-primary">請直接輸入<span title="從成員清單進入該成員頁面時，網址最後面的數字。<br />你的UID為 {{ Auth::user()->id }}" style="color: #ffff00">數字UID</span></span>
                                     </div>
                                 </div>
+                                <div class="form-group has-feedback{{ ($errors->has('info'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="info">內容簡介</label>
+                                    <div class="col-md-9" role="tabpanel">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab" id="tab_edit">編輯</a></li>
+                                            <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab" id="tab_preview">預覽</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="edit">
+                                                {!! Form::textarea('info', null, ['id' => 'info', 'placeholder' => '請輸入內容簡介', 'class' => 'form-control']) !!}
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="preview">
+                                                Loading...
+                                            </div>
+                                        </div>
+                                        @if($errors->has('info'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('info') }}</span>@endif
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-md-9 col-md-offset-2">
                                         {!! Form::submit('新增投票活動', ['class' => 'btn btn-primary']) !!}
@@ -91,4 +113,38 @@
             format: 'YYYY/MM/DD HH:mm:ss'
         });
     });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        // e.target -> newly activated tab
+        if(e.target.id == 'tab_preview'){
+            $("#preview").html("Loading...");
+
+            var URLs = "{{ URL::route('markdown.preview') }}"
+            var val = $('#edit textarea').val();
+
+            $.ajax({
+                url: URLs,
+                data: val,
+                headers: {
+                    'X-CSRF-Token': "{{ Session::token() }}" ,
+                    "Accept": "application/json"
+                },
+                type:"POST",
+                dataType: "text",
+
+                success: function(data){
+                    if(data){
+                        $("#preview").html(data);
+                    }else{
+                        alert("error");
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+        }
+    })
 @endsection
+

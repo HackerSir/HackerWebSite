@@ -59,7 +59,8 @@ class VoteEventController extends Controller
                 'location' => 'max:20',
                 'open_time' => 'date',
                 'close_time' => 'date',
-                'watcher' => 'integer'
+                'watcher' => 'integer',
+                'info' => 'max:65535'
             )
         );
 
@@ -81,6 +82,7 @@ class VoteEventController extends Controller
                 'close_time' => ($request->has('close_time')) ? $request->get('close_time') : null,
                 'creator' => Auth::user()->id,
                 'watcher' => $watcher->id,
+                'info' => $request->get('info'),
             ));
 
             return Redirect::route('vote-event.show', $course->id)
