@@ -3,7 +3,12 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+use App\VoteEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class VoteEventController extends Controller
 {
@@ -11,7 +16,12 @@ class VoteEventController extends Controller
     public function __construct()
     {
         //限工作人員
-        $this->middleware('staff');
+        $this->middleware('staff', [
+            'except' => [
+                'index',
+                'show'
+            ]
+        ]);
     }
 
     /**
@@ -21,7 +31,8 @@ class VoteEventController extends Controller
      */
     public function index()
     {
-        return "index()";
+        $voteEventList = VoteEvent::orderBy('id', 'desc')->paginate(20);
+        return view('vote.event.list')->with('voteEventList', $voteEventList);
     }
 
     /**
@@ -31,7 +42,7 @@ class VoteEventController extends Controller
      */
     public function create()
     {
-        return "create()";
+        return view('vote.event.create');
     }
 
     /**
@@ -42,7 +53,39 @@ class VoteEventController extends Controller
      */
     public function store(Request $request)
     {
-        return "store()";
+        $validator = Validator::make($request->all(),
+            array(
+                'subject' => 'required|max:100',
+                'location' => 'max:20',
+                'open_time' => 'date',
+                'close_time' => 'date',
+                'watcher' => 'integer'
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('vote-event.create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            if ($request->has('watcher')) {
+                $watcher = User::find($request->get('watcher'))->first();
+            }
+            if (!isset($watcher) || $watcher == null) {
+                $watcher = Auth::user();
+            }
+            $course = VoteEvent::create(array(
+                'subject' => $request->get('subject'),
+                'location' => $request->get('location'),
+                'open_time' => ($request->has('open_time')) ? $request->get('open_time') : null,
+                'close_time' => ($request->has('close_time')) ? $request->get('close_time') : null,
+                'creator' => Auth::user()->id,
+                'watcher' => $watcher->id,
+            ));
+
+            return Redirect::route('vote-event.show', $course->id)
+                ->with('global', '投票活動已建立');
+        }
     }
 
     /**
@@ -53,7 +96,13 @@ class VoteEventController extends Controller
      */
     public function show($id)
     {
-        return "show($id)";
+        $user = Auth::user();
+        $voteEvent = VoteEvent::find($id);
+        if ($voteEvent) {
+            return view('vote.event.show')->with('user', $user)->with('voteEvent', $voteEvent);
+        }
+        return Redirect::route('vote-event.index')
+            ->with('warning', '投票活動不存在');
     }
 
     /**
@@ -64,7 +113,12 @@ class VoteEventController extends Controller
      */
     public function edit($id)
     {
-        return "edit($id)";
+        $voteEvent = VoteEvent::find($id);
+        if ($voteEvent) {
+            return view('vote.event.edit')->with('voteEvent', $voteEvent);
+        }
+        return Redirect::route('vote-event.index')
+            ->with('warning', '投票活動不存在');
     }
 
     /**
@@ -76,7 +130,45 @@ class VoteEventController extends Controller
      */
     public function update($id, Request $request)
     {
-        return "update($id)";
+        $voteEvent = VoteEvent::find($id);
+        if (!$voteEvent) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票活動不存在');
+        }
+
+        $validator = Validator::make($request->all(),
+            array(
+                'subject' => 'required|max:100',
+                'location' => 'max:20',
+                'open_time' => 'date',
+                'close_time' => 'date',
+                'watcher' => 'integer',
+                'info' => 'max:65535'
+            )
+        );
+
+        if ($validator->fails()) {
+            return Redirect::route('vote-event.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            if ($request->has('watcher')) {
+                $watcher = User::find($request->get('watcher'))->first();
+            }
+            if (!isset($watcher) || $watcher == null) {
+                $watcher = Auth::user();
+            }
+            $voteEvent->subject = $request->get('subject');
+            $voteEvent->location = $request->get('location');
+            $voteEvent->open_time = ($request->has('open_time')) ? $request->get('open_time') : null;
+            $voteEvent->close_time = ($request->has('close_time')) ? $request->get('close_time') : null;
+            $voteEvent->watcher = $watcher->id;
+            $voteEvent->info = $request->get('info');
+            $voteEvent->save();
+
+            return Redirect::route('vote-event.show', $id)
+                ->with('global', '投票活動已更新');
+        }
     }
 
     /**
@@ -87,7 +179,11 @@ class VoteEventController extends Controller
      */
     public function destroy($id)
     {
-        return "destroy($id)";
+        $voteEvent = VoteEvent::find($id);
+        //移除課程
+        $voteEvent->delete();
+        return Redirect::route('vote-event.index')
+            ->with('global', '投票活動已刪除');
     }
 
 }

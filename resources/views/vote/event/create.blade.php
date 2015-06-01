@@ -1,0 +1,94 @@
+@extends('app')
+
+@section('title')
+    新增投票活動
+@endsection
+
+@section('content')
+    <div class="container" style="min-height: 600px">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">新增投票活動</div>
+                    {{-- Panel body --}}
+                    <div class="panel-body">
+                        <div class="row">
+                            {!! Form::open(['route' => 'vote-event.store', 'class' => 'form-horizontal']) !!}
+                                <div class="form-group has-feedback{{ ($errors->has('subject'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="subject">投票主題</label>
+                                    <div class="col-md-9">
+                                        {!! Form::text('subject', null, ['id' => 'subject', 'placeholder' => '請輸入投票主題', 'class' => 'form-control', 'required']) !!}
+                                        @if($errors->has('subject'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('subject') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('location'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="location">投票地點</label>
+                                    <div class="col-md-9">
+                                        {!! Form::text('location', null, ['id' => 'location', 'placeholder' => '請輸入投票地點', 'class' => 'form-control']) !!}
+                                        @if($errors->has('location'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('location') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('open_time'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="open_time">開始時間</label>
+                                    <div class="col-md-9">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            {!! Form::text('open_time', null, ['id' => 'open_time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control']) !!}
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @if($errors->has('open_time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('open_time') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('close_time'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="close_time">結束時間</label>
+                                    <div class="col-md-9">
+                                        <div class='input-group date' id='datetimepicker2'>
+                                            {!! Form::text('close_time', null, ['id' => 'close_time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control']) !!}
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        @if($errors->has('close_time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('close_time') }}</span>@endif
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="creator">建立者</label>
+                                    <div class="col-md-9">
+                                        {!! link_to_route('member.profile', Auth::user()->nickname, Auth::user()->id) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback{{ ($errors->has('watcher'))?' has-error':'' }}">
+                                    <label class="control-label col-md-2" for="watcher">監票者</label>
+                                    <div class="col-md-9">
+                                        {!! Form::text('watcher', null, ['id' => 'watcher', 'placeholder' => '請輸入監票者UID，不輸入則為自己', 'class' => 'form-control']) !!}
+                                        @if($errors->has('watcher'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('watcher') }}</span><br />@endif
+                                        <span class="label label-primary">請直接輸入<span title="從成員清單進入該成員頁面時，網址最後面的數字。<br />你的UID為 {{ Auth::user()->id }}" style="color: #ffff00">數字UID</span></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-9 col-md-offset-2">
+                                        {!! Form::submit('新增投票活動', ['class' => 'btn btn-primary']) !!}
+                                        {!! HTML::linkRoute('vote-event.index', '返回', [], ['class' => 'btn btn-default']) !!}
+                                    </div>
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('javascript')
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY/MM/DD HH:mm:ss'
+        });
+        $('#datetimepicker2').datetimepicker({
+            format: 'YYYY/MM/DD HH:mm:ss'
+        });
+    });
+@endsection
