@@ -8,15 +8,27 @@ use Illuminate\Http\Request;
 class VotingController extends Controller
 {
     //投票頁面
-    public function vote($id, Request $request)
+    public function getVote($id, Request $request)
     {
-        return 'vote($id, Request $request)';
+        return 'getVote($id, Request $request)';
     }
 
     //開票頁面
-    public function billing($id)
+    public function getBilling($id)
     {
-        return 'billing($id)';
+        return 'getBilling($id)';
+    }
+
+    //開始投票
+    public function postStart($id)
+    {
+        return 'postStart($id)';
+    }
+
+    //結束投票
+    public function postEnd($id)
+    {
+        return 'postEnd($id)';
     }
 
 }

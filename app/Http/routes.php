@@ -82,10 +82,10 @@ Route::controller('export', 'ExportController', array(
 ));
 
 //投票系統
-Route::post('voting/start/{vid}', 'VotingController@start');
-Route::post('voting/end/{vid}', 'VotingController@end');
-Route::get('voting/vote/{vid}', 'VotingController@vote');
-Route::get('voting/billing/{vid}', 'VotingController@billing');
+Route::controller('voting', 'VotingController', array(
+    'getVote' => 'voting.vote',
+    'getBilling' => 'voting.billing',
+));
 Route::resource('vote-event', 'VoteEventController');
 Route::resource('vote-selection', 'VoteSelectionController');
 
