@@ -94,6 +94,7 @@ Route::controller('export', 'ExportController', array(
 Route::controller('vote', 'VoteController', array(
     'getIndex' => 'vote.vote',
     'getBilling' => 'vote.billing',
+    'postIndex' => 'vote.user-vote',
 ));
 Route::resource('vote-event', 'VoteEventController');
 Route::resource('vote-selection', 'VoteSelectionController');
