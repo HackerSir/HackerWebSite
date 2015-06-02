@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    編輯投票活動
+    編輯投票選項
 @endsection
 
 @section('content')
@@ -9,91 +9,38 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">編輯投票活動</div>
+                    <div class="panel-heading">編輯投票選項</div>
                     {{-- Panel body --}}
                     <div class="panel-body">
                         <div class="row">
-                            {!! Form::open(['route' => ['vote-event.update', $voteEvent->id], 'class' => 'form-horizontal', 'method' => 'PUT']) !!}
-                                <div class="form-group has-feedback{{ ($errors->has('subject'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="subject">投票主題</label>
-                                    <div class="col-md-9">
-                                        {!! Form::text('subject', $voteEvent->subject, ['id' => 'subject', 'placeholder' => '請輸入投票主題', 'class' => 'form-control', 'required']) !!}
-                                        @if($errors->has('subject'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('subject') }}</span>@endif
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback{{ ($errors->has('location'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="location">投票地點</label>
-                                    <div class="col-md-9">
-                                        {!! Form::text('location', $voteEvent->location, ['id' => 'location', 'placeholder' => '請輸入投票地點', 'class' => 'form-control']) !!}
-                                        @if($errors->has('location'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('location') }}</span>@endif
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback{{ ($errors->has('open_time'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="open_time">開始時間</label>
-                                    <div class="col-md-9">
-                                        <div class='input-group date' id='datetimepicker1'>
-                                            {!! Form::text('open_time', $voteEvent->open_time, ['id' => 'open_time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control']) !!}
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
-                                        @if($errors->has('open_time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('open_time') }}</span>@endif
-                                    </div>
-                                </div>
-                                <div class="form-group has-feedback{{ ($errors->has('close_time'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="close_time">結束時間</label>
-                                    <div class="col-md-9">
-                                        <div class='input-group date' id='datetimepicker2'>
-                                            {!! Form::text('close_time', $voteEvent->close_time, ['id' => 'close_time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control']) !!}
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
-                                        @if($errors->has('close_time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('close_time') }}</span>@endif
-                                    </div>
-                                </div>
+                            {!! Form::open(['route' => ['vote-selection.update', $voteSelection->id], 'class' => 'form-horizontal', 'method' => 'PUT']) !!}
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="creator">建立者</label>
+                                    <label class="control-label col-md-3" for="creator">投票活動</label>
                                     <div class="col-md-9">
-                                        {!! link_to_route('member.profile', $voteEvent->getCreator->nickname, $voteEvent->getCreator->id) !!}
+                                        {!! HTML::linkRoute('vote-event.show', $voteSelection->voteEvent->subject, $voteSelection->voteEvent->id, null) !!}
                                     </div>
                                 </div>
-                                <div class="form-group has-feedback{{ ($errors->has('watcher'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="watcher">監票者</label>
+                                <div class="form-group has-feedback{{ ($errors->has('nid'))?' has-error':'' }}">
+                                    <label class="control-label col-md-3" for="nid">候選人NID</label>
                                     <div class="col-md-9">
-                                        {!! Form::text('watcher', $voteEvent->watcher, ['id' => 'watcher', 'placeholder' => '請輸入監票者UID，不輸入則為自己', 'class' => 'form-control']) !!}
-                                        @if($errors->has('watcher'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('watcher') }}</span><br />@endif
-                                        <span class="label label-primary">請直接輸入<span title="從成員清單進入該成員頁面時，網址最後面的數字。<br />你的UID為 {{ Auth::user()->id }}" style="color: #ffff00">數字UID</span></span>
+                                        {!! Form::text('nid', ($voteSelection->card)?$voteSelection->card->nid:null, ['id' => 'nid', 'placeholder' => '請輸入候選人NID，不輸入則顯示下方替代文字', 'class' => 'form-control']) !!}
+                                        @if($errors->has('nid'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('nid') }}</span><br />@endif
                                     </div>
                                 </div>
-                                <div class="form-group has-feedback{{ ($errors->has('info'))?' has-error':'' }}">
-                                    <label class="control-label col-md-2" for="info">內容簡介</label>
-                                    <div class="col-md-9" role="tabpanel">
-                                        <ul class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab" id="tab_edit">編輯</a></li>
-                                            <li role="presentation"><a href="#preview" aria-controls="preview" role="tab" data-toggle="tab" id="tab_preview">預覽</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <!-- Tab panes -->
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active" id="edit">
-                                                {!! Form::textarea('info', $voteEvent->info, ['id' => 'info', 'placeholder' => '請輸入內容簡介', 'class' => 'form-control']) !!}
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="preview">
-                                                Loading...
-                                            </div>
-                                        </div>
-                                        @if($errors->has('info'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                        <span class="label label-danger">{{ $errors->first('info') }}</span>@endif
+                                <div class="form-group has-feedback{{ ($errors->has('alt_text'))?' has-error':'' }}">
+                                    <label class="control-label col-md-3" for="alt_text">替代文字</label>
+                                    <div class="col-md-9">
+                                        {!! Form::text('alt_text', $voteSelection->alt_text, ['id' => 'alt_text', 'placeholder' => '請輸入替代文字', 'class' => 'form-control']) !!}
+                                        @if($errors->has('alt_text'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        <span class="label label-danger">{{ $errors->first('alt_text') }}</span>@endif
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-10 col-md-offset-1 text-center">
                                         <hr />
                                         {!! Form::submit('修改資料', ['class' => 'btn btn-primary']) !!}
-                                        {!! HTML::linkRoute('vote-event.show', '返回', $voteEvent->id, ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('vote-selection.index', '返回', ['vid' => $voteSelection->voteEvent->id], ['class' => 'btn btn-default']) !!}
                                     </div>
                                 </div>
                             {!! Form::close() !!}
@@ -103,48 +50,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('javascript')
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-            format: 'YYYY/MM/DD HH:mm:ss'
-        });
-        $('#datetimepicker2').datetimepicker({
-            format: 'YYYY/MM/DD HH:mm:ss'
-        });
-    });
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        // e.target -> newly activated tab
-        if(e.target.id == 'tab_preview'){
-            $("#preview").html("Loading...");
-
-            var URLs = "{{ URL::route('markdown.preview') }}"
-            var val = $('#edit textarea').val();
-
-            $.ajax({
-                url: URLs,
-                data: val,
-                headers: {
-                    'X-CSRF-Token': "{{ Session::token() }}" ,
-                    "Accept": "application/json"
-                },
-                type:"POST",
-                dataType: "text",
-
-                success: function(data){
-                    if(data){
-                        $("#preview").html(data);
-                    }else{
-                        alert("error");
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError){
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
-            });
-        }
-    })
 @endsection

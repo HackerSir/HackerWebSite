@@ -208,7 +208,7 @@ class VoteEventController extends Controller
     public function destroy($id)
     {
         $voteEvent = VoteEvent::find($id);
-        //移除課程
+        //移除投票活動
         $voteEvent->delete();
         return Redirect::route('vote-event.index')
             ->with('global', '投票活動已刪除');

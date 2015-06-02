@@ -10,6 +10,7 @@ use App\VoteSelection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class VoteSelectionController extends Controller
@@ -94,11 +95,20 @@ class VoteSelectionController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
+            //檢查NID是否有卡片資料
             if ($request->has('nid')) {
                 $card = Card::where('nid', '=', $request->get('nid'))->first();
                 if ($card == null) {
                     return Redirect::route('vote-selection.create', ['vid' => $voteEvent->id])
-                        ->with('warning', '該NID沒有卡片資料');
+                        ->with('warning', '該NID沒有卡片資料')
+                        ->withInput();
+                }
+                //檢查該卡片是否已是其他選項
+                $cardCount = VoteSelection::where('vote_event_id', '=', $vid)->where('card_id', '=', $card->id)->count();
+                if ($cardCount > 0) {
+                    return Redirect::route('vote-selection.create', ['vid' => $voteEvent->id])
+                        ->with('warning', '該NID已是選項之一')
+                        ->withInput();
                 }
             }
 
@@ -108,7 +118,7 @@ class VoteSelectionController extends Controller
                 'alt_text' => $request->get('alt_text')
             ));
 
-            return Redirect::route('vote-selection.index', ['vid' => $voteEvent->id])
+            return Redirect::route('vote-selection.show', $voteSelection->id)
                 ->with('global', '投票選項已建立');
         }
     }
@@ -121,7 +131,14 @@ class VoteSelectionController extends Controller
      */
     public function show($id)
     {
-        return "show($id)";
+        $voteSelection = VoteSelection::find($id);
+        if ($voteSelection) {
+            return Redirect::route('vote-selection.index', ['vid' => $voteSelection->voteEvent->id])
+                ->with('global', Session::get('global'))
+                ->with('warning', Session::get('warning'));
+        }
+        return Redirect::route('vote-event.index')
+            ->with('warning', '投票選項不存在');
     }
 
     /**
@@ -132,7 +149,12 @@ class VoteSelectionController extends Controller
      */
     public function edit($id)
     {
-        return "edit($id)";
+        $voteSelection = VoteSelection::find($id);
+        if ($voteSelection) {
+            return view('vote.selection.edit')->with('voteSelection', $voteSelection);
+        }
+        return Redirect::route('vote-event.index')
+            ->with('warning', '投票選項不存在');
     }
 
     /**
@@ -144,7 +166,50 @@ class VoteSelectionController extends Controller
      */
     public function update($id, Request $request)
     {
-        return "update($id)";
+        $voteSelection = VoteSelection::find($id);
+        if (!$voteSelection) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票選項不存在');
+        }
+
+        $validator = Validator::make($request->all(),
+            array(
+                'alt_text' => 'max:100'
+            )
+        );
+        $validator->sometimes('alt_text', 'required|max:100', function ($input) {
+            return empty($input->nid);
+        });
+
+        if ($validator->fails()) {
+            return Redirect::route('vote-selection.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            //檢查NID是否有卡片資料
+            if ($request->has('nid')) {
+                $card = Card::where('nid', '=', $request->get('nid'))->first();
+                if ($card == null) {
+                    return Redirect::route('vote-selection.edit', $voteSelection->id)
+                        ->with('warning', '該NID沒有卡片資料')
+                        ->withInput();
+                }
+                //檢查該卡片是否已是其他選項
+                $cardCount = VoteSelection::where('vote_event_id', '=', $voteSelection->voteEvent->id)->where('card_id', '=', $card->id)->where('id', '<>', $voteSelection->id)->count();
+                if ($cardCount > 0) {
+                    return Redirect::route('vote-selection.edit', $voteSelection->id)
+                        ->with('warning', '該NID已是選項之一')
+                        ->withInput();
+                }
+            }
+
+            $voteSelection->card_id = (isset($card) && $card != null) ? $card->id : null;
+            $voteSelection->alt_text = $request->get('alt_text');
+            $voteSelection->save();
+
+            return Redirect::route('vote-selection.show', $voteSelection->id)
+                ->with('global', '投票選項已更新');
+        }
     }
 
     /**
@@ -155,7 +220,12 @@ class VoteSelectionController extends Controller
      */
     public function destroy($id)
     {
-        return "destroy($id)";
+        $voteSelection = VoteSelection::find($id);
+        $voteEvent = $voteSelection->voteEvent;
+        //移除投票選項
+        $voteSelection->delete();
+        return Redirect::route('vote-selection.index', ['vid' => $voteEvent->id])
+            ->with('global', '投票活動已刪除');
     }
 
 }

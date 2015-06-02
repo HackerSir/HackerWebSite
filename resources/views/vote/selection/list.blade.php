@@ -19,28 +19,30 @@
                         <table class="table table-hover" style="margin-top: 5px">
                             <thead>
                             <tr>
-                                <th class="col-md-2">投票活動：</th>
-                                <th class="col-md-10" colspan="2">{!! HTML::linkRoute('vote-event.show', $voteEvent->subject, $voteEvent->id, null) !!}</th>
+                                <th class="col-md-2" colspan="2">投票活動：{!! HTML::linkRoute('vote-event.show', $voteEvent->subject, $voteEvent->id, null) !!}</th>
                             </tr>
                             <tr>
-                                <th class="col-md-2">ID</th>
-                                <th class="col-md-6">投票項目</th>
-                                <th class="col-md-4">操作</th>
+                                <th class="col-md-10 text-center">投票項目</th>
+                                <th class="col-md-2"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($voteEvent->voteSelections as $voteSelectionItem)
                                 <tr class="classData">
-                                    <td>{{ $voteSelectionItem->id }}</td>
                                     <td>
                                         @if($voteSelectionItem->card != null)
-                                            {{ $voteSelectionItem->card->name }}
+                                            {{ $voteSelectionItem->card->getName() }}
+                                            <a href="{{ URL::route('card.show', $voteSelectionItem->card->id) }}" title="卡片資料"><i class="glyphicon glyphicon-credit-card"></i></a>
                                         @else
                                             {{ $voteSelectionItem->alt_text }}
                                         @endif
                                     </td>
-                                    <td>
-                                        {!! link_to_route('vote-selection.edit', '編輯', $voteSelectionItem->id) !!}
+                                    <td class="text-right">
+                                        {!! link_to_route('vote-selection.edit', '編輯', $voteSelectionItem->id, ['class' => 'btn btn-default']) !!}
+                                        {!! Form::open(['route' => ['vote-selection.destroy', $voteSelectionItem->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                        'onSubmit' => "return confirm('確定要刪除此投票選項嗎？');"]) !!}
+                                        {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach
