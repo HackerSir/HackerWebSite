@@ -19,7 +19,7 @@ return array(
         '社團課程' => '/#class',
         '社團活動' => '/#activity',
         '課程清單' => 'course',
-        '<span style="color: red; font-weight: bold">學生會選舉</span>' => 'http://hackersir.info/vote',
+        '<span style="color: red; font-weight: bold">學生會選舉</span>' => 'http://hackersir.info/savote',
     ),
 
     //會員
