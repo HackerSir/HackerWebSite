@@ -25,6 +25,10 @@ class VoteController extends Controller
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
         }
+        if (!$voteEvent->isStarted() || $voteEvent->isEnded()) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '非投票時間');
+        }
         $action = Session::get('action');
         if (empty($action)) {
             return view('vote.vote')->with('voteEvent', $voteEvent);
@@ -54,7 +58,7 @@ class VoteController extends Controller
                 ->with('warning', '投票活動不存在');
         }
         if (!$voteEvent->isStarted() || $voteEvent->isEnded()) {
-            return Redirect::route('vote.vote', ['id' => $vid])
+            return Redirect::route('vote-event.index')
                 ->with('warning', '非投票時間');
         }
 

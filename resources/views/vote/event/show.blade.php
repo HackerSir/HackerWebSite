@@ -17,7 +17,12 @@
                                 <table class="table table-hover">
                                     <tr>
                                         <td class="col-md-2">投票主題：</td>
-                                        <td>{{ $voteEvent->subject }}</td>
+                                        <td>
+                                            {{ $voteEvent->subject }}
+                                            @if($voteEvent->isStarted() && !$voteEvent->isEnded())
+                                                <a href="{{ URL::route('vote.vote', ['id' => $voteEvent->id]) }}" title="進入投票頁面"><i class="fa fa-bar-chart"></i></a>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>投票地點：</td>
