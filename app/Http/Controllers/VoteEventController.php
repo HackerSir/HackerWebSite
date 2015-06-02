@@ -223,13 +223,13 @@ class VoteEventController extends Controller
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
         }
-        if ($voteEvent->isStarted()) {
-            return Redirect::route('vote-event.show', $id)
-                ->with('warning', '該投票活動早已開始');
-        }
         if ($voteEvent->isEnded()) {
             return Redirect::route('vote-event.show', $id)
                 ->with('warning', '該投票活動早已結束');
+        }
+        if ($voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '該投票活動早已開始');
         }
         $voteEvent->open_time = Carbon::now()->toDateTimeString();
         $voteEvent->save();
@@ -244,6 +244,10 @@ class VoteEventController extends Controller
         if (!$voteEvent) {
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
+        }
+        if (!$voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '該投票活動尚未開始');
         }
         if ($voteEvent->isEnded()) {
             return Redirect::route('vote-event.show', $id)
