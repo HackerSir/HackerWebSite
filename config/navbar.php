@@ -33,12 +33,12 @@ return array(
     ),
 
     //學生會
-    'sa' => array(
-        ' ' => array(
-            '候選人' => 'candidate',
-            '投票所' => 'booth'
-        )
-    ),
+//    'sa' => array(
+//        ' ' => array(
+//            '候選人' => 'candidate',
+//            '投票所' => 'booth'
+//        )
+//    ),
 
     //工作人員
     'staff' => array(
