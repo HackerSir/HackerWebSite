@@ -4,14 +4,31 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
-class VoteController extends Controller
+class VotingController extends Controller
 {
-
+    //投票頁面
     public function getIndex()
     {
-        return File::get('vote/index.html');
+        return 'getIndex()';
+    }
+
+    //開票頁面
+    public function getBilling()
+    {
+        return 'getBilling()';
+    }
+
+    //開始投票
+    public function postStart()
+    {
+        return 'postStart()';
+    }
+
+    //結束投票
+    public function postEnd()
+    {
+        return 'postEnd()';
     }
 
 }
