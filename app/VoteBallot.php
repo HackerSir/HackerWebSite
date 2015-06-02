@@ -19,6 +19,10 @@ class VoteBallot extends Model
         return $this->belongsTo('App\VoteSelection');
     }
 
+    /**
+     * 產生驗證用的唯一hash值
+     * @param $nid
+     */
     public function generateHash($nid)
     {
         $salt = str_random(8);
@@ -27,8 +31,11 @@ class VoteBallot extends Model
         $this->ballot_id = $salt . $hash;
     }
 
-    /*
-     * @deprecated
+    /**
+     * 可驗證是否為特定NID投的票
+     * @deprecated 違反原則，非必要時請勿使用
+     * @param $nid
+     * @return bool
      */
     public function verity($nid)
     {
