@@ -89,7 +89,7 @@ class VoteEventController extends Controller
                 }
             }
 
-            $course = VoteEvent::create(array(
+            $voteEvent = VoteEvent::create(array(
                 'subject' => $request->get('subject'),
                 'location' => $request->get('location'),
                 'open_time' => $open_time,
@@ -99,7 +99,7 @@ class VoteEventController extends Controller
                 'info' => $request->get('info'),
             ));
 
-            return Redirect::route('vote-event.show', $course->id)
+            return Redirect::route('vote-event.show', $voteEvent->id)
                 ->with('global', '投票活動已建立');
         }
     }
