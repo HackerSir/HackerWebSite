@@ -23,4 +23,13 @@ class VoteSelection extends Model
         return $this->belongsTo('App\Card');
     }
 
+    public function getText()
+    {
+        if ($this->card) {
+            return $this->card->getName();
+        } else {
+            return $this->alt_text;
+        }
+    }
+
 }

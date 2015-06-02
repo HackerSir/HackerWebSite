@@ -29,7 +29,12 @@ class VoteController extends Controller
         if (empty($action)) {
             return view('vote.vote')->with('voteEvent', $voteEvent);
         } else if ($action == 'user-vote') {
-            return view('vote.vote-select')->with('voteEvent', $voteEvent);
+            $selectionList = [null => "-- 請下拉選擇 --"];
+            $selections = $voteEvent->voteSelections;
+            foreach ($selections as $selection) {
+                $selectionList[$selection->id] = $selection->getText();
+            }
+            return view('vote.vote-select')->with('voteEvent', $voteEvent)->with('selectionList', $selectionList);
         }
         return view('vote.vote')->with('warning', '未預期的行為，請洽網站管理人員！');
     }
@@ -48,13 +53,17 @@ class VoteController extends Controller
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
         }
+        if (!$voteEvent->isStarted() || $voteEvent->isEnded()) {
+            return Redirect::route('vote.vote', ['id' => $vid])
+                ->with('warning', '非投票時間');
+        }
 
         if ($action == 'send_nid') {
             $nid = Input::get('nid');
             if (!empty($nid)) {
                 $voteUser = VoteUser::whereHas('card', function ($q) use ($nid) {
                     $q->where('nid', '=', $nid);
-                })->where('vote_event_id', '=', $vid)->first();
+                })->where('vote_event_id', '=', $vid)->where('voted', '=', 0)->first();
                 if ($voteUser) {
                     Session::put('nid', $nid);
                     Session::put('action', 'user-vote');
@@ -62,31 +71,41 @@ class VoteController extends Controller
                 }
             }
             return Redirect::route('vote.vote', ['id' => $vid])
-                ->with('warning', '查無NID或NID尚未簽到, 請洽監票人員。')
+                ->with('warning', '該NID不存在、尚未簽到或已投票，請洽監票人員。')
                 ->withInput();
         } else if ($action == 'vote-selected') {
-            $nid = Input::get('nid');
+            $nid = Session::get('nid');
             $selection = Input::get('vote-select');
             if (!empty($selection)) {
-                $voteEvent = VoteEvent::find($vid);
-                if ($voteEvent->isStarted() && !$voteEvent->isEnded()) {
-                    // Set User Voted
-                    $voteUser = VoteUser::whereHas('card', function ($q) use ($nid) {
-                        $q->where('nid', '=', $nid);
-                    })->where('vote_event_id', '=', $vid)->first();
-                    $voteUser->voted = 1;
-                    $voteUser->save();
-                    // Create Ticket
-                    $voteBallot = VoteBallot::create(array(
-                        'vote_event_id' => $vid,
-                        'vote_selection_id' => $selection,
-                    ));
-                    $voteBallot->generateHash($nid);
-                    $voteBallot->save();
-                    Session::forget('action');
+                // Set User Voted
+                $voteUser = VoteUser::whereHas('card', function ($q) use ($nid) {
+                    $q->where('nid', '=', $nid);
+                })->where('vote_event_id', '=', $vid)->where('voted', '=', 0)->first();
+                if ($voteUser == null) {
+                    return Redirect::route('vote.vote', ['id' => $vid])
+                        ->with('warning', '該NID不存在、尚未簽到或已投票，請洽監票人員。')
+                        ->withInput();
                 }
+                $voteUser->voted = 1;
+                $voteUser->save();
+                // Create Ticket
+                $voteBallot = VoteBallot::create(array(
+                    'vote_event_id' => $vid,
+                    'vote_selection_id' => $selection,
+                ));
+                $voteBallot->generateHash($nid);
+                $voteBallot->save();
+                Session::forget('action');
+                return Redirect::route('vote.vote', ['id' => $vid])
+                    ->with('global', '投票完成');
             }
+        } else if ($action == 'reset') {
+            Session::forget('nid');
+            Session::forget('action');
+            return Redirect::route('vote.vote', ['id' => $vid])
+                ->with('global', '投票狀態已重設');
         }
+
         return Redirect::route('vote.vote', ['id' => $vid])->with('warning', '未預期的錯誤，請找網站管理員喝茶！');
     }
 
