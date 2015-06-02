@@ -9,24 +9,27 @@
             </button>
             <a class="navbar-brand" href="{{ URL::route('home') }}">{{ Config::get('config.sitename') }}</a>
         </div>
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                {{-- 右側主要選單 --}}
-                @include('common.navbar_set', ['navbar' => Config::get('navbar.navbar')])
-                {{-- 學生會--}}
-                {{-- @if (Auth::check() && (Auth::user()->isStaff() || Auth::user()->isSA()))
-                    @include('common.navbar_set', ['navbar' => Config::get('navbar.sa')])
-                @endif --}}
-                {{-- 工作人員 --}}
-                @if (Auth::check() && Auth::user()->isStaff())
-                    @include('common.navbar_set', ['navbar' => Config::get('navbar.staff')])
-                @endif
-                {{-- Auth --}}
-                @if (Auth::guest())
-                    @include('common.navbar_set', ['navbar' => Config::get('navbar.guest')])
+                @if(Request::is('vote/*'))
+                    {{-- TODO : Add Navbar for Vote--}}
                 @else
-                    @include('common.navbar_set', ['navbar' => Config::get('navbar.member')])
+                    {{-- 右側主要選單 --}}
+                    @include('common.navbar_set', ['navbar' => Config::get('navbar.navbar')])
+                    {{-- 學生會--}}
+                    {{-- @if (Auth::check() && (Auth::user()->isStaff() || Auth::user()->isSA()))
+                        @include('common.navbar_set', ['navbar' => Config::get('navbar.sa')])
+                    @endif --}}
+                    {{-- 工作人員 --}}
+                    @if (Auth::check() && Auth::user()->isStaff())
+                        @include('common.navbar_set', ['navbar' => Config::get('navbar.staff')])
+                    @endif
+                    {{-- Auth --}}
+                    @if (Auth::guest())
+                        @include('common.navbar_set', ['navbar' => Config::get('navbar.guest')])
+                    @else
+                        @include('common.navbar_set', ['navbar' => Config::get('navbar.member')])
+                    @endif
                 @endif
             </ul>
         </div>
