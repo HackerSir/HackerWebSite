@@ -1,5 +1,6 @@
 <?php namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class VoteBallot extends Model
@@ -16,5 +17,24 @@ class VoteBallot extends Model
     public function voteSelection()
     {
         return $this->belongsTo('App\VoteSelection');
+    }
+
+    public function generateHash($nid)
+    {
+        $salt = str_random(8);
+        $timestamp = $this->created_at;
+        $hash = sha1($salt . $nid . $timestamp);
+        $this->ballot_id = $salt . $hash;
+    }
+
+    /*
+     * @deprecated
+     */
+    public function verity($nid)
+    {
+        $salt = substr($this->ballot_id, 0, 8);
+        $timestamp = $this->created_at;
+        $hash = sha1($salt . $nid . $timestamp);
+        return $this->ballot_id == $hash;
     }
 }
