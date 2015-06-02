@@ -29,17 +29,23 @@
                                             @if($voteEvent->isEnded())
                                                 已結束
                                             @elseif($voteEvent->isStarted())
-                                                進行中<br />
-                                                {!! Form::open(['route' => ['vote-event.end', $voteEvent->id], 'style' => 'display: inline', 'method' => 'POST',
-                                                'onSubmit' => "return confirm('確定要立即結束此投票活動嗎？');"]) !!}
-                                                {!! Form::submit('立即結束', ['class' => 'btn btn-danger']) !!}
-                                                {!! Form::close() !!}
+                                                進行中
+                                                @if(Auth::check() && Auth::user()->isStaff())
+                                                    <br />
+                                                    {!! Form::open(['route' => ['vote-event.end', $voteEvent->id], 'style' => 'display: inline', 'method' => 'POST',
+                                                    'onSubmit' => "return confirm('確定要立即結束此投票活動嗎？');"]) !!}
+                                                    {!! Form::submit('立即結束', ['class' => 'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                @endif
                                             @else
-                                                未開始<br />
-                                                {!! Form::open(['route' => ['vote-event.start', $voteEvent->id], 'style' => 'display: inline', 'method' => 'POST',
-                                                'onSubmit' => "return confirm('確定要立即開始此投票活動嗎？');"]) !!}
-                                                {!! Form::submit('立即開始', ['class' => 'btn btn-danger']) !!}
-                                                {!! Form::close() !!}
+                                                未開始
+                                                @if(Auth::check() && Auth::user()->isStaff())
+                                                    <br />
+                                                    {!! Form::open(['route' => ['vote-event.start', $voteEvent->id], 'style' => 'display: inline', 'method' => 'POST',
+                                                    'onSubmit' => "return confirm('確定要立即開始此投票活動嗎？');"]) !!}
+                                                    {!! Form::submit('立即開始', ['class' => 'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
@@ -78,7 +84,7 @@
                                         {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
                                         {!! Form::close() !!}
                                     @else
-                                        {!! HTML::linkRoute('course.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('vote-event.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
                                     @endif
                                 </div>
                             </div>
