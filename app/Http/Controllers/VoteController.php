@@ -26,7 +26,7 @@ class VoteController extends Controller
                 ->with('warning', '投票活動不存在');
         }
         $action = Session::get('action');
-        if ($action == NULL) {
+        if (empty($action)) {
             return view('vote.vote')->with('voteEvent', $voteEvent);
         } else if ($action == 'user-vote') {
             return view('vote.vote-select')->with('voteEvent', $voteEvent);
