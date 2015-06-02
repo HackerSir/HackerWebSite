@@ -2,7 +2,13 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\VoteBallot;
+use App\VoteEvent;
+use App\VoteUser;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
 
 class VoteController extends Controller
 {
