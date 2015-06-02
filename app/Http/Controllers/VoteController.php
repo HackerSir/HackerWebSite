@@ -31,4 +31,9 @@ class VotingController extends Controller
         return 'postEnd()';
     }
 
+    // 暫存: 學生會
+    public function saVote(){
+        return File::get('savote/index.html');
+    }
+
 }

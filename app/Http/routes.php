@@ -61,7 +61,10 @@ Route::post('signin/store/{courseId}', array(
 //學生會開票系統
 Route::resource('candidate', 'CandidateController');
 Route::resource('booth', 'BoothController');
-Route::controller('vote', 'VoteController');
+Route::get('/savote', [
+    'as' => 'savote',
+    'uses' => 'VoteController@saVote'
+]);
 Route::controller('vote-api', 'VoteApiController', array(
     'anyVote' => 'vote-api.vote',
 ));
