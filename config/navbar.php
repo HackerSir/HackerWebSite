@@ -52,7 +52,7 @@ return array(
             '投票系統' => array(
                 '投票活動' => 'vote-event',
                 '投票選項' => 'vote-selection',
-                '投票頁面' => 'voting',
+                '投票頁面' => 'vote',
             )
         )
     ),
