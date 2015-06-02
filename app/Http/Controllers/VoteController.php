@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class VotingController extends Controller
+class VoteController extends Controller
 {
     //投票頁面
     public function getIndex()
