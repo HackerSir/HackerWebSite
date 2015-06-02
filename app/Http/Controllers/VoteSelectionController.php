@@ -23,26 +23,6 @@ class VoteSelectionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $vid = Input::get('vid');
-        if (empty($vid) || !is_numeric($vid)) {
-            return Redirect::route('vote-event.index')
-                ->with('warning', '請選擇投票活動');
-        }
-        $voteEvent = VoteEvent::find($vid);
-        if ($voteEvent == null) {
-            return Redirect::route('vote-event.index')
-                ->with('warning', '投票活動不存在');
-        }
-        return view('vote.selection.list')->with('voteEvent', $voteEvent);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return Response
@@ -118,27 +98,9 @@ class VoteSelectionController extends Controller
                 'alt_text' => $request->get('alt_text')
             ));
 
-            return Redirect::route('vote-selection.show', $voteSelection->id)
+            return Redirect::route('vote-event.show', $voteSelection->voteEvent->id)
                 ->with('global', '投票選項已建立');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $voteSelection = VoteSelection::find($id);
-        if ($voteSelection) {
-            return Redirect::route('vote-selection.index', ['vid' => $voteSelection->voteEvent->id])
-                ->with('global', Session::get('global'))
-                ->with('warning', Session::get('warning'));
-        }
-        return Redirect::route('vote-event.index')
-            ->with('warning', '投票選項不存在');
     }
 
     /**
@@ -207,7 +169,7 @@ class VoteSelectionController extends Controller
             $voteSelection->alt_text = $request->get('alt_text');
             $voteSelection->save();
 
-            return Redirect::route('vote-selection.show', $voteSelection->id)
+            return Redirect::route('vote-event.show', $voteSelection->voteEvent->id)
                 ->with('global', '投票選項已更新');
         }
     }
@@ -224,8 +186,8 @@ class VoteSelectionController extends Controller
         $voteEvent = $voteSelection->voteEvent;
         //移除投票選項
         $voteSelection->delete();
-        return Redirect::route('vote-selection.index', ['vid' => $voteEvent->id])
-            ->with('global', '投票活動已刪除');
+        return Redirect::route('vote-event.show', $voteEvent->id)
+            ->with('global', '投票選項已刪除');
     }
 
 }

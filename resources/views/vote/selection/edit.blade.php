@@ -40,7 +40,7 @@
                                     <div class="col-md-10 col-md-offset-1 text-center">
                                         <hr />
                                         {!! Form::submit('修改資料', ['class' => 'btn btn-primary']) !!}
-                                        {!! HTML::linkRoute('vote-selection.index', '返回', ['vid' => $voteSelection->voteEvent->id], ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('vote-event.show', '返回', $voteSelection->voteEvent->id, ['class' => 'btn btn-default']) !!}
                                     </div>
                                 </div>
                             {!! Form::close() !!}

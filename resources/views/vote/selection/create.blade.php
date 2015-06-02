@@ -40,7 +40,7 @@
                                     <div class="col-md-9 col-md-offset-3">
                                         {!! Form::hidden('vid', $voteEvent->id) !!}
                                         {!! Form::submit('新增投票選項', ['class' => 'btn btn-primary']) !!}
-                                        {!! HTML::linkRoute('vote-selection.index', '返回', ['vid' => $voteEvent->id], ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('vote-event.show', '返回', $voteEvent->id, ['class' => 'btn btn-default']) !!}
                                     </div>
                                 </div>
                             {!! Form::close() !!}

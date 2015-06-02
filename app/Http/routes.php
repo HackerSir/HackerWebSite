@@ -97,7 +97,7 @@ Route::controller('vote', 'VoteController', array(
     'postIndex' => 'vote.user-vote',
 ));
 Route::resource('vote-event', 'VoteEventController');
-Route::resource('vote-selection', 'VoteSelectionController');
+Route::resource('vote-selection', 'VoteSelectionController', ['except' => ['index', 'show']]);
 
 //未定義路由
 Route::get('{all}', array(
