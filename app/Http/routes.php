@@ -96,6 +96,14 @@ Route::controller('vote', 'VoteController', array(
     'getBilling' => 'vote.billing',
     'postIndex' => 'vote.user-vote',
 ));
+Route::post('vote-event/start/{vid}', [
+    'as' => 'vote-event.start',
+    'uses' => 'VoteEventController@start'
+]);
+Route::post('vote-event/end/{vid}', [
+    'as' => 'vote-event.end',
+    'uses' => 'VoteEventController@end'
+]);
 Route::resource('vote-event', 'VoteEventController');
 Route::resource('vote-selection', 'VoteSelectionController', ['except' => ['index', 'show']]);
 

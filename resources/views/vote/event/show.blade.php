@@ -29,9 +29,17 @@
                                             @if($voteEvent->isEnded())
                                                 已結束
                                             @elseif($voteEvent->isStarted())
-                                                進行中
+                                                進行中<br />
+                                                {!! Form::open(['route' => ['vote-event.end', $voteEvent->id], 'style' => 'display: inline', 'method' => 'POST',
+                                                'onSubmit' => "return confirm('確定要立即結束此投票活動嗎？');"]) !!}
+                                                {!! Form::submit('立即結束', ['class' => 'btn btn-danger']) !!}
+                                                {!! Form::close() !!}
                                             @else
-                                                未開始
+                                                未開始<br />
+                                                {!! Form::open(['route' => ['vote-event.start', $voteEvent->id], 'style' => 'display: inline', 'method' => 'POST',
+                                                'onSubmit' => "return confirm('確定要立即開始此投票活動嗎？');"]) !!}
+                                                {!! Form::submit('立即開始', ['class' => 'btn btn-danger']) !!}
+                                                {!! Form::close() !!}
                                             @endif
                                         </td>
                                     </tr>

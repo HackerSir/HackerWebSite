@@ -80,18 +80,6 @@ class VoteController extends Controller
         return 'getBilling()';
     }
 
-    //開始投票
-    public function postStart()
-    {
-        return 'postStart()';
-    }
-
-    //結束投票
-    public function postEnd()
-    {
-        return 'postEnd()';
-    }
-
     // 暫存: 學生會
     public function saVote(){
         return File::get('savote/index.html');

@@ -214,4 +214,44 @@ class VoteEventController extends Controller
             ->with('global', '投票活動已刪除');
     }
 
+
+    //開始投票
+    public function start($id, Request $request)
+    {
+        $voteEvent = VoteEvent::find($id);
+        if (!$voteEvent) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票活動不存在');
+        }
+        if ($voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '該投票活動早已開始');
+        }
+        if ($voteEvent->isEnded()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '該投票活動早已結束');
+        }
+        $voteEvent->open_time = Carbon::now()->toDateTimeString();
+        $voteEvent->save();
+        return Redirect::route('vote-event.show', $id)
+            ->with('global', '投票活動已開始');
+    }
+
+    //結束投票
+    public function end($id, Request $request)
+    {
+        $voteEvent = VoteEvent::find($id);
+        if (!$voteEvent) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票活動不存在');
+        }
+        if ($voteEvent->isEnded()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '該投票活動早已結束');
+        }
+        $voteEvent->close_time = Carbon::now()->toDateTimeString();
+        $voteEvent->save();
+        return Redirect::route('vote-event.show', $id)
+            ->with('global', '投票活動已結束');
+    }
 }
