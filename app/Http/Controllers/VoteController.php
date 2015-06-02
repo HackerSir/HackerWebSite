@@ -2,14 +2,14 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Input;
 
 class VoteController extends Controller
 {
     //投票頁面
     public function getIndex()
     {
-        $vid = Request::get('id');
+        $vid = Input::get('id');
         $voteEvent = VoteEvent::find($vid);
         if ($voteEvent !=NULL){
             $action = Session::get('action');
@@ -28,11 +28,11 @@ class VoteController extends Controller
 
     //投票頁面
     public function postIndex(){
-        $action = Request::get('action');
+        $action = Input::get('action');
         // FIXME
         $vid = 1;
         if ($action == 'send_nid'){
-            $nid = Request::get('nid');
+            $nid = Input::get('nid');
             if (!empty($nid)){
                 $voteUser = VoteUser::where('nid', '=', $nid)->where('vote_event_id', '=', $vid)->first();
                 if ($voteUser != NULL){
@@ -45,8 +45,8 @@ class VoteController extends Controller
             return Redirect::route('vote.vote')->with('warning', '查無NID或NID尚未簽到, 請洽監票人員。');
         }
         else if ( $action == 'vote-selected'){
-            $nid = Request::get('nid');
-            $selection = Request::get('vote-select');
+            $nid = Input::get('nid');
+            $selection = Input::get('vote-select');
             if (!empty($selection)){
                 $voteEvent = VoteEvent::find($vid);
                 if ($voteEvent->isStarted() && !$voteEvent->isEnded()){
