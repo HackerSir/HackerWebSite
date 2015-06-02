@@ -16,7 +16,7 @@ class CreateVoteSelectionsTable extends Migration
         Schema::create('vote_selections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vote_event_id')->unsigned();
-            $table->integer('card_id')->unsigned();
+            $table->integer('card_id')->unsigned()->nullable();
             $table->string('alt_text', 100);
             $table->timestamps();
         });

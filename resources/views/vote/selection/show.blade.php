@@ -64,7 +64,6 @@
                                 <div>
                                     @if(Auth::check() && Auth::user()->isStaff())
                                         {!! HTML::linkRoute('vote-event.edit', '編輯投票活動', $voteEvent->id, ['class' => 'btn btn-primary']) !!}
-                                        {!! HTML::linkRoute('vote-selection.index', '投票選項', ['vid' => $voteEvent->id], ['class' => 'btn btn-primary']) !!}
                                         {!! HTML::linkRoute('vote-event.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
                                         {!! Form::open(['route' => ['vote-event.destroy', $voteEvent->id], 'style' => 'display: inline', 'method' => 'DELETE',
                                         'onSubmit' => "return confirm('確定要刪除投票活動嗎？');"]) !!}
