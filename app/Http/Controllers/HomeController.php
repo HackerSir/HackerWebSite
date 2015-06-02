@@ -4,6 +4,7 @@ use App\Course;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
 class HomeController extends Controller
@@ -77,6 +78,11 @@ class HomeController extends Controller
             }
         }
         return view('home')->with('courseList', $courseList)->with('nextCourseTime', $nextCourseTime);
+    }
+
+    public function entrance()
+    {
+        return Redirect::route('home');
     }
 
 }
