@@ -82,7 +82,16 @@ class HomeController extends Controller
 
     public function entrance()
     {
-        return Redirect::route('home');
+        $nowtime = Carbon::now()->timestamp;
+        $begintime = Carbon::create(2015, 6, 4, 0, 0, 0)->timestamp;
+        $endtime = Carbon::create(2015, 6, 9, 23, 59, 59)->timestamp;
+        dd($nowtime . "/" . $begintime . "/" . $endtime);
+        if ( $nowtime > $begintime && $nowtime <= $endtime){
+            return view('entrance');
+        }
+        else {
+            return Redirect::route('home');
+        }
     }
 
 }
