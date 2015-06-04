@@ -36,7 +36,9 @@
     </head>
     <body>
         {{-- navbar--}}
-        @include('common.navbar')
+        @if(!Request::is('/'))
+            @include('common.navbar')
+        @endif
         <div class="container-fluid">
             {{-- content --}}
             @yield('content')
