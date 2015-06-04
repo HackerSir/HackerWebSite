@@ -14,8 +14,8 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="centered">
+    <div class="container-fluid">
+        <div class="center-block">
             {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive')) !!}
         </div>
     </div>
