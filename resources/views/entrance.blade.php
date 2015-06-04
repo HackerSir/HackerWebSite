@@ -13,6 +13,6 @@
 @section('content')
     <div class="text-center">
         {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive center-block')) !!}
-        <a class="btn btn-primary btn-lg" href="{!! URL::route('home') !!}" role="button">進入社網</a>
+        {!! HTML::linkRoute('home', '進入社網', [], ['class' => 'btn btn-primary btn-lg', 'role' => 'button']) !!}
     </div>
 @endsection
