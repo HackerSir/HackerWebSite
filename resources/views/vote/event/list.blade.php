@@ -57,7 +57,7 @@
                                     <td>
                                         @if($voteEventItem->isEnded())
                                             已結束
-                                        @elseif($voteEventItem->isStarted())
+                                        @elseif($voteEventItem->isInProgress())
                                             進行中
                                         @else
                                             未開始
@@ -65,7 +65,7 @@
                                     </td>
                                     <td>
                                         {!! HTML::linkRoute('vote-event.show', $voteEventItem->subject, $voteEventItem->id, null) !!}
-                                        @if($voteEventItem->isStarted() && !$voteEventItem->isEnded())
+                                        @if($voteEventItem->isInProgress())
                                             <a href="{{ URL::route('vote.vote', ['id' => $voteEventItem->id]) }}" title="進入投票頁面"><i class="fa fa-bar-chart"></i></a>
                                         @endif
                                     </td>

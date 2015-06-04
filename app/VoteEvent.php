@@ -56,4 +56,9 @@ class VoteEvent extends Model
         return false;
     }
 
+    public function isInProgress()
+    {
+        return $this->isStarted() && !$this->isEnded();
+    }
+
 }
