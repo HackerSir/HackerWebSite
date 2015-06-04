@@ -19,6 +19,12 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
+// Enterance
+Route::get('/enter', [
+    'as' => 'enter',
+    'uses' => 'EnterPageController@index'
+]);
+
 Route::controller('member', 'MemberController', array(
     'getIndex' => 'member.list',
     'getLogin' => 'member.login',

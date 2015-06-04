@@ -42,7 +42,7 @@ class HomeController extends Controller
         $nowtime = Carbon::now()->timestamp;
         $begintime = Carbon::create(2015, 6, 4, 0, 0, 0)->timestamp;
         $endtime = Carbon::create(2015, 6, 9, 23, 59, 59)->timestamp;
-        if ($firstCome == 'No' ||  ( $firstCome == NULL && ($nowtime < $begintime || $nowtime > $endtime))){
+        if ($firstCome !=NULL ||  ( $firstCome == NULL && ($nowtime < $begintime || $nowtime > $endtime))){
             //計算課程數量
             $courseCount = Course::count();
             //課程清單
@@ -86,8 +86,7 @@ class HomeController extends Controller
             return view('home')->with('courseList', $courseList)->with('nextCourseTime', $nextCourseTime);
         }
         else{
-            Session::put('firstCome', 'No');
-            return view('entrance');
+            return Redirect::route('enter');
         }
 
     }
