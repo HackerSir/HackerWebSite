@@ -9,7 +9,7 @@
         background-color: #2D2535;
     }
     .img-alpha{
-        filter: Alpha(Opacity=30, FinishOpacity=30, Style=2);
+        filter: Alpha(Opacity=100, FinishOpacity=0, Style=3);
     }
 @endsection
 
