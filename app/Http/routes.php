@@ -13,13 +13,8 @@
 
 use Illuminate\Support\Facades\App;
 
-//入口頁面
-Route::get('/', [
-    'as' => 'entrance',
-    'uses' => 'HomeController@entrance'
-]);
 //真正的首頁
-Route::get('home', [
+Route::get('/', [
     'as' => 'home',
     'uses' => 'HomeController@index'
 ]);
