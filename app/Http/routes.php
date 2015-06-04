@@ -20,8 +20,8 @@ Route::get('/', [
 ]);
 
 // Enterance
-Route::get('/enter', [
-    'as' => 'enter',
+Route::get('/annou', [
+    'as' => 'annou',
     'uses' => 'EnterPageController@index'
 ]);
 

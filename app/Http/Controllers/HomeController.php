@@ -86,7 +86,7 @@ class HomeController extends Controller
             return view('home')->with('courseList', $courseList)->with('nextCourseTime', $nextCourseTime);
         }
         else{
-            return Redirect::route('enter');
+            return Redirect::route('annou');
         }
 
     }

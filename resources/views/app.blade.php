@@ -37,7 +37,7 @@
     </head>
     <body>
         {{-- navbar--}}
-        @if(Session::get('firstCome')!=NULL)
+        @if(!Request::is('/annou'))
             @include('common.navbar')
         @endif
         <div class="container-fluid">
