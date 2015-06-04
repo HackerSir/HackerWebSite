@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Validator;
 
 class VoteUserController extends Controller
 {
-
+    public function __construct()
+    {
+        //限工作人員
+        $this->middleware('staff');
+    }
 
     /**
      * Store a newly created resource in storage.
