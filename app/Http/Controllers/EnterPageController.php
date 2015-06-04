@@ -1,10 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Doctrine\Common\Collections\ArrayCollection;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 class EnterPageController extends Controller
@@ -37,9 +33,8 @@ class EnterPageController extends Controller
      */
     public function index()
     {
-        if (Session::get('firstCome')==NULL){
-            Session::put('firstCome', Carbon::now()->timestamp);
-        }
+        //記錄最後觀看時間
+        Session::put('visitEnterPage', Carbon::now()->timestamp);
         return view('entrance');
 
     }
