@@ -14,12 +14,6 @@
 
 //入口頁面首頁
 Route::get('/', [
-    'as' => 'entrance',
-    'uses' => 'EntranceController@index'
-]);
-
-//真正的首頁
-Route::get('home', [
     'as' => 'home',
     'uses' => 'HomeController@index'
 ]);
