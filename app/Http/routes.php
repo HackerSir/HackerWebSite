@@ -11,15 +11,20 @@
 |
 */
 
-use Illuminate\Support\Facades\App;
+
+//入口頁面首頁
+Route::get('/', [
+    'as' => 'entrance',
+    'uses' => 'EntranceController@index'
+]);
 
 //真正的首頁
-Route::get('/', [
+Route::get('home', [
     'as' => 'home',
     'uses' => 'HomeController@index'
 ]);
 
-// Enterance
+//入口公告
 Route::get('annou', [
     'as' => 'annou',
     'uses' => 'EnterPageController@index'
