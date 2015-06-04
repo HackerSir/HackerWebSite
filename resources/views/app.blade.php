@@ -37,7 +37,7 @@
     </head>
     <body>
         {{-- navbar--}}
-        @if(Session::get('firstCome')==NULL)
+        @if(Session::get('firstCome')!=NULL)
             @include('common.navbar')
         @endif
         <div class="container-fluid">
