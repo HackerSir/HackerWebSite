@@ -106,6 +106,7 @@ Route::post('vote-event/end/{vid}', [
 ]);
 Route::resource('vote-event', 'VoteEventController');
 Route::resource('vote-selection', 'VoteSelectionController', ['except' => ['index', 'show']]);
+Route::resource('vote-user', 'VoteUserController', ['only' => ['store', 'destroy']]);
 
 //未定義路由
 Route::get('{all}', array(

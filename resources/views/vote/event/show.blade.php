@@ -150,6 +150,68 @@
                         </div>
                     </div>
                 </div>
+                @if(Auth::check() && Auth::user()->isStaff())
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">投票者（以下僅工作人員可見）</div>
+                        {{-- Panel body --}}
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="text-center col-md-12 col-md-offset-0">
+                                    @if($voteEvent->isInProgress())
+                                        {!! Form::open(['route' => 'vote-user.store', 'class' => 'form-inline pull-right',
+                                        'onSubmit' => "return confirm('確定要強制簽到嗎');"]) !!}
+                                        {!! Form::text('nid', null, ['id' => 'nid', 'placeholder' => '請輸入NID', 'class' => 'form-control', 'required']) !!}
+                                        {!! Form::hidden('event_id', $voteEvent->id) !!}
+                                        {!! Form::submit('強制新增簽到', ['class' => 'btn btn-primary']) !!}
+                                        {!! Form::close() !!}
+                                    @endif
+                                    <table class="table table-hover">
+                                        @if(count($voteEvent->voteUsers))
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-4 text-center">投票者</th>
+                                                    <th class="col-md-4 text-center">簽到時間</th>
+                                                    <th class="col-md-1 text-center">投票</th>
+                                                    <th class="col-md-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($voteEvent->voteUsers as $voteUserItem)
+                                                    <tr>
+                                                        <td>
+                                                            {{ $voteUserItem->card->getName() }}
+                                                            <a href="{{ URL::route('card.show', $voteUserItem->card->id) }}" title="卡片資料"><i class="glyphicon glyphicon-credit-card"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            {{ $voteUserItem->check_in_time }}
+                                                        </td>
+                                                        <td>
+                                                            @if($voteUserItem->isVoted())
+                                                                <span title="已投票">✔</span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-right">
+                                                            @if($voteEvent->isInProgress() && !$voteUserItem->isVoted())
+                                                                {!! Form::open(['route' => ['vote-user.destroy', $voteUserItem->id], 'style' => 'display: inline', 'method' => 'DELETE',
+                                                                'onSubmit' => "return confirm('確定要解除此投票者的簽到嗎？');"]) !!}
+                                                                {!! Form::submit('解除簽到', ['class' => 'btn btn-danger']) !!}
+                                                                {!! Form::close() !!}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        @else
+                                            <tr>
+                                                <td>無投票者</td>
+                                            </tr>
+                                        @endif
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

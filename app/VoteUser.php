@@ -18,5 +18,10 @@ class VoteUser extends Model
         return $this->belongsTo('App\VoteEvent');
     }
 
+    public function isVoted()
+    {
+        return $this->voted == 1;
+    }
+
 
 }
