@@ -13,6 +13,8 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(Request::is('vote/*'))
                     {{-- TODO : Add Navbar for Vote--}}
+                @elseif(Request::is('/'))
+                    {{-- Nothing here --}}
                 @else
                     {{-- 右側主要選單 --}}
                     @include('common.navbar_set', ['navbar' => Config::get('navbar.navbar')])
