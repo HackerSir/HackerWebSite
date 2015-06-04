@@ -13,7 +13,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-6 col-sm-4">
+            <div class="col-lg-6 col-sm-4">
                 {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive')) !!}
             </div>
         </div>
