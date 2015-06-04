@@ -39,6 +39,10 @@ class VoteSelectionController extends Controller
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
         }
+        if ($voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $voteEvent->id)
+                ->with('warning', '只能在投票活動開始前編輯選項');
+        }
         return view('vote.selection.create')->with('voteEvent', $voteEvent);
     }
 
@@ -59,6 +63,10 @@ class VoteSelectionController extends Controller
         if ($voteEvent == null) {
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
+        }
+        if ($voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $voteEvent->id)
+                ->with('warning', '只能在投票活動開始前編輯選項');
         }
 
         $validator = Validator::make($request->all(),
@@ -112,11 +120,16 @@ class VoteSelectionController extends Controller
     public function edit($id)
     {
         $voteSelection = VoteSelection::find($id);
-        if ($voteSelection) {
-            return view('vote.selection.edit')->with('voteSelection', $voteSelection);
+        if (!$voteSelection) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票選項不存在');
         }
-        return Redirect::route('vote-event.index')
-            ->with('warning', '投票選項不存在');
+        if ($voteSelection->voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $voteSelection->voteEvent->id)
+                ->with('warning', '只能在投票活動開始前編輯選項');
+        }
+        return view('vote.selection.edit')->with('voteSelection', $voteSelection);
+
     }
 
     /**
@@ -132,6 +145,10 @@ class VoteSelectionController extends Controller
         if (!$voteSelection) {
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票選項不存在');
+        }
+        if ($voteSelection->voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $voteSelection->voteEvent->id)
+                ->with('warning', '只能在投票活動開始前編輯選項');
         }
 
         $validator = Validator::make($request->all(),
@@ -183,6 +200,14 @@ class VoteSelectionController extends Controller
     public function destroy($id)
     {
         $voteSelection = VoteSelection::find($id);
+        if (!$voteSelection) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票選項不存在');
+        }
+        if ($voteSelection->voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $voteSelection->voteEvent->id)
+                ->with('warning', '只能在投票活動開始前編輯選項');
+        }
         $voteEvent = $voteSelection->voteEvent;
         //移除投票選項
         $voteSelection->delete();

@@ -102,14 +102,14 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="text-center col-md-12 col-md-offset-0">
-                                @if(Auth::check() && Auth::user()->isStaff())
+                                @if(Auth::check() && Auth::user()->isStaff() && !$voteEvent->isStarted())
                                     {!! HTML::linkRoute('vote-selection.create', '新增投票選項', ['vid' => $voteEvent->id], ['class' => 'btn btn-primary pull-right']) !!}
                                 @endif
                                 <table class="table table-hover">
                                     @if(count($voteEvent->voteSelections))
                                         <thead>
                                             <tr>
-                                                @if(Auth::check() && Auth::user()->isStaff())
+                                                @if(Auth::check() && Auth::user()->isStaff() && !$voteEvent->isStarted())
                                                     <th class="col-md-8 text-center">投票項目</th>
                                                     <th class="col-md-4"></th>
                                                 @else
@@ -128,7 +128,7 @@
                                                             {{ $voteSelectionItem->alt_text }}
                                                         @endif
                                                     </td>
-                                                    @if(Auth::check() && Auth::user()->isStaff())
+                                                    @if(Auth::check() && Auth::user()->isStaff() && !$voteEvent->isStarted())
                                                         <td class="text-right">
                                                             {!! link_to_route('vote-selection.edit', '編輯', $voteSelectionItem->id, ['class' => 'btn btn-default']) !!}
                                                             {!! Form::open(['route' => ['vote-selection.destroy', $voteSelectionItem->id], 'style' => 'display: inline', 'method' => 'DELETE',
