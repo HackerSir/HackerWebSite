@@ -8,14 +8,15 @@
     body{
         background-color: #2D2535;
     }
-    .img-alpha{
-        filter: Alpha(Opacity=100, FinishOpacity=0, Style=3);
-    }
 @endsection
 
 @section('content')
-    <div class="center-block">
-        {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive img-alpha')) !!}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive')) !!}
+            </div>
+        </div>
     </div>
 
 @endsection
