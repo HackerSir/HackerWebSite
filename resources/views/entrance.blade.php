@@ -8,6 +8,9 @@
     body{
         background-color: #2D2535;
     }
+    .centered{
+        margin: 0 auto;
+    }
 @endsection
 
 @section('content')
