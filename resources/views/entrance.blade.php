@@ -11,11 +11,9 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 col-md-offset-5">
-                {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive')) !!}
-            </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 text-center">
+            {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive')) !!}
         </div>
     </div>
 @endsection
