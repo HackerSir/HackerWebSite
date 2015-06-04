@@ -26,7 +26,7 @@ Route::get('home', [
 
 //入口公告
 Route::get('annou', [
-    'as' => 'annou',
+    'as' => 'enter-page',
     'uses' => 'EnterPageController@index'
 ]);
 

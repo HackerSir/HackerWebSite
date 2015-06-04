@@ -31,7 +31,7 @@ class EntranceController extends Controller
         if ($firstCome != NULL || ($firstCome == NULL && ($nowTime < $beginTime || $nowTime > $endTime))) {
             return Redirect::route('home');
         } else {
-            return Redirect::route('annou');
+            return Redirect::route('enter-page');
         }
 
     }
