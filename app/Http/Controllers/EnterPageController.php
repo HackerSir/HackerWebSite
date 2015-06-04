@@ -40,7 +40,7 @@ class EnterPageController extends Controller
         if (Session::get('firstCome')==NULL){
             Session::put('firstCome', Carbon::now()->timestamp);
         }
-        return view('entrance')->with('firstCome', Session::get('firstCome'));
+        return view('entrance');
 
     }
 
