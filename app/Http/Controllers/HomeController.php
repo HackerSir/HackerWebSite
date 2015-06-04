@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
