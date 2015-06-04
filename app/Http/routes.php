@@ -20,7 +20,7 @@ Route::get('/', [
 ]);
 
 // Enterance
-Route::get('/annou', [
+Route::get('annou', [
     'as' => 'annou',
     'uses' => 'EnterPageController@index'
 ]);
@@ -68,7 +68,7 @@ Route::post('signin/store/{courseId}', array(
 //學生會開票系統
 Route::resource('candidate', 'CandidateController');
 Route::resource('booth', 'BoothController');
-Route::get('/savote', [
+Route::get('savote', [
     'as' => 'savote',
     'uses' => 'VoteController@saVote'
 ]);
