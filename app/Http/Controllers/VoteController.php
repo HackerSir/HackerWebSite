@@ -68,8 +68,13 @@ class VoteController extends Controller
             $group = Group::where('name', '=', 'vote')->first();
             $user = User::where('group_id', '=', $group->id)->first();
             if ($user == null) {
-                return Redirect::route('vote-event.index')
-                    ->with('warning', '無投票專用帳號，請聯絡網站管理員');
+                //無投票帳號時，自動產生
+                $user = User::create(array(
+                    'name' => '投票帳號',
+                    'nickname' => '投票帳號',
+                    'register_at' => Carbon::now()->toDateTimeString(),
+                    'confirm_at' => Carbon::now()->toDateTimeString()
+                ));
             }
             //寫入記錄
             Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 登入投票專用帳號');
