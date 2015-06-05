@@ -71,12 +71,9 @@ class VoteSelectionController extends Controller
 
         $validator = Validator::make($request->all(),
             array(
-                'alt_text' => 'max:100'
+                'alt_text' => 'required_without:nid|max:100'
             )
         );
-        $validator->sometimes('alt_text', 'required|max:100', function ($input) {
-            return empty($input->nid);
-        });
 
         if ($validator->fails()) {
             return Redirect::route('vote-selection.create', ['vid' => $voteEvent->id])
@@ -153,12 +150,9 @@ class VoteSelectionController extends Controller
 
         $validator = Validator::make($request->all(),
             array(
-                'alt_text' => 'max:100'
+                'alt_text' => 'required_without:nid|max:100'
             )
         );
-        $validator->sometimes('alt_text', 'required|max:100', function ($input) {
-            return empty($input->nid);
-        });
 
         if ($validator->fails()) {
             return Redirect::route('vote-selection.edit', $id)
