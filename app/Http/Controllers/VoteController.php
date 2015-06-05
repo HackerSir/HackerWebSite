@@ -93,12 +93,22 @@ class VoteController extends Controller
                 }
                 $voteUser->voted = 1;
                 $voteUser->save();
-                // Create Ticket
-                $voteBallot = VoteBallot::create(array(
-                    'id' => sha1(Carbon::now()->timestamp . str_random(8)),
-                    'vote_event_id' => $vid,
-                    'vote_selection_id' => $selection,
-                ));
+
+                do {
+                    $voteBallot = null;
+                    try {
+                        //嘗試建立投票資料
+                        $voteBallot = VoteBallot::create(array(
+                            'id' => str_random(64),
+                            'vote_event_id' => $vid,
+                            'vote_selection_id' => $selection,
+                        ));
+                    } catch (\Exception $e) {
+
+                    }
+                    //直到失敗（碰撞）則持續嘗試
+                } while ($voteBallot == null);
+
                 Session::forget('action');
                 return Redirect::route('vote.vote', ['id' => $vid])
                     ->with('global', '投票完成');
