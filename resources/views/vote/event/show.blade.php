@@ -112,6 +112,10 @@
                                                 @if(Auth::check() && Auth::user()->isStaff() && !$voteEvent->isStarted())
                                                     <th class="col-md-8 text-center">投票項目</th>
                                                     <th class="col-md-4"></th>
+                                                @elseif($voteEvent->isEnded())
+                                                    <th class="col-md-8 text-center">投票項目</th>
+                                                    <th class="col-md-2 text-center">票數</th>
+                                                    <th class="col-md-2 text-center">最高票</th>
                                                 @else
                                                     <th class="col-md-12 text-center">投票項目</th>
                                                 @endif
@@ -135,6 +139,13 @@
                                                             'onSubmit' => "return confirm('確定要刪除此投票選項嗎？');"]) !!}
                                                             {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
                                                             {!! Form::close() !!}
+                                                        </td>
+                                                    @elseif($voteEvent->isEnded())
+                                                        <td class="col-md-2">{{ $voteSelectionItem->getCount() }}</td>
+                                                        <td class="col-md-2">
+                                                            @if($voteSelectionItem->isMax())
+                                                                <span title="最高票">♛</span>
+                                                            @endif
                                                         </td>
                                                     @endif
                                                 </tr>
