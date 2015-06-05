@@ -168,6 +168,10 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="text-center col-md-12 col-md-offset-0">
+                                    @if(count($voteEvent->voteUsers))
+                                        簽到：{{ count($voteEvent->voteUsers) }}
+                                        （已投票：{{ $voteEvent->voteUsers()->where('voted','=',1)->count() }} / 未投票：{{ $voteEvent->voteUsers()->where('voted','=',0)->count() }}）
+                                    @endif
                                     @if($voteEvent->isInProgress())
                                         {!! Form::open(['route' => 'vote-user.store', 'class' => 'form-inline pull-right',
                                         'onSubmit' => "return confirm('確定要強制簽到嗎');"]) !!}
