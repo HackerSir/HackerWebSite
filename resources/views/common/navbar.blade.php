@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                @if(Request::is('vote/*'))
+                @if(Request::is('vote'))
                     {{-- TODO : Add Navbar for Vote--}}
                 @else
                     {{-- 右側主要選單 --}}
