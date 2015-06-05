@@ -10,6 +10,7 @@ use App\VoteUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -70,6 +71,8 @@ class VoteController extends Controller
                 return Redirect::route('vote-event.index')
                     ->with('warning', '無投票專用帳號，請聯絡網站管理員');
             }
+            //寫入記錄
+            Log::info('[Vote] ' . Auth::user()->id . ' ' . Auth::user()->name . ' 登入投票專用帳號');
             //強行登入
             Auth::login($user);
             return Redirect::route('vote.vote', ['id' => $vid])
