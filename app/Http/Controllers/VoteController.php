@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\VoteBallot;
 use App\VoteEvent;
 use App\VoteUser;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -94,11 +95,10 @@ class VoteController extends Controller
                 $voteUser->save();
                 // Create Ticket
                 $voteBallot = VoteBallot::create(array(
+                    'id' => sha1(Carbon::now()->timestamp . str_random(8)),
                     'vote_event_id' => $vid,
                     'vote_selection_id' => $selection,
                 ));
-                $voteBallot->generateHash($nid);
-                $voteBallot->save();
                 Session::forget('action');
                 return Redirect::route('vote.vote', ['id' => $vid])
                     ->with('global', '投票完成');
