@@ -150,8 +150,7 @@ class VoteController extends Controller
         } else if ($action == 'reset') {
             Session::forget('nid');
             Session::forget('action');
-            return Redirect::route('vote.vote', ['id' => $vid])
-                ->with('global', '投票狀態已重設');
+            return Redirect::route('vote.vote', ['id' => $vid]);
         }
 
         return Redirect::route('vote.vote', ['id' => $vid])->with('warning', '未預期的錯誤，請找網站管理員喝茶！');
