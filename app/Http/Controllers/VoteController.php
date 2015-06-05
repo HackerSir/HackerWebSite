@@ -106,7 +106,7 @@ class VoteController extends Controller
                     } catch (\Exception $e) {
 
                     }
-                    //直到失敗（碰撞）則持續嘗試
+                    //若失敗（碰撞）則持續嘗試
                 } while ($voteBallot == null);
 
                 Session::forget('action');
