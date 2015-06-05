@@ -57,4 +57,9 @@ return array(
     'guest' => array(
         '登入' => 'member/login'
     ),
+
+    //投票專用
+    'vote' => array(
+        '投票系統' => 'vote-event'
+    ),
 );

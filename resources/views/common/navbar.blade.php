@@ -13,6 +13,9 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(Request::is('vote'))
                     {{-- TODO : Add Navbar for Vote--}}
+                @elseif (Auth::check() && Auth::user()->group->name == 'vote')
+                    {{-- 投票專用 --}}
+                    @include('common.navbar_set', ['navbar' => Config::get('navbar.vote')])
                 @else
                     {{-- 右側主要選單 --}}
                     @include('common.navbar_set', ['navbar' => Config::get('navbar.navbar')])

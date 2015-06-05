@@ -1,11 +1,14 @@
 <?php namespace App\Http\Controllers;
 
+use App\Group;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\VoteBallot;
 use App\VoteEvent;
 use App\VoteUser;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -13,10 +16,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class VoteController extends Controller
 {
+    public function __construct()
+    {
+        //會員限定
+        $this->middleware('auth');
+    }
+
     //投票頁面
     public function getIndex()
     {
         $vid = Input::get('id');
+        //檢查是否為投票專用帳號
+        if (Auth::user()->group->name != 'vote') {
+            return $this->loginVoteAccount($vid);
+        }
         if (empty($vid) || !is_numeric($vid)) {
             return Redirect::route('vote-event.index')
                 ->with('warning', '請選擇投票活動');
@@ -49,6 +62,19 @@ class VoteController extends Controller
     {
         $action = Input::get('action');
         $vid = Input::get('vid');
+        //登入專用帳號
+        if ($action == 'login') {
+            $group = Group::where('name', '=', 'vote')->first();
+            $user = User::where('group_id', '=', $group->id)->first();
+            if ($user == null) {
+                return Redirect::route('vote-event.index')
+                    ->with('warning', '無投票專用帳號，請聯絡網站管理員');
+            }
+            //強行登入
+            Auth::login($user);
+            return Redirect::route('vote.vote', ['id' => $vid])
+                ->with('global', '已登入投票專用帳號');
+        }
         if (empty($vid) || !is_numeric($vid)) {
             return Redirect::route('vote-event.index')
                 ->with('warning', '請選擇投票活動');
@@ -133,6 +159,11 @@ class VoteController extends Controller
     public function saVote()
     {
         return File::get('savote/index.html');
+    }
+
+    public function loginVoteAccount($vid)
+    {
+        return view('vote.vote-login')->with('vid', $vid);
     }
 
 }
