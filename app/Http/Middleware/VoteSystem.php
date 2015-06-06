@@ -3,7 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class Authenticate
+class VoteSystem
 {
 
     /**
@@ -32,11 +32,10 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->route('member.login');
+        //投票專用帳號禁止使用投票以外的會員功能
+        if ($this->auth->check() && $this->auth->user()->group->name == 'vote') {
+            if (!$request->is('vote*') && !$request->is('member/logout')) {
+                return redirect()->route('vote-event.index');
             }
         }
 

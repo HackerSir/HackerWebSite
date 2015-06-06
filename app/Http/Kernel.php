@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         //'App\Http\Middleware\VerifyCsrfToken',
         'App\Http\Middleware\VerifyCsrf',
         'App\Http\Middleware\Secure',
+        'App\Http\Middleware\VoteSystem',
     ];
 
     /**

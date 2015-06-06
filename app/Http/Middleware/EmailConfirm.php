@@ -44,12 +44,6 @@ class EmailConfirm
             return redirect()->route('member.resend')
                 ->with('warning', '完成信箱驗證方可進入此頁面');
         }
-        //投票專用帳號禁止使用投票以外的會員功能
-        if ($this->auth->user()->group->name == 'vote') {
-            if (!$request->is('vote*')) {
-                return redirect()->route('vote-event.index');
-            }
-        }
 
         return $next($request);
     }
