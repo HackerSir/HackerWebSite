@@ -60,6 +60,7 @@ return array(
 
     //投票專用
     'vote' => array(
-        '投票系統' => 'vote-event'
+        '投票系統' => 'vote-event',
+        '離開' => 'member/logout'
     ),
 );
