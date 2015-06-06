@@ -19,9 +19,6 @@
                                         <td class="col-md-2">投票主題：</td>
                                         <td>
                                             {{ $voteEvent->subject }}
-                                            @if($voteEvent->isInProgress())
-                                                <a href="{{ URL::route('vote.vote', ['id' => $voteEvent->id]) }}" title="進入投票頁面"><i class="fa fa-bar-chart"></i></a>
-                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -88,6 +85,9 @@
                                         'onSubmit' => "return confirm('確定要刪除投票活動嗎？');"]) !!}
                                         {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
                                         {!! Form::close() !!}
+                                        @if($voteEvent->isInProgress())
+                                            {!! HTML::linkRoute('vote.vote', '進入投票頁面', ['id' => $voteEvent->id], ['class' => 'btn btn-primary']) !!}
+                                        @endif
                                     @else
                                         {!! HTML::linkRoute('vote-event.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
                                     @endif
