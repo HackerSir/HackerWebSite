@@ -63,12 +63,7 @@
                                             未開始
                                         @endif
                                     </td>
-                                    <td>
-                                        {!! HTML::linkRoute('vote-event.show', $voteEventItem->subject, $voteEventItem->id, null) !!}
-                                        @if($voteEventItem->isInProgress())
-                                            <a href="{{ URL::route('vote.vote', ['id' => $voteEventItem->id]) }}" title="進入投票頁面"><i class="fa fa-bar-chart"></i></a>
-                                        @endif
-                                    </td>
+                                    <td>{!! HTML::linkRoute('vote-event.show', $voteEventItem->subject, $voteEventItem->id, null) !!}</td>
                                     <td>{{ $voteEventItem->open_time }}</td>
                                     <td>{{ $voteEventItem->close_time }}</td>
                                     <td>{{ $voteEventItem->location }}</td>
