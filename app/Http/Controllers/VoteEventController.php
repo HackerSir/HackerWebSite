@@ -253,6 +253,10 @@ class VoteEventController extends Controller
             return Redirect::route('vote-event.show', $id)
                 ->with('warning', '該投票活動早已開始');
         }
+        if ($voteEvent->voteSelections()->count() < 2) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '選項過少，無法開始');
+        }
         $voteEvent->open_time = Carbon::now()->toDateTimeString();
         $voteEvent->save();
         return Redirect::route('vote-event.show', $id)
