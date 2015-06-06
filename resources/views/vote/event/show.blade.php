@@ -68,7 +68,7 @@
                                     <tr>
                                         <td>監票者：</td>
                                         <td>
-                                            {!! link_to_route('member.profile', $voteEvent->getCreator->nickname, $voteEvent->getCreator->id) !!}
+                                            {!! link_to_route('member.profile', $voteEvent->getWatcher->nickname, $voteEvent->getWatcher->id) !!}
                                         </td>
                                     </tr>
                                 </table>
