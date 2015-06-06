@@ -15,9 +15,9 @@ return array(
 
     //基本巡覽列
     'navbar' => array(
-        '關於我們' => '#about',
-        '社團課程' => '#class',
-        '社團活動' => '#activity',
+        '關於我們' => '/#about',
+        '社團課程' => '/#class',
+        '社團活動' => '/#activity',
         '課程清單' => 'course',
         '學生會選舉' => 'http://hackersir.info/savote',
     ),
