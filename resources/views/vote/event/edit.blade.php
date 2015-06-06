@@ -40,7 +40,6 @@
                                         </div>
                                         @else
                                             {{ $voteEvent->open_time }}
-                                            {!! Form::hidden('open_time', $voteEvent->open_time) !!}
                                         @endif
                                         @if($errors->has('open_time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('open_time') }}</span>@endif

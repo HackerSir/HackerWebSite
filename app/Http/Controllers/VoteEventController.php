@@ -183,7 +183,11 @@ class VoteEventController extends Controller
                 $watcher = Auth::user();
             }
             //檢查時間
-            $open_time = ($request->has('open_time')) ? $request->get('open_time') : null;
+            if (!$voteEvent->isStarted()) {
+                $open_time = ($request->has('open_time')) ? $request->get('open_time') : null;
+            } else {
+                $open_time = $voteEvent->open_time;
+            }
             $close_time = ($request->has('close_time')) ? $request->get('close_time') : null;
             if ($close_time != null) {
                 if ($open_time == null) {
