@@ -33,10 +33,14 @@
                                 <div class="form-group has-feedback{{ ($errors->has('open_time'))?' has-error':'' }}">
                                     <label class="control-label col-md-2" for="open_time">開始時間</label>
                                     <div class="col-md-9">
+                                        @if(!$voteEvent->isStarted())
                                         <div class='input-group date' id='datetimepicker1'>
                                             {!! Form::text('open_time', $voteEvent->open_time, ['id' => 'open_time', 'placeholder' => 'YYYY/MM/DD HH:mm:ss', 'class' => 'form-control']) !!}
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
+                                        @else
+                                            {{ $voteEvent->open_time }}
+                                        @endif
                                         @if($errors->has('open_time'))<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                         <span class="label label-danger">{{ $errors->first('open_time') }}</span>@endif
                                     </div>

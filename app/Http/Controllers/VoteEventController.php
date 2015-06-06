@@ -133,6 +133,10 @@ class VoteEventController extends Controller
         if ($voteEvent) {
             return view('vote.event.edit')->with('voteEvent', $voteEvent);
         }
+        if ($voteEvent->isEnded()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '無法編輯已結束之投票活動');
+        }
         return Redirect::route('vote-event.index')
             ->with('warning', '投票活動不存在');
     }
@@ -150,6 +154,10 @@ class VoteEventController extends Controller
         if (!$voteEvent) {
             return Redirect::route('vote-event.index')
                 ->with('warning', '投票活動不存在');
+        }
+        if ($voteEvent->isEnded()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '無法編輯已結束之投票活動');
         }
 
         $validator = Validator::make($request->all(),
@@ -188,7 +196,9 @@ class VoteEventController extends Controller
             }
             $voteEvent->subject = $request->get('subject');
             $voteEvent->location = $request->get('location');
-            $voteEvent->open_time = $open_time;
+            if (!$voteEvent->isStarted()) {
+                $voteEvent->open_time = $open_time;
+            }
             $voteEvent->close_time = $close_time;
             $voteEvent->watcher = $watcher->id;
             $voteEvent->info = $request->get('info');
@@ -208,6 +218,14 @@ class VoteEventController extends Controller
     public function destroy($id)
     {
         $voteEvent = VoteEvent::find($id);
+        if (!$voteEvent) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票活動不存在');
+        }
+        if ($voteEvent->isStarted()) {
+            return Redirect::route('vote-event.show', $id)
+                ->with('warning', '無法刪除已開始之投票活動');
+        }
         //移除投票活動
         $voteEvent->delete();
         return Redirect::route('vote-event.index')
