@@ -94,6 +94,9 @@
                                         @endif
                                     @else
                                         {!! HTML::linkRoute('vote-event.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
+                                        @if(Auth::user()->group->name == 'vote' && $voteEvent->isInProgress())
+                                            {!! HTML::linkRoute('vote.vote', '進入投票頁面', ['id' => $voteEvent->id], ['class' => 'btn btn-primary']) !!}
+                                        @endif
                                     @endif
                                 </div>
                             </div>
