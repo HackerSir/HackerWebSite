@@ -120,9 +120,9 @@
                                                     <th class="col-md-8 text-center">投票項目</th>
                                                     <th class="col-md-4"></th>
                                                 @elseif($voteEvent->isEnded())
+                                                    <th class="col-md-2 text-center">最高票</th>
                                                     <th class="col-md-8 text-center">投票項目</th>
                                                     <th class="col-md-2 text-center">票數</th>
-                                                    <th class="col-md-2 text-center">最高票</th>
                                                 @else
                                                     <th class="col-md-12 text-center">投票項目</th>
                                                 @endif
@@ -131,6 +131,13 @@
                                         <tbody>
                                             @foreach($voteEvent->voteSelections as $voteSelectionItem)
                                                 <tr>
+                                                    @if($voteEvent->isEnded())
+                                                        <td class="col-md-2">
+                                                            @if($voteSelectionItem->isMax())
+                                                                <span title="最高票">♛</span>
+                                                            @endif
+                                                        </td>
+                                                    @endif
                                                     <td>
                                                         @if($voteSelectionItem->card != null)
                                                             {{ $voteSelectionItem->card->getName() }}
@@ -149,11 +156,6 @@
                                                         </td>
                                                     @elseif($voteEvent->isEnded())
                                                         <td class="col-md-2">{{ $voteSelectionItem->getCount() }}</td>
-                                                        <td class="col-md-2">
-                                                            @if($voteSelectionItem->isMax())
-                                                                <span title="最高票">♛</span>
-                                                            @endif
-                                                        </td>
                                                     @endif
                                                 </tr>
                                             @endforeach
