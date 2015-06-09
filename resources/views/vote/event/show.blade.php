@@ -193,7 +193,8 @@
                                         @if(count($voteEvent->voteUsers))
                                             <thead>
                                                 <tr>
-                                                    <th class="col-md-4 text-center">投票者</th>
+                                                    <th class="col-md-2 text-center">NID</th>
+                                                    <th class="col-md-3 text-center">投票者</th>
                                                     <th class="col-md-4 text-center">簽到時間</th>
                                                     <th class="col-md-1 text-center">投票</th>
                                                     <th class="col-md-2"></th>
@@ -202,6 +203,9 @@
                                             <tbody>
                                                 @foreach($voteEvent->voteUsers as $voteUserItem)
                                                     <tr>
+                                                        <td>
+                                                            {{ $voteUserItem->card->nid }}
+                                                        </td>
                                                         <td>
                                                             {{ $voteUserItem->card->getName() }}
                                                             <a href="{{ URL::route('card.show', $voteUserItem->card->id) }}" title="卡片資料"><i class="glyphicon glyphicon-credit-card"></i></a>
