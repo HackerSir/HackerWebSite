@@ -29,6 +29,14 @@
                                         <td>結束時間：</td>
                                         <td>{{ $announcement->end_time }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>建立時間：</td>
+                                        <td>{{ $announcement->created_at }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>最後修改：</td>
+                                        <td>{{ $announcement->updated_at }}</td>
+                                    </tr>
                                 </table>
                                 <idv>（下方內容不解析HTML代碼，實際內容請見
                                     <a href="{{ route('enter-page', $announcement->id) }}" target="_blank">公告顯示頁面<i class="glyphicon glyphicon-new-window"></i></a>
