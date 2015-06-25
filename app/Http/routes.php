@@ -108,6 +108,8 @@ Route::resource('vote-event', 'VoteEventController');
 Route::resource('vote-selection', 'VoteSelectionController', ['except' => ['index', 'show']]);
 Route::resource('vote-user', 'VoteUserController', ['only' => ['store', 'destroy']]);
 
+Route::resource('announcement', 'AnnouncementController');
+
 //未定義路由
 Route::get('{all}', array(
     'as' => 'not-found',
