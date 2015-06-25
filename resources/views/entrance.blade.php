@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    社員大會通知
+    {{ $announcement->title }}
 @endsection
 
 @section('css')
@@ -12,7 +12,9 @@
 
 @section('content')
     <div class="text-center">
-        {!! HTML::image('pic/entrance.png', '', array('class'=>'img-responsive center-block')) !!}
-        {!! HTML::linkRoute('home', '進入社網', [], ['class' => 'btn btn-primary btn-lg', 'role' => 'button']) !!}
+        {!! $announcement->message !!}
+        <div>
+            {!! HTML::linkRoute('home', '進入社網', [], ['class' => 'btn btn-primary btn-lg', 'role' => 'button']) !!}
+        </div>
     </div>
 @endsection

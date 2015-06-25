@@ -30,7 +30,9 @@
                                         <td>{{ $announcement->end_time }}</td>
                                     </tr>
                                 </table>
-                                <idv>（下方內容不解析HTML代碼，實際內容請見公告顯示頁面）</idv>
+                                <idv>（下方內容不解析HTML代碼，實際內容請見
+                                    <a href="{{ route('enter-page', $announcement->id) }}" target="_blank">公告顯示頁面<i class="glyphicon glyphicon-new-window"></i></a>
+                                    ）</idv>
                                 <hr />
                                 <div class="text-left">
                                     {!! nl2br(htmlspecialchars($announcement->message)) !!}
@@ -38,14 +40,14 @@
                                 <hr />
                                 <div>
                                     @if(Auth::check() && Auth::user()->isStaff())
-                                        {!! HTML::linkRoute('announcement.edit', '編輯投票活動', $announcement->id, ['class' => 'btn btn-primary']) !!}
-                                        {!! HTML::linkRoute('announcement.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('announcement.edit', '編輯公告', $announcement->id, ['class' => 'btn btn-primary']) !!}
+                                        {!! HTML::linkRoute('announcement.index', '返回公告列表', [], ['class' => 'btn btn-default']) !!}
                                         {!! Form::open(['route' => ['announcement.destroy', $announcement->id], 'style' => 'display: inline', 'method' => 'DELETE',
-                                        'onSubmit' => "return confirm('確定要刪除投票活動嗎？');"]) !!}
+                                        'onSubmit' => "return confirm('確定要刪除公告嗎？');"]) !!}
                                         {!! Form::submit('刪除', ['class' => 'btn btn-danger']) !!}
                                         {!! Form::close() !!}
                                     @else
-                                        {!! HTML::linkRoute('announcement.index', '返回投票活動列表', [], ['class' => 'btn btn-default']) !!}
+                                        {!! HTML::linkRoute('announcement.index', '返回公告列表', [], ['class' => 'btn btn-default']) !!}
                                     @endif
                                 </div>
                             </div>

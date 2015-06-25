@@ -19,10 +19,10 @@ Route::get('/', [
 ]);
 
 //入口公告
-Route::get('annou', [
+Route::get('annou/{id?}', [
     'as' => 'enter-page',
     'uses' => 'EnterPageController@index'
-]);
+])->where('id', '[0-9]+');
 
 Route::controller('member', 'MemberController', array(
     'getIndex' => 'member.list',
