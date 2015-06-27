@@ -1,5 +1,9 @@
 <?php
 
+//FIXME Laravel 5.1 出現 Maximum function nesting level of '100' reached, aborting! 的暫時解法
+//來源：http://stackoverflow.com/questions/30803342
+ini_set('xdebug.max_nesting_level', 120);
+
 define('LARAVEL_START', microtime(true));
 
 /*
@@ -14,7 +18,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +31,8 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$compiledPath = __DIR__.'/../storage/framework/compiled.php';
+$compiledPath = __DIR__ . '/cache/compiled.php';
 
-if (file_exists($compiledPath))
-{
+if (file_exists($compiledPath)) {
     require $compiledPath;
 }
