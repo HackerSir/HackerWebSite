@@ -53,7 +53,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function gravatar($s = 200, $d = 'mm', $r = 'g', $img = false, $atts = array())
     {
         $email = $this->email;
-        $url = 'http://www.gravatar.com/avatar/';
+        $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
         $url .= "?s=$s&d=$d&r=$r";
         if ($img) {

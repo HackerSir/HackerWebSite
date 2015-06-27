@@ -18,7 +18,7 @@
                                 {!! HTML::image($user->gravatar(), null, ['class' => 'img-circle']) !!}
                                 <br />
                                 <br />
-                                {!! HTML::link('http://zh-tw.gravatar.com/', '透過Gravatar更換大頭貼', ['class' => 'btn btn-primary', 'target' => '_blank']) !!}
+                                {!! HTML::link('https://zh-tw.gravatar.com/', '透過Gravatar更換大頭貼', ['class' => 'btn btn-primary', 'target' => '_blank']) !!}
                             </div>
                         </div>
                         <br />
