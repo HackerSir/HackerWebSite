@@ -130,15 +130,15 @@ class VoteEventController extends Controller
     public function edit($id)
     {
         $voteEvent = VoteEvent::find($id);
-        if ($voteEvent) {
-            return view('vote.event.edit')->with('voteEvent', $voteEvent);
+        if (!$voteEvent) {
+            return Redirect::route('vote-event.index')
+                ->with('warning', '投票活動不存在');
         }
         if ($voteEvent->isEnded()) {
             return Redirect::route('vote-event.show', $id)
                 ->with('warning', '無法編輯已結束之投票活動');
         }
-        return Redirect::route('vote-event.index')
-            ->with('warning', '投票活動不存在');
+        return view('vote.event.edit')->with('voteEvent', $voteEvent);
     }
 
     /**
