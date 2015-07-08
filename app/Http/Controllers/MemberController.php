@@ -192,7 +192,7 @@ class MemberController extends Controller
     {
         $user = Auth::user();
         //帳號已啟用
-        if (empty($user->confirm_code)) {
+        if ($user->isConfirmed()) {
             return Redirect::back()
                 ->with('warning', '此帳號已啟用，無須再次認證');
         }
@@ -204,7 +204,7 @@ class MemberController extends Controller
     {
         $user = Auth::user();
         //帳號已啟用
-        if (empty($user->confirm_code)) {
+        if ($user->isConfirmed()) {
             return Redirect::back()
                 ->with('warning', '此帳號已啟用，無須再次認證');
         }
