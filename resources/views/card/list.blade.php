@@ -52,7 +52,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {!! str_replace('/?', '?', $cardList->appends(Input::except(array('page')))->render()); !!}
+                            {!! str_replace('/?', '?', $cardList->appends(Input::except(array('page')))->render()) !!}
                         </div>
                     </div>
                 </div>

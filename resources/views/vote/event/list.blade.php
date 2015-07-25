@@ -5,7 +5,7 @@
 @endsection
 
 @section('head')
-    {!! HTML::style('css/no-more-table.css'); !!}
+    {!! HTML::style('css/no-more-table.css') !!}
     <style type="text/css">
         @media
         only screen and (max-width: 479px) {
@@ -78,7 +78,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {!! str_replace('/?', '?', $voteEventList->appends(Input::except(array('page')))->render()); !!}
+                            {!! str_replace('/?', '?', $voteEventList->appends(Input::except(array('page')))->render()) !!}
                         </div>
                     </div>
                 </div>

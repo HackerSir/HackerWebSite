@@ -31,7 +31,7 @@
     <body>
         <div class="container">
             <div class="content">
-                {!! HTML::image('pic/503.jpg','Be right back',['height'=>'400px']); !!}
+                {!! HTML::image('pic/503.jpg','Be right back',['height'=>'400px']) !!}
                 <div class="title">Be right back.</div>
             </div>
         </div>

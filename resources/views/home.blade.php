@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('head')
-    {!! HTML::style('css/no-more-table.css'); !!}
+    {!! HTML::style('css/no-more-table.css') !!}
     <style type="text/css">
         @media
         only screen and (max-width: 479px) {
@@ -180,10 +180,10 @@
 @endsection
 
 @section('script')
-    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js'); !!}
-    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js'); !!}
-    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js'); !!}
-    {!! HTML::script('https://apis.google.com/js/platform.js'); !!}
+    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js') !!}
+    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js') !!}
+    {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js') !!}
+    {!! HTML::script('https://apis.google.com/js/platform.js') !!}
 @endsection
 
 @section('javascript')
