@@ -17,7 +17,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="subject">課程名稱</label>
                                     <div class="col-md-9">
-                                        {!! HTML::linkRoute('course.show', $course->subject, $course->id, null) !!}</td>
+                                        {!! HTML::linkRoute('course.show', $course->subject, $course->id, null) !!}
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback{{ ($errors->has('time'))?' has-error':'' }}">
