@@ -5,9 +5,11 @@
 @endsection
 
 @section('css')
-    body{
-        background-color: #2D2535;
-    }
+    <style type="text/css">
+        body {
+            background-color: #2D2535;
+        }
+    </style>
 @endsection
 
 @section('content')

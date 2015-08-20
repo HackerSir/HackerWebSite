@@ -130,53 +130,59 @@
 @endsection
 
 @section('css')
+    <style type="text/css">
+        body {
+            padding-top: 0px;
+        }
 
-    body {
-        padding-top: 0px;
-    }
+        .section {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
 
-    .section {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
+        .section-text {
+            background: rgba(255, 255, 255, 0.75);
+            height: 100%;
+            color: black;
+            font-size: 15pt;
+        }
 
-    .section-text {
-        background: rgba(255,255,255,0.75);
-        height: 100%;
-        color: black;
-        font-size: 15pt;
-    }
+        #section1 {
+            background-size: contain;
+            background-image: url({{ URL::asset('pic/Header.jpg') }});
+        }
 
-    #section1 {
-        background-size: contain;
-        background-image: url({{ URL::asset('pic/Header.jpg') }});
-    }
-    #section2 {
-        background-image: url({{ URL::asset('pic/About.jpg') }});
-    }
-    #section3 {
-        background-image: url({{ URL::asset('pic/Class.jpg') }});
-    }
-    #section4 {
-        background-image: url({{ URL::asset('pic/Activity.jpg') }});
-    }
+        #section2 {
+            background-image: url({{ URL::asset('pic/About.jpg') }});
+        }
 
-    .tg {
-        text-align:center;
-        font-size: 13pt;
-    }
-    .tg td {
-        text-align:center
-    }
-    .tg th {
-        text-align:center
-    }
-    span.tg-left {
-        display: block;
-        text-align:left
-    }
+        #section3 {
+            background-image: url({{ URL::asset('pic/Class.jpg') }});
+        }
 
+        #section4 {
+            background-image: url({{ URL::asset('pic/Activity.jpg') }});
+        }
+
+        .tg {
+            text-align: center;
+            font-size: 13pt;
+        }
+
+        .tg td {
+            text-align: center
+        }
+
+        .tg th {
+            text-align: center
+        }
+
+        span.tg-left {
+            display: block;
+            text-align: left
+        }
+    </style>
 @endsection
 
 @section('script')
