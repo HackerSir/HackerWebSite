@@ -34,19 +34,19 @@
 
         #section1 {
             background-size: contain;
-            background-image: url({{ URL::asset('pic/Header.jpg') }});
+            background-image: url("{{ URL::asset('pic/Header.jpg') }}");
         }
 
         #section2 {
-            background-image: url({{ URL::asset('pic/About.jpg') }});
+            background-image: url("{{ URL::asset('pic/About.jpg') }}");
         }
 
         #section3 {
-            background-image: url({{ URL::asset('pic/Class.jpg') }});
+            background-image: url("{{ URL::asset('pic/Class.jpg') }}");
         }
 
         #section4 {
-            background-image: url({{ URL::asset('pic/Activity.jpg') }});
+            background-image: url("{{ URL::asset('pic/Activity.jpg') }}");
         }
 
         .tg {
