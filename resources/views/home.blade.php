@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('head')
+@section('css')
     {!! HTML::style('css/no-more-table.css') !!}
     <style type="text/css">
         @media
@@ -13,6 +13,58 @@
             .noMoreTable td:nth-of-type(3):before { content: "課程名稱"; }
             .noMoreTable td:nth-of-type(4):before { content: "講師"; }
             .noMoreTable td:nth-of-type(5):before { content: "狀態"; }
+        }
+
+        body {
+            padding-top: 0px;
+        }
+
+        .section {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .section-text {
+            background: rgba(255, 255, 255, 0.75);
+            height: 100%;
+            color: black;
+            font-size: 15pt;
+        }
+
+        #section1 {
+            background-size: contain;
+            background-image: url({{ URL::asset('pic/Header.jpg') }});
+        }
+
+        #section2 {
+            background-image: url({{ URL::asset('pic/About.jpg') }});
+        }
+
+        #section3 {
+            background-image: url({{ URL::asset('pic/Class.jpg') }});
+        }
+
+        #section4 {
+            background-image: url({{ URL::asset('pic/Activity.jpg') }});
+        }
+
+        .tg {
+            text-align: center;
+            font-size: 13pt;
+        }
+
+        .tg td {
+            text-align: center
+        }
+
+        .tg th {
+            text-align: center
+        }
+
+        span.tg-left {
+            display: block;
+            text-align: left
         }
     </style>
 @endsection
@@ -127,62 +179,6 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('css')
-    <style type="text/css">
-        body {
-            padding-top: 0px;
-        }
-
-        .section {
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-        }
-
-        .section-text {
-            background: rgba(255, 255, 255, 0.75);
-            height: 100%;
-            color: black;
-            font-size: 15pt;
-        }
-
-        #section1 {
-            background-size: contain;
-            background-image: url({{ URL::asset('pic/Header.jpg') }});
-        }
-
-        #section2 {
-            background-image: url({{ URL::asset('pic/About.jpg') }});
-        }
-
-        #section3 {
-            background-image: url({{ URL::asset('pic/Class.jpg') }});
-        }
-
-        #section4 {
-            background-image: url({{ URL::asset('pic/Activity.jpg') }});
-        }
-
-        .tg {
-            text-align: center;
-            font-size: 13pt;
-        }
-
-        .tg td {
-            text-align: center
-        }
-
-        .tg th {
-            text-align: center
-        }
-
-        span.tg-left {
-            display: block;
-            text-align: left
-        }
-    </style>
 @endsection
 
 @section('script')

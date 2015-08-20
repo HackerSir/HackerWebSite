@@ -18,8 +18,6 @@
         {!! HTML::style('//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css') !!}
         {!! HTML::style('css/select2-bootstrap.min.css') !!}
 
-        @yield('head')
-
         <!-- Fonts -->
         {!! HTML::style('//fonts.googleapis.com/css?family=Roboto:400,300') !!}
 
@@ -31,7 +29,6 @@
         <![endif]-->
 
         @yield('css')
-
     </head>
     <body>
         {{-- navbar--}}

@@ -4,7 +4,7 @@
     公告清單
 @endsection
 
-@section('head')
+@section('css')
     {!! HTML::style('css/no-more-table.css') !!}
     <style type="text/css">
         @media
