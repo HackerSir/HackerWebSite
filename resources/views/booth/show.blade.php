@@ -97,36 +97,38 @@
 @endsection
 
 @section('javascript')
-    var vote=function($action,$booth,$candidate){
-        var URLs="{{ URL::route('vote-api.vote') }}";
+    <script type="text/javascript">
+        var vote = function ($action, $booth, $candidate) {
+            var URLs = "{{ URL::route('vote-api.vote') }}";
 
-        $.ajax({
-            url: URLs,
-            data: {
-                action: $action,
-                booth: $booth,
-                candidate:$candidate
-            },
-            headers: {
-                'X-CSRF-Token': "{{ Session::token() }}" ,
-                "Accept": "application/json"
-            },
-            type:"POST",
-            dataType: "json",
+            $.ajax({
+                url: URLs,
+                data: {
+                    action: $action,
+                    booth: $booth,
+                    candidate: $candidate
+                },
+                headers: {
+                    'X-CSRF-Token': "{{ Session::token() }}",
+                    "Accept": "application/json"
+                },
+                type: "POST",
+                dataType: "json",
 
-            success: function(data){
-                if(data.success == true){
-                    //alert(data.count);
-                    $('#count_' + $booth + '_' + $candidate).html(data.count);
-                }else{
-                    alert("error");
+                success: function (data) {
+                    if (data.success == true) {
+                        //alert(data.count);
+                        $('#count_' + $booth + '_' + $candidate).html(data.count);
+                    } else {
+                        alert("error");
+                    }
+                },
+
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
                 }
-            },
-
-            error:function(xhr, ajaxOptions, thrownError){
-                alert(xhr.status);
-                alert(thrownError);
-            }
-        });
-    }
+            });
+        }
+    </script>
 @endsection

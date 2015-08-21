@@ -117,49 +117,51 @@
 @endsection
 
 @section('javascript')
-    $(function () {
-        $('#datetimepicker').datetimepicker({
-            format: 'YYYY/MM/DD HH:mm:ss'
-        });
-    });
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        // e.target -> newly activated tab
-        if(e.target.id == 'tab_preview'){
-            $("#preview").html("Loading...");
-
-            var URLs = "{{ URL::route('markdown.preview') }}"
-            var val = $('#edit textarea').val();
-
-            $.ajax({
-                url: URLs,
-                data: val,
-                headers: {
-                    'X-CSRF-Token': "{{ Session::token() }}" ,
-                    "Accept": "application/json"
-                },
-                type:"POST",
-                dataType: "text",
-
-                success: function(data){
-                    if(data){
-                        $("#preview").html(data);
-                    }else{
-                        alert("error");
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError){
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker').datetimepicker({
+                format: 'YYYY/MM/DD HH:mm:ss'
             });
-        }
-    })
+        });
 
-    $('#tag').select2({
-        placeholder: "請輸入分類標籤（多個請以半形逗號分隔）",
-        multiple: true,
-        tags: true,
-        tokenSeparators: [',', ' ']
-    });
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // e.target -> newly activated tab
+            if (e.target.id == 'tab_preview') {
+                $("#preview").html("Loading...");
+
+                var URLs = "{{ URL::route('markdown.preview') }}"
+                var val = $('#edit textarea').val();
+
+                $.ajax({
+                    url: URLs,
+                    data: val,
+                    headers: {
+                        'X-CSRF-Token': "{{ Session::token() }}",
+                        "Accept": "application/json"
+                    },
+                    type: "POST",
+                    dataType: "text",
+
+                    success: function (data) {
+                        if (data) {
+                            $("#preview").html(data);
+                        } else {
+                            alert("error");
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            }
+        })
+
+        $('#tag').select2({
+            placeholder: "請輸入分類標籤（多個請以半形逗號分隔）",
+            multiple: true,
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
+    </script>
 @endsection

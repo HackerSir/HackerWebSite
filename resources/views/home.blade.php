@@ -185,54 +185,54 @@
     </div>
 @endsection
 
-@section('script')
+@section('javascript')
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/jquery.fullPage.min.js') !!}
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.easings.min.js') !!}
     {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.5.9/vendors/jquery.slimscroll.min.js') !!}
     {!! HTML::script('https://apis.google.com/js/platform.js') !!}
-@endsection
 
-@section('javascript')
-    $(document).ready(function() {
-        $('#fullpage').fullpage({
-            {{-- Extra small devices (xs) is < 768px --}}
-            paddingTop: ($( window ).width() >= 768) ? '50px' : '0px',
-            scrollOverflow: ($( window ).width() >= 768),
-            scrollBar: true,
-            responsive: 768,
-            {{-- sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'], --}}
-            anchors: ['welcome', 'about', 'class', 'activity']
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#fullpage').fullpage({
+                {{-- Extra small devices (xs) is < 768px --}}
+                paddingTop: ($(window).width() >= 768) ? '50px' : '0px',
+                scrollOverflow: ($(window).width() >= 768),
+                scrollBar: true,
+                responsive: 768,
+                {{-- sectionsColor: ['black', '#4BBFC3', '#7BAABE', '#ccddff'], --}}
+                anchors: ['welcome', 'about', 'class', 'activity']
+            });
         });
-    });
-    $(document).ready(function () {
-        {{-- //TODO:: 隱藏顯示不下的課程，暫時從前台下手，
-                    未來應該改成從後台下手，固定顯示數量，
-                    前台在動態固定表格高度，可能在加一層div
-                    這樣在空間不足時，還有個卷軸可用
-                    雖然應該會很難操作。--}}
-        {{-- 限制課程清單只有 section3 高度的 50% --}}
-        var targetTableHeight = ($( window ).width() >= 768) ? $( window ).height() * 0.5 : $( window ).height() * 1.5;
-        if ($('#classList').height() > targetTableHeight) {
-            var trList = $('#classList tbody tr');
-            for (var i = 0; i < trList.length; i++) {
-                {{-- jQuery 怪怪的，不能用 hasClass ... --}}
-                {{-- //TODO:: 未來可能會有 Bug --}}
-                if (trList[i].className.indexOf('success') != -1) {
-                    trList[i].style.display = 'none';
-                    if ($('#classList').height() <= targetTableHeight) break;
+        $(document).ready(function () {
+            {{-- //TODO:: 隱藏顯示不下的課程，暫時從前台下手，
+                        未來應該改成從後台下手，固定顯示數量，
+                        前台在動態固定表格高度，可能在加一層div
+                        這樣在空間不足時，還有個卷軸可用
+                        雖然應該會很難操作。--}}
+            {{-- 限制課程清單只有 section3 高度的 50% --}}
+            var targetTableHeight = ($(window).width() >= 768) ? $(window).height() * 0.5 : $(window).height() * 1.5;
+            if ($('#classList').height() > targetTableHeight) {
+                var trList = $('#classList tbody tr');
+                for (var i = 0; i < trList.length; i++) {
+                    {{-- jQuery 怪怪的，不能用 hasClass ... --}}
+                    {{-- //TODO:: 未來可能會有 Bug --}}
+                    if (trList[i].className.indexOf('success') != -1) {
+                        trList[i].style.display = 'none';
+                        if ($('#classList').height() <= targetTableHeight) break;
+                    }
                 }
             }
-        }
 
-        if ($('#classList').height() > targetTableHeight) {
-            var trList = $('#classList tbody tr');
-            var hasNone = false;
-            for (var i = trList.length - 1; i >= 0 ; i--) {
-                if (trList[i].className.indexOf('info') != -1) {
-                    trList[i].style.display = 'none';
-                    if ($('#classList').height() <= targetTableHeight) break;
+            if ($('#classList').height() > targetTableHeight) {
+                var trList = $('#classList tbody tr');
+                var hasNone = false;
+                for (var i = trList.length - 1; i >= 0; i--) {
+                    if (trList[i].className.indexOf('info') != -1) {
+                        trList[i].style.display = 'none';
+                        if ($('#classList').height() <= targetTableHeight) break;
+                    }
                 }
             }
-        }
-    });
+        });
+    </script>
 @endsection

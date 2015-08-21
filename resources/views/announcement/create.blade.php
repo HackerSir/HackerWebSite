@@ -69,13 +69,15 @@
 @endsection
 
 @section('javascript')
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-            format: 'YYYY/MM/DD HH:mm:ss'
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY/MM/DD HH:mm:ss'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'YYYY/MM/DD HH:mm:ss'
+            });
         });
-        $('#datetimepicker2').datetimepicker({
-            format: 'YYYY/MM/DD HH:mm:ss'
-        });
-    });
+    </script>
 @endsection
 

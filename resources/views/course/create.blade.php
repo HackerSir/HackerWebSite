@@ -86,16 +86,18 @@
 @endsection
 
 @section('javascript')
-    $(function () {
-        $('#datetimepicker').datetimepicker({
-            format: 'YYYY/MM/DD HH:mm:ss'
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker').datetimepicker({
+                format: 'YYYY/MM/DD HH:mm:ss'
+            });
         });
-    });
 
-    $('#tag').select2({
-        placeholder: "請輸入分類標籤（多個請以半形逗號分隔）",
-        multiple: true,
-        tags: true,
-        tokenSeparators: [',', ' ']
-    });
+        $('#tag').select2({
+            placeholder: "請輸入分類標籤（多個請以半形逗號分隔）",
+            multiple: true,
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
+    </script>
 @endsection
