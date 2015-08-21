@@ -35,10 +35,9 @@
         @if(!Request::is('annou') && !Request::is('annou/*'))
             @include('common.navbar')
         @endif
-        <div class="container-fluid">
-            {{-- content --}}
-            @yield('content')
-        </div>
+
+        {{-- content --}}
+        @yield('content')
 
         <!-- Scripts -->
         {!! HTML::script('//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js') !!}

@@ -13,10 +13,12 @@
 @endsection
 
 @section('content')
-    <div class="text-center">
-        {!! $announcement->message !!}
-        <div>
-            {!! HTML::linkRoute('home', '進入社網', [], ['class' => 'btn btn-primary btn-lg', 'role' => 'button']) !!}
+    <div class="container-fluid">
+        <div class="text-center">
+            {!! $announcement->message !!}
+            <div>
+                {!! HTML::linkRoute('home', '進入社網', [], ['class' => 'btn btn-primary btn-lg', 'role' => 'button']) !!}
+            </div>
         </div>
     </div>
 @endsection

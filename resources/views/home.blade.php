@@ -70,112 +70,116 @@
 @endsection
 
 @section('content')
-    <div id="fullpage">
-        {{-- Welcome section--}}
-        <div class="section" id="section1">
+    <div class="container-fluid">
+        <div id="fullpage">
+            {{-- Welcome section--}}
+            <div class="section" id="section1">
 
-        </div>
-        {{-- About section--}}
-        <div class="section" id="section2">
-            <div class="col-md-6 col-md-offset-6 section-text">
-                <h1>關於我們</h1>
+            </div>
+            {{-- About section--}}
+            <div class="section" id="section2">
+                <div class="col-md-6 col-md-offset-6 section-text">
+                    <h1>關於我們</h1>
 
-                <blockquote>
-                    <p>一點點契機、一點點緣分、一點點專業，因為這些，所以我們存在！</p>
-                </blockquote>
-                <p>
-                    逢甲大學黑客社創立於2014年，原本只是一群喜歡資訊的人，在因緣際會之下成立了這個社團。
-                </p>
-                <p>
-                    我們致力推廣<strong>「資訊安全」</strong>及<strong>「程式設計」</strong>，秉持著<strong>「創新與實作」</strong>的理念，
-                    除了推廣資訊安全的基礎概念、程式設計普及化、開源文化，同時也致力於推廣包括電子簽到、電子投票等等，
-                    希望可以讓每位社員甚至每位學生都能了解到資安的重要性及體驗到更加便利、有趣的未來！
-                </p>
+                    <blockquote>
+                        <p>一點點契機、一點點緣分、一點點專業，因為這些，所以我們存在！</p>
+                    </blockquote>
+                    <p>
+                        逢甲大學黑客社創立於2014年，原本只是一群喜歡資訊的人，在因緣際會之下成立了這個社團。
+                    </p>
 
-                <div>
-                    <a class="btn btn-social-icon btn-facebook" target="_blank" href="https://www.facebook.com/groups/HackerSir" title="Facebook社團<br />逢甲大學黑客社公開板 (Hackers Club, FCU)">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a class="btn btn-social-icon btn-github" target="_blank" href="https://github.com/HackerSir" title="Github組織<br />HackerSir">
-                        <i class="fa fa-github"></i>
-                    </a>
-                    <br /><br />
-                    <div class="g-ytsubscribe" data-channelid="UCeDnuTpnq_4As-ceZiWsi4A" data-layout="full" data-count="default"></div>
+                    <p>
+                        我們致力推廣<strong>「資訊安全」</strong>及<strong>「程式設計」</strong>，秉持著<strong>「創新與實作」</strong>的理念，
+                        除了推廣資訊安全的基礎概念、程式設計普及化、開源文化，同時也致力於推廣包括電子簽到、電子投票等等，
+                        希望可以讓每位社員甚至每位學生都能了解到資安的重要性及體驗到更加便利、有趣的未來！
+                    </p>
+
+                    <div>
+                        <a class="btn btn-social-icon btn-facebook" target="_blank" href="https://www.facebook.com/groups/HackerSir" title="Facebook社團<br />逢甲大學黑客社公開板 (Hackers Club, FCU)">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="btn btn-social-icon btn-github" target="_blank" href="https://github.com/HackerSir" title="Github組織<br />HackerSir">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <br/><br/>
+
+                        <div class="g-ytsubscribe" data-channelid="UCeDnuTpnq_4As-ceZiWsi4A" data-layout="full" data-count="default"></div>
+                    </div>
+
                 </div>
-
             </div>
-        </div>
-        {{-- Class section--}}
-        <div class="section text-right" id="section3">
-            <div class="col-md-6 section-text">
-                <h1>社團課程</h1>
+            {{-- Class section--}}
+            <div class="section text-right" id="section3">
+                <div class="col-md-6 section-text">
+                    <h1>社團課程</h1>
 
-                <p>
-                    本學期(103下)開設<strong>程式設計</strong>課程<br />
-                    歡迎有興趣的人來聽課！(歡迎初學者！)<br />
-                    每堂社課皆是 07:00 PM 至 09:00 PM！
-                </p>
-                <table class="tg table table-striped noMoreTable" id="classList">
-                    <caption style="color: #000000">課程名稱：<span class="label label-success">請問您今天要來點Python嗎？</span></caption>
-                    <thead>
-                    <tr class="active">
-                        <th>日期</th>
-                        <th>地點</th>
-                        <th>課程名稱</th>
-                        <th>講師</th>
-                        <th>狀態</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($courseList as $course)
-                        <tr class="@if($course->time < $nextCourseTime) success @elseif($course->time > $nextCourseTime) info @else warning @endif classData">
-                            <td>{{ (new Carbon\Carbon($course->time))->formatLocalized('%m/%d (%a)') }}</td>
-                            <td>{{ $course->location }}</td>
-                            {{-- TODO: 髒髒 code, 去除課程名稱前的"請問您今天要來點Python嗎？"字樣，因為表格上方有標示，也比較不占版面 --}}
-                            <td><span class="tg-left">{{ (str_contains($course->subject, '？'))?explode('？', $course->subject)[1]:$course->subject }}<br />@if(!empty($course->description)) &gt;&gt;&gt;{{ $course->description }} @endif</span></td>
-                            <td>
-                                @if(App\User::find($course->lecturer))
-                                    {!! link_to_route('member.profile', App\User::find($course->lecturer)->nickname, App\User::find($course->lecturer)->id) !!}
-                                @elseif($course->lecturer !== '')
-                                    {{ $course->lecturer }}
-                                @else
-                                    ？
-                                @endif
-                            </td>
-                            <td>
-                                @if((new Carbon($course->time))->startOfDay()->diffInDays(Carbon::now()->startOfDay())==0)
-                                    Today
-                                @elseif($course->time < $nextCourseTime)
-                                    Finished
-                                @elseif($course->time > $nextCourseTime)
-                                    Coming Soon
-                                @else
-                                    Next
-                                @endif
-                            </td>
+                    <p>
+                        本學期(103下)開設<strong>程式設計</strong>課程<br/>
+                        歡迎有興趣的人來聽課！(歡迎初學者！)<br/>
+                        每堂社課皆是 07:00 PM 至 09:00 PM！
+                    </p>
+                    <table class="tg table table-striped noMoreTable" id="classList">
+                        <caption style="color: #000000">課程名稱：<span class="label label-success">請問您今天要來點Python嗎？</span></caption>
+                        <thead>
+                        <tr class="active">
+                            <th>日期</th>
+                            <th>地點</th>
+                            <th>課程名稱</th>
+                            <th>講師</th>
+                            <th>狀態</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5">暫無課程</td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-                <a href="{{ URL::route('course.index') }}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true" />&nbsp;更多課程</a>
+                        </thead>
+                        <tbody>
+                        @forelse($courseList as $course)
+                            <tr class="@if($course->time < $nextCourseTime) success @elseif($course->time > $nextCourseTime) info @else warning @endif classData">
+                                <td>{{ (new Carbon\Carbon($course->time))->formatLocalized('%m/%d (%a)') }}</td>
+                                <td>{{ $course->location }}</td>
+                                {{-- TODO: 髒髒 code, 去除課程名稱前的"請問您今天要來點Python嗎？"字樣，因為表格上方有標示，也比較不占版面 --}}
+                                <td><span class="tg-left">{{ (str_contains($course->subject, '？'))?explode('？', $course->subject)[1]:$course->subject }}<br/>@if(!empty($course->description)) &gt;&gt;&gt;{{ $course->description }} @endif</span></td>
+                                <td>
+                                    @if(App\User::find($course->lecturer))
+                                        {!! link_to_route('member.profile', App\User::find($course->lecturer)->nickname, App\User::find($course->lecturer)->id) !!}
+                                    @elseif($course->lecturer !== '')
+                                        {{ $course->lecturer }}
+                                    @else
+                                        ？
+                                    @endif
+                                </td>
+                                <td>
+                                    @if((new Carbon($course->time))->startOfDay()->diffInDays(Carbon::now()->startOfDay())==0)
+                                        Today
+                                    @elseif($course->time < $nextCourseTime)
+                                        Finished
+                                    @elseif($course->time > $nextCourseTime)
+                                        Coming Soon
+                                    @else
+                                        Next
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">暫無課程</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                    <a href="{{ URL::route('course.index') }}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-th-list" aria-hidden="true"/>&nbsp;更多課程</a>
+                </div>
             </div>
-        </div>
-        {{-- Activity section--}}
-        <div class="section" id="section4">
-            <div class="col-md-6 col-md-offset-6 section-text">
-                <h1>社團活動</h1>
+            {{-- Activity section--}}
+            <div class="section" id="section4">
+                <div class="col-md-6 col-md-offset-6 section-text">
+                    <h1>社團活動</h1>
 
-                <p>本社每個月和SITCON學生計算機年會合辦一次台中定期聚，下次定期聚時間及資訊如下：</p>
-                <ul>
-                    <li>104年4月25日 (六)</li>
-                    <li>18:00 - 21:00</li>
-                    <li>逢甲大學 (未定)</li>
-                </ul>
-                <p>另外，本社也會不定期舉辦社內或跨社活動，所有活動資訊都會公告在本社臉書社團，敬請關注。</p>
+                    <p>本社每個月和SITCON學生計算機年會合辦一次台中定期聚，下次定期聚時間及資訊如下：</p>
+                    <ul>
+                        <li>104年4月25日 (六)</li>
+                        <li>18:00 - 21:00</li>
+                        <li>逢甲大學 (未定)</li>
+                    </ul>
+                    <p>另外，本社也會不定期舉辦社內或跨社活動，所有活動資訊都會公告在本社臉書社團，敬請關注。</p>
+                </div>
             </div>
         </div>
     </div>
