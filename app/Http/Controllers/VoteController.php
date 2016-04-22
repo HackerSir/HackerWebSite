@@ -8,6 +8,7 @@ use App\VoteBallot;
 use App\VoteEvent;
 use App\VoteUser;
 use Carbon\Carbon;
+use File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
